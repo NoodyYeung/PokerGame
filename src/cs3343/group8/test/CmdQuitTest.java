@@ -15,7 +15,6 @@ public class CmdQuitTest extends TestCase {
         cmdQuit = new CmdQuit();
     }
 
-    @Test
     public void testExecute() {
         CommandController commandController = CommandController.getInstance();
         cmdQuit.execute();
