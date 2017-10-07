@@ -1,13 +1,9 @@
 package cs3343.group8.client;
 
-public abstract class Command {
+public abstract class Command implements Running{
 
-    public void execute() {
-    }
+    public abstract void execute();
 
-    public abstract String key();
-
-    public abstract String description();
 
     public String toString() {
         return key() + ": " + description();

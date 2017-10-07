@@ -1,50 +1,52 @@
 package cs3343.group8.client;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import cs3343.group8.DDZ.Deck;
 
 public class Main {
 
-    private static CommandController commandController = new CommandController();
+	private static CommandController commandController = CommandController.getInstance();
+	public static void main(String[] args) {
 
-    public static void main(String[] args) {
-        commandController
-                .registerCommand(new CmdConnect())
-                .registerCommand(new CmdGame())
-                .registerCommand(new CmdQuit());
-/*
- *   @
-    @|@
-    \|/
-    ) (
-   (___)
- * */
-        // display menu
-        System.out.println("==============================@===============");
-        System.out.println("Welcome to Poker Game        @|@");
-        System.out.println("                             \\|/");
-        System.out.println("                             ) (");
-        System.out.println("                            (___)");
-        commandController.displayCommandList();
-        System.out.println("==============================================");
-        
-        Scanner in = new Scanner(System.in);
+		/*
+		 *   @
+		    @|@
+		    \|/
+		    ) (
+		   (___)
+		 * */
 
-        String input;
-        try {
-            while (!commandController.shouldQuit()) {
-                System.out.print("Menu> ");
-                input = in.nextLine();
-                commandController.execute(input.trim());
+		// display menu
+		System.out.println("==============================================");
+		System.out.println("==============================@===============");
+		System.out.println("Welcome to Poker Game        @|@");
+		System.out.println("                             \\|/");
+		System.out.println("                             ) (");
+		System.out.println("                            (___)");
+		// commandController.display();
+		// System.out.println("==============================================");
 
+		Scanner in = new Scanner(System.in);
 
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            in.close();
-        }
+		String input;
+		try {
+			while (!commandController.shouldQuit()) {
+				System.out.println("==============================================");
+				commandController.display();
+				System.out.println("==============================================");
+				
+				System.out.print("Menu> ");
+				input = in.nextLine();
+				commandController.execute(input.trim());
 
-    }
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			in.close();
+		}
+
+	}
 }

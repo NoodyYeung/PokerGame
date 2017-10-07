@@ -36,11 +36,12 @@ public class Deck {
 	private void createDeck() throws FileNotFoundException, IOException, Exception {
 		Scanner input = null;
 		try {
-			// four suits: put
-			// none: without suit values
+		// four suits: put
+		// none: without suit values
 
 			input = new Scanner(new File("src\\cs3343\\group8\\DDZ\\cardpool.txt"));
 			while (input.hasNextLine()) {
+				// 3 lines: 'description', 'cards', 'values'
 				String line = input.nextLine();
 				String cardsLine = input.nextLine();
 				String valueLine = input.nextLine();
@@ -48,14 +49,14 @@ public class Deck {
 				String[] cards = cardsLine.split(" ");
 				String[] value = valueLine.split(" ");
 
-				// Add all 4 suits to each card; 'switch' is as if String.equals was
+				// Add all 4 suits to each card; 'switch' is as if String.equals was used
 				switch (line) {
 				case "four suits":
 					for (int i = 0; i < cards.length; i++)
 						for (Suit suit : Suit.values()) {
+							// identify card: card, suit, value in base 10
 							Card newCard = identifyCard(cards[i], suit, Integer.parseInt(value[i], 10));
-							if (newCard == null)
-								throw new Exception("Unidentified card");
+							if (newCard == null) throw new Exception("Unidentified card");
 							deck.add(newCard);
 						}
 					break;
@@ -70,7 +71,7 @@ public class Deck {
 				}
 			} //end while
 
-			System.out.println(deck.size());
+			// System.out.println(deck.size());
 			
 		} catch (Exception e) {
 			throw e;
@@ -79,7 +80,7 @@ public class Deck {
 		}
 	} // end createDeck
 
-	// identifies cards with a suit
+	// identifies cards: is this a suit or a number?
 	private Card identifyCard(String card, Suit suit, int value) {
 		// Regular expression: card is J or Q or K
 		if (Pattern.matches("[JQK]", card)) {
@@ -96,9 +97,14 @@ public class Deck {
 		}
 	}
 
-	public void distributeToMe(Player p) {
+	// Distribute all cards at once
+	// want to distribute one card at once? Classic playstyle?
+	public List<Card> distribute() {
 		Collections.shuffle(deck);
-		for(int i=0; i<12; i++)
-			p.take(deck.remove(0));
+		List<Card> hand = new ArrayList<Card>();
+		for(int i=0; i<12; i++){
+			hand.add(deck.remove(0));
+		}
+		return hand;
 	}
 }

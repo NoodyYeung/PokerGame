@@ -6,8 +6,6 @@ public class CmdConnect extends Command {
 
     @Override
     public void execute() {
-        super.execute();
-
         String host = "127.0.0.1";
         int port = 5998;
 

@@ -1,18 +1,18 @@
 package cs3343.group8.test;
 
-import cs3343.group8.client.CmdQuit;
+import cs3343.group8.client.CmdBack;
 import cs3343.group8.client.CommandController;
 import junit.framework.TestCase;
 import org.junit.Test;
 
 public class CmdQuitTest extends TestCase {
 
-    private CmdQuit cmdQuit;
+    private CmdBack cmdQuit;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        cmdQuit = new CmdQuit();
+        cmdQuit = new CmdBack();
     }
 
     public void testExecute() {
