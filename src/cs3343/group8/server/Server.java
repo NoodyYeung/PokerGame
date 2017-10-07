@@ -67,6 +67,8 @@ public class Server {
 
                     // TODO: received message form player's socket
                     String s = input.readUTF();
+                    ClientMessage msg = new ClientMessage(s);
+
                     System.out.println(s);
                     output.writeUTF("got " + s);
                     output.flush();
@@ -74,6 +76,8 @@ public class Server {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ExInsuffientData exInsuffientData) {
+                exInsuffientData.printStackTrace();
             } finally {
                 try {
                     if (input != null)
