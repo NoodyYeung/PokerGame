@@ -5,7 +5,7 @@ public class CmdQuit extends Command {
     @Override
     public void execute() {
         super.execute();
-        CommandController.getInstance().setQuit(true);
+        // CommandController.getInstance().setQuit(true);
     }
 
     @Override

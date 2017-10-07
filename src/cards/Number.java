@@ -5,10 +5,10 @@ package cards;
  * 
  * 
  */
-public class Number extends Card{
+public class Number extends SuitCard{
 
-	public Number(String shortForm) {
-		super(shortForm);
+	public Number(String shortForm, Suit suit, int value) {
+		super(shortForm, suit, value);
 		// TODO Auto-generated constructor stub
 	}
 

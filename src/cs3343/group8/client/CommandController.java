@@ -1,21 +1,23 @@
 package cs3343.group8.client;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CommandController {
 
-    private static HashMap<String, Command> commands = new HashMap<>();
+    private LinkedHashMap<String, Command> commands = null;
+    
+    // quit one level? all levels?
+    enum Quits{FALSE, ONE, ALL}
+    private Quits quit = Quits.FALSE;
 
-    private boolean quit = false;
+    // if you're inside a commmand tree (eg. a submenu), execute the command inside the command tree instead. if you're at the root menu, just execute the root
+    private Command currentCommand = null;
 
-    private static CommandController ourInstance = new CommandController();
 
-    public static CommandController getInstance() {
-        return ourInstance;
-    }
-
-    private CommandController() {
+    public CommandController() {
+    	commands = new LinkedHashMap<>();
     }
 
     public CommandController registerCommand(Command command) {
@@ -46,11 +48,15 @@ public class CommandController {
     }
 
     public boolean shouldQuit() {
-        return quit;
+        return quit == Quits.ALL;
     }
 
-    public void setQuit(boolean quit) {
-        this.quit = quit;
+    protected void quitAll(boolean quit) {
+        this.quit = Quits.ALL;
+    }
+    
+    protected void quitOne(boolean quit) {
+      this.quit = Quits.ONE;
     }
 }
 

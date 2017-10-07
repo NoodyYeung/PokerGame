@@ -10,7 +10,7 @@ public class CommandControllerTest extends TestCase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        commandController = CommandController.getInstance();
+        // commandController = CommandController.getInstance();
     }
 
     // TODO: test case
