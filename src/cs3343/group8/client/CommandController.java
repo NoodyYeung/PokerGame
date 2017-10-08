@@ -38,9 +38,30 @@ public class CommandController {
 
 	}
 
+	/**
+	 * Execute the cmd on current menu
+	 * @param commandKey
+	 */
 	public void execute(String commandKey) {
-		String key = commandKey.toUpperCase();
+		executeCmdOnTopMenu(commandKey);
+	}
 
+	/**
+	 * Push new menu to the top of the menuHistory
+	 * @param menu
+	 */
+	public void pushNewMenu(Menu menu){
+		if(menu != null){
+			menuHistory.add(menu);
+		}
+	}
+
+	/**
+	 * Find to menu with last index in the menuHistory and executed the cmd by key
+	 * @param key
+	 */
+	public void executeCmdOnTopMenu(String key){
+		key = key.toUpperCase();
 		Menu curMenu = menuHistory.get(menuHistory.size() - 1);
 		Menu nextMenu = curMenu.execute(key);
 
@@ -49,6 +70,7 @@ public class CommandController {
 			menuHistory.add(nextMenu);
 		}
 	}
+
 
 	public boolean shouldQuit() {
 		return quit;
@@ -70,4 +92,7 @@ public class CommandController {
 		menuHistory.remove(menuHistory.size() - 1);
 	}
 
+	public void quitMenu(Menu menu) {
+		menuHistory.remove(menu);
+	}
 }

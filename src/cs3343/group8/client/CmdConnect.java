@@ -1,5 +1,8 @@
 package cs3343.group8.client;
 
+import cs3343.group8.messageEvent.MsgEvent;
+import cs3343.group8.server.ExInsuffientData;
+
 import java.util.Scanner;
 
 /**
@@ -7,7 +10,7 @@ import java.util.Scanner;
  * "quit" is entered to close the socket
  */
 public class CmdConnect extends Command {
-    private static final String CMD_QUIT = "quit";
+
     @Override
     public void execute() {
         String host = "127.0.0.1";
@@ -23,10 +26,16 @@ public class CmdConnect extends Command {
             @Override
             public void onMessageReceived(String receivedMessage) {
                 System.out.println(receivedMessage);
-                switch (receivedMessage){
-                    case CMD_QUIT:
-                        client.disconnect();
-                        break;
+                try {
+                    ClientMessage msg = new ClientMessage(receivedMessage);
+                    switch (msg.getEvent()){
+                        case MsgEvent.CLIENT_EVENT_CMD_OPEN_ROOM:
+                            //TODO::Response from server
+                            System.out.println("Responses from server");
+                            break;
+                    }
+                } catch (ExInsuffientData exInsuffientData) {
+                    exInsuffientData.printStackTrace();
                 }
             }
 

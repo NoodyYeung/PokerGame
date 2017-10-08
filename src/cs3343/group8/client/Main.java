@@ -1,9 +1,6 @@
 package cs3343.group8.client;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
-import cs3343.group8.DDZ.Deck;
 
 public class Main {
 
@@ -13,8 +10,6 @@ public class Main {
 		/*
 		 *   @
 		    @|@
-		    \|/
-		    ) (
 		   (___)
 		 * */
 

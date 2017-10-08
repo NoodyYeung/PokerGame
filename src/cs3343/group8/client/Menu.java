@@ -12,9 +12,11 @@ public abstract class Menu implements Running{
 
 	public abstract void displayCommandList();
 
+	public void quit(){
+		CommandController.getInstance().quitMenu(this);
+	}
 
-
-  public String toString() {
+  	public String toString() {
     return key() + ": " + description() + "+";
 }
 }

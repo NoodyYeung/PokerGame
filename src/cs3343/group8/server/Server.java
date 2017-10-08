@@ -63,15 +63,13 @@ public class Server {
                 input = new DataInputStream(this.clientSocket.getInputStream());
                 output = new DataOutputStream(this.clientSocket.getOutputStream());
                 output.writeUTF(String.format("Hi, %s!\n", clientSocket.getRemoteSocketAddress()));
+                ClientMessageHandler handler = new ClientMessageHandler(player);
                 while (true) {
 
                     // TODO: received message form player's socket
                     String s = input.readUTF();
                     try {
-                        ClientMessage msg = new ClientMessage(s);
-                        System.out.println(s);
-                        output.writeUTF("got " + s);
-                        output.flush();
+                        handler.handleMessage(s);
                     } catch (ExInsuffientData exInsuffientData) {
                         exInsuffientData.printStackTrace();
                         output.writeUTF("Invalid Command");
