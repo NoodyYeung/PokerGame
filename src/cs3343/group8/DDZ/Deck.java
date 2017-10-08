@@ -1,5 +1,10 @@
 package cs3343.group8.DDZ;
 
+import cards.Card;
+import cards.Number;
+import cards.Royal;
+import cards.Suit;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,10 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
-import cards.*;
-import cards.Number;
-import cs3343.group8.table.Player;
 
 // with a deck reader
 public class Deck {
@@ -38,8 +39,7 @@ public class Deck {
 		try {
 		// four suits: put
 		// none: without suit values
-
-			input = new Scanner(new File("src\\cs3343\\group8\\DDZ\\cardpool.txt"));
+			input = new Scanner(new File("src"+ File.separator +"cs3343"+ File.separator+ "group8"+ File.separator+"DDZ" + File.separator+"cardpool.txt"));
 			while (input.hasNextLine()) {
 				// 3 lines: 'description', 'cards', 'values'
 				String line = input.nextLine();

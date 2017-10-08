@@ -17,7 +17,7 @@ public class CmdConnect extends Command {
             // TODO: send message to server if IsMyTurn
 
             String message = scanner.nextLine();
-            client.send(message);
+            client.send("Simple : \t" + message);
         }
 
     }
