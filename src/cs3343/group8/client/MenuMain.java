@@ -15,12 +15,15 @@ public class MenuMain extends Menu {
 
 	private MenuMain() {
 		// Initialize the menu with items
-		List<Running> cmds = Arrays.asList(new CmdConnect(), new MenuGame());
+		List<Running> cmds = Arrays.asList(new CmdConnect(), new MenuGame(), new CmdHelp(), new CmdBack());
 		for (Running command : cmds) {
 			commands.put(command.key().toUpperCase(), command);
 		}
 	}
 
+    /**
+     * This function will run on CommandController and display the menu
+     */
 	@Override
 	public void displayCommandList() {
 		for (Entry<String, Running> entry : commands.entrySet()) {
@@ -28,6 +31,12 @@ public class MenuMain extends Menu {
 		}
 	}
 
+    /**
+     * The mainMenu execution will return menu if the key of the menu selected. The the selected menu will be added to CommandController.menuHistory.
+     * If Cmd is selected, the cmd will be executed
+     * @param commandKey
+     * @return Running? Return null or the selected cmd that is a menu
+     */
 	@Override
 	public Menu execute(String commandKey) {
 		try {
@@ -38,20 +47,16 @@ public class MenuMain extends Menu {
 			if (commands.containsKey(key)) {
 				Running cmdOrMenu = commands.get(key);
 				// At node:
+				cmdOrMenu.execute();
 				if (cmdOrMenu instanceof Menu) {
-					cmdOrMenu.execute();
 					return ((Menu) cmdOrMenu);
-				}
-				// No more branches: at leaf
-				else if (cmdOrMenu instanceof Command) {
-					((Command) cmdOrMenu).execute();
+				} else {
 					return null;
 				}
 			} else {
 				throw new Exception("Invalid Command [" + commandKey + "]!");
 			}
 
-			throw new Exception("cmdOrMenu not instanceof Menu nor instanceof Command: error [" + commandKey + "]!");
 		} catch (Exception e) {
 			// I am somewhat averse to allowing any random class use
 			// System.out.println... change this later maybe

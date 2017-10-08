@@ -8,11 +8,23 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Client {
 
+interface OnConnectedListener{
+    void onSuccessConnected(String connectedMessage);
+    void onMessageReceived(String receivedMessage);
+    void onFailConnected();
+}
+
+public class Client {
+    private Client(){};
     private DataInputStream input;
     private DataOutputStream output;
     private Socket socket;
+    private static Client instance = new Client();
+    private OnConnectedListener onConnectedListener;
+    public static Client getInstance(){
+        return instance;
+    }
 
     public void connectTo(String host, int port) {
         ExecutorService threadExecutor = Executors.newCachedThreadPool();
@@ -23,6 +35,21 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void disconnect(){
+        if(socket.isConnected()){
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void setOnConnectedListener(OnConnectedListener onConnectedListener) {
+        this.onConnectedListener = onConnectedListener;
     }
 
     public boolean isConnecting() {
@@ -43,13 +70,13 @@ public class Client {
                 try {
                     input = new DataInputStream(socket.getInputStream());
                     output = new DataOutputStream(socket.getOutputStream());
-                    System.out.println(input.readUTF());
-
+                    if(onConnectedListener != null)
+                        onConnectedListener.onSuccessConnected(input.readUTF());
                     while (socket.isConnected()) {
                         try {
                             // keep read stream
-                            System.out.println(input.readUTF());
-
+                            if(onConnectedListener!= null)
+                                onConnectedListener.onMessageReceived(input.readUTF());
                             // TODO: do something when receive message form server
 
                         } catch (EOFException e) {
@@ -60,6 +87,8 @@ public class Client {
 
                 } catch (IOException e) {
                     e.printStackTrace();
+                    if(onConnectedListener != null)
+                        onConnectedListener.onFailConnected();
                 } finally {
                     if (input != null)
                         input.close();

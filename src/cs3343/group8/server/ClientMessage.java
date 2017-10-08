@@ -16,6 +16,12 @@ public class ClientMessage {
         this.jsonStr = msgs[1];
     }
 
+    public ClientMessage(String event, String jsonStr) {
+        this.event = event;
+        this.jsonStr = jsonStr;
+    }
+
+
     public String getEvent() {
         return event;
     }

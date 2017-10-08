@@ -1,12 +1,12 @@
 package cs3343.group8.client;
 
+import cs3343.group8.DDZ.Deck;
+import cs3343.group8.table.Table;
+
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
-
-import cs3343.group8.DDZ.Deck;
-import cs3343.group8.table.Table;
 
 // This is the main menu selection for the game: this is only a menu selection!
 
@@ -17,7 +17,7 @@ public class MenuGame extends Menu {
 	public MenuGame() {
 		// If you look closely, this actually is similar to MenuMain; other methods (execute, displayCommandList) here are similar to MenuMain too... anyway to decrease repetition?
 		// Maybe someone who knows how to do it can try to do so
-		List<Running> cmds = Arrays.asList(new Cmd2Play());
+		List<Running> cmds = Arrays.asList(new Cmd2Play(), new CmdBack());
 		for (Running command : cmds) {
 			commands.put(command.key().toUpperCase(), command);
 		}

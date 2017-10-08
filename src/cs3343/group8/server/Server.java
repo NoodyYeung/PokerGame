@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    public static final int LISTEN_PORT = 5998;
+    public static final int LISTEN_PORT = 5999;
 
     public ArrayList<Player> playerList = new ArrayList<>();
 
