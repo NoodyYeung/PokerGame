@@ -1,4 +1,4 @@
-package cmdPlayer;
+package command;
 
 public interface Running {
 	// Stuff to do

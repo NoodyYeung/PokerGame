@@ -1,4 +1,4 @@
-package cmdPlayer;
+package command;
 
 public class CmdHelp extends Command {
 

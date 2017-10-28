@@ -1,4 +1,4 @@
-package cmdPlayer;
+package command;
 
 public class CmdBack extends Command {
     private String key;

@@ -1,6 +1,6 @@
 package table;
 
-import rules.*;
+import DDZ.*;
 import gameController.Deck;
 // Each table has 4 players and a deck: for testing, it only has 1 player: (54-6)/4 = 12
 

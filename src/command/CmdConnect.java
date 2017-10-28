@@ -1,10 +1,12 @@
-package cmdPlayer;
+package command;
 
 import cs3343.group8.messageEvent.MsgEvent;
 import server.ExInsuffientData;
-import player.Client;
+
 import java.util.Scanner;
-import player.ClientMessage;
+
+import client.Client;
+import client.ClientMessage;
 
 /**
  * This cmd is use for connecting server. The connection will keep connect until the
@@ -18,8 +20,9 @@ public class CmdConnect extends Command {
         String host = "127.0.0.1";
         int port = 5999;
 
-        Client client = Client.getInstance();
-        client.setOnConnectedListener(new OnConnectedListener() {
+        Client client = Client.getInstance(); 
+        
+        client.setOnConnectedListener(new Client.OnConnectedListener(){
             @Override
             public void onSuccessConnected(String connectedMessage) {
 
@@ -45,7 +48,9 @@ public class CmdConnect extends Command {
             public void onFailConnected() {
 
             }
-        });
+        }
+         
+        		);
         client.connectTo(host, port);
         Scanner scanner = new Scanner(System.in);
         while (client.isConnecting()) {

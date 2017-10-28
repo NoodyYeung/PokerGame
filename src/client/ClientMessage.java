@@ -1,6 +1,7 @@
-package player;
+package client;
 
 import server.ExInsuffientData;
+import server.Player;
 
 /**
  * Created by yeungchunyin on 6/10/2017.

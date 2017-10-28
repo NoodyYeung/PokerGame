@@ -1,4 +1,4 @@
-package cmdPlayer;
+package command;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

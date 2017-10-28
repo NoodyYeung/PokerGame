@@ -1,4 +1,4 @@
-package cmdPlayer;
+package command;
 
 public abstract class Menu implements Running{
 	// protected LinkedHashMap<String, Running> commands = new LinkedHashMap<>();

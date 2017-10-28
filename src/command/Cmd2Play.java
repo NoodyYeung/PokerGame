@@ -1,4 +1,4 @@
-package cmdPlayer;
+package command;
 
 public class Cmd2Play extends Command{
 

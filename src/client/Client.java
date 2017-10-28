@@ -1,4 +1,4 @@
-package player;
+package client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,13 +9,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-interface OnConnectedListener{
-    void onSuccessConnected(String connectedMessage);
-    void onMessageReceived(String receivedMessage);
-    void onFailConnected();
-}
 
 public class Client {
+	
+		public static interface OnConnectedListener{
+	    void onSuccessConnected(String connectedMessage);
+	    void onMessageReceived(String receivedMessage);
+	    void onFailConnected();
+	}
+
     private Client(){};
     private DataInputStream input;
     private DataOutputStream output;
@@ -48,7 +50,7 @@ public class Client {
     }
 
 
-    public void setOnConnectedListener(OnConnectedListener onConnectedListener) {
+    public void setOnConnectedListener(Client.OnConnectedListener onConnectedListener) {
         this.onConnectedListener = onConnectedListener;
     }
 

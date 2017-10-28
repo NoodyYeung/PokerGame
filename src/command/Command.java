@@ -1,4 +1,4 @@
-package cmdPlayer;
+package command;
 
 public abstract class Command implements Running{
 

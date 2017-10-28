@@ -1,4 +1,4 @@
-package rules;
+package DDZ;
 
 import java.util.ArrayList;
 

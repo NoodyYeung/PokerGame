@@ -1,9 +1,8 @@
-package player;
+package client;
 
 import java.util.Scanner;
 
-
-import cmdPlayer.CommandController;
+import command.CommandController;
 public class Main {
 	private static CommandController commandController = CommandController.getInstance();
 	
