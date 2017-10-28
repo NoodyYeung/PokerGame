@@ -1,6 +1,6 @@
 package cs3343.group8.test;
 
-import cs3343.group8.client.CommandController;
+import Player.CommandController;
 import junit.framework.TestCase;
 
 public class CommandControllerTest extends TestCase {

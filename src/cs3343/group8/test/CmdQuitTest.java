@@ -1,9 +1,10 @@
 package cs3343.group8.test;
 
-import cs3343.group8.client.CmdBack;
-import cs3343.group8.client.CommandController;
 import junit.framework.TestCase;
 import org.junit.Test;
+
+import Player.CmdBack;
+import Player.CommandController;
 
 public class CmdQuitTest extends TestCase {
 
