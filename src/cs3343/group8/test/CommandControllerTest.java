@@ -1,7 +1,7 @@
 package cs3343.group8.test;
 
-import cs3343.group8.client.CommandController;
 import junit.framework.TestCase;
+import command.CommandController;
 
 public class CommandControllerTest extends TestCase {
 
