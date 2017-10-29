@@ -1,7 +1,6 @@
 package client;
 
 import server.ExInsuffientData;
-import server.Player;
 
 /**
  * Created by yeungchunyin on 6/10/2017.
@@ -12,6 +11,11 @@ public class ClientMessage {
     private String event;
     private String jsonStr;
 
+    /**
+     *
+     * @param rawString consisted by "key +\t + jsonMessage"  Example: startGame    {"cards" : [1,2,3,3,4,5,6]}
+     * @throws ExInsuffientData
+     */
     public ClientMessage(String rawString) throws ExInsuffientData {
         String msgs[] = rawString.split("\t");
         if(msgs.length < 1){
@@ -25,9 +29,7 @@ public class ClientMessage {
         this.event = event;
         this.jsonStr = jsonStr;
     }
-
-    public void sendMessageToServer(){
-        Client client = Client.getInstance();
+    public void sendMessageToServer(Client client){
         client.send(this.event + "\t" + this.jsonStr);
     }
 

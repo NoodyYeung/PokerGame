@@ -13,7 +13,7 @@ public class Server {
 
     public static final int LISTEN_PORT = 5999;
 
-    public ArrayList<Player> playerList = new ArrayList<>();
+    public ArrayList<ServerPlayer> playerList = new ArrayList<>();
 
     public void listenRequest() {
         ServerSocket serverSocket = null;
@@ -23,7 +23,7 @@ public class Server {
             System.out.println("Server listening requests...");
             while (true) {
                 Socket socket = serverSocket.accept();
-                Player player = new Player(socket);
+                ServerPlayer player = new ServerPlayer(socket);
                 playerList.add(player);
                 threadExecutor.execute(new RequestThread(player));
             }
@@ -43,10 +43,10 @@ public class Server {
 
     class RequestThread implements Runnable {
 
-        private Player player;
+        private ServerPlayer player;
         private Socket clientSocket;
 
-        public RequestThread(Player player) {
+        public RequestThread(ServerPlayer player) {
             this.player = player;
             this.clientSocket = player.getSocket();
         }
@@ -96,7 +96,7 @@ public class Server {
     }
 
     public void sendToAll(String message){
-        for (Player player: playerList){
+        for (ServerPlayer player: playerList){
             player.write(message);
         }
     }

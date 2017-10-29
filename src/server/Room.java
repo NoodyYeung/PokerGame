@@ -9,16 +9,16 @@ public class Room {
 
     private int roomId;
     private String name;
-    private Player host;
-    private ArrayList<Player> players = new ArrayList<>();
+    private ServerPlayer host;
+    private ArrayList<ServerPlayer> players = new ArrayList<>();
 
-    public Room(int roomId, Player host) {
+    public Room(int roomId, ServerPlayer host) {
         this.roomId = roomId;
         this.host = host;
         this.players.add(host);
     }
 
-    public void join (Player newPlayer) throws ExRoomFullException {
+    public void join (ServerPlayer newPlayer) throws ExRoomFullException {
         if(this.players.size() >= 3){
             throw new ExRoomFullException("Room " + roomId + " is full");
         }else{
@@ -31,7 +31,7 @@ public class Room {
      * @param player
      * @return True for remove success; False otherwise
      */
-    public boolean leave(Player player){
+    public boolean leave(ServerPlayer player){
         return players.remove(player);
     }
 

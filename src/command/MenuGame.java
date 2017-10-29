@@ -1,8 +1,6 @@
 package command;
 
 
-import table.Table;
-
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,9 +8,12 @@ import java.util.Map.Entry;
 
 // This is the main menu selection for the game: this is only a menu selection!
 
+/**
+ * This Menu is making for local Game
+ */
 public class MenuGame extends Menu {
-	private static LinkedHashMap<String, Running> commands = new LinkedHashMap<>();
-	private static MenuGame menu = null;
+	private LinkedHashMap<String, Running> commands = new LinkedHashMap<>();
+	private MenuGame menu = null;
 
 	public MenuGame() {
 		// If you look closely, this actually is similar to MenuMain; other methods (execute, displayCommandList) here are similar to MenuMain too... anyway to decrease repetition?

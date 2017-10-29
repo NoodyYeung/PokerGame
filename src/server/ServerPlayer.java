@@ -5,7 +5,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class Player {
+/**
+ * Server Player is the player on  the server
+ * This class should extends Player.java. For development, i will add it later.
+ */
+public class ServerPlayer  {
 
     private static int id = 1;
     private String name;
@@ -13,7 +17,7 @@ public class Player {
     private DataOutputStream outputStream;
     private Socket socket;
 
-    public Player(Socket socket) throws IOException {
+    public ServerPlayer(Socket socket) throws IOException {
         this.name = "Player" + id++;
         this.socket = socket;
         inputStream = new DataInputStream(socket.getInputStream());
@@ -36,4 +40,7 @@ public class Player {
     public String getName() {
         return name;
     }
+
+
+
 }

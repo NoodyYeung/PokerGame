@@ -17,19 +17,19 @@ public class RoomsController {
     public int roomId = 0;
     public Map<Integer, Room> rooms = new LinkedHashMap<>();
 
-    public Room createNewRoom(Player host){
+    public Room createNewRoom(ServerPlayer host){
         Room room = new Room(roomId, host);
         rooms.put(roomId++ , room);
         return room;
     }
 
-    public Room createNewRoom(Player host, String roomName){
+    public Room createNewRoom(ServerPlayer host, String roomName){
         Room room = createNewRoom(host);
         room.setName(roomName);
         return room;
     }
 
-    public void joinRoomWithRoomId(Player player, int id) throws ExRoomFullException, ExRoomNotFound {
+    public void joinRoomWithRoomId(ServerPlayer player, int id) throws ExRoomFullException, ExRoomNotFound {
         if(rooms.containsKey(id)){
             rooms.get(id).join(player);
         }else throw new ExRoomNotFound("Room Not Found");

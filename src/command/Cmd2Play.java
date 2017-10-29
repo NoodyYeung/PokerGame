@@ -1,9 +1,28 @@
 package command;
 
+import client.AIPlayer;
+import client.LocalPlayer;
+import gameController.GameController;
+import gameController.InsufficientPlayerException;
+import gameController.Player;
+
+import java.util.ArrayList;
+
 public class Cmd2Play extends Command{
 
 	public void execute(){
-		System.out.println("[Cmd2Play execute()] Play play play play!");
+
+		ArrayList<Player> players = new ArrayList<>();
+		players.add(new LocalPlayer());
+		players.add(new AIPlayer());
+		players.add(new AIPlayer());
+		try {
+			GameController gameController = new GameController(players);
+			gameController.startGame();
+
+		}  catch (InsufficientPlayerException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

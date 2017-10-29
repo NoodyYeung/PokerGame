@@ -4,11 +4,12 @@ import cs3343.group8.messageEvent.MsgEvent;
 
 /**
  * Created by yeungchunyin on 7/10/2017.
+ * Used for server to receive cards
  */
 public class ClientMessageHandler {
-    private Player player;
+    private ServerPlayer player;
 
-    public ClientMessageHandler(Player player) {
+    public ClientMessageHandler(ServerPlayer player) {
         this.player = player;
     }
 

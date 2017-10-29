@@ -1,11 +1,11 @@
 package client;
 
-import java.util.Scanner;
-
 import command.CommandController;
+
+import java.util.Scanner;
 public class Main {
 	private static CommandController commandController = CommandController.getInstance();
-	
+	public static Scanner systemIn;
 	public static void main(String[] args) {
 
 		/*
@@ -24,9 +24,10 @@ public class Main {
 		// commandController.display();
 		// System.out.println("==============================================");
 
-		Scanner in = new Scanner(System.in);
+		Main.systemIn = new Scanner(System.in);
 
 		String input;
+
 		try {
 			while (!commandController.shouldQuit()) {
 				System.out.println("==============================================");
@@ -34,14 +35,14 @@ public class Main {
 				System.out.println("==============================================");
 				
 				System.out.print("Menu> ");
-				input = in.nextLine();
+				input = Main.systemIn.nextLine();
 				commandController.execute(input.trim());
 
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			in.close();
+			Main.systemIn.close();
 		}
 
 	}
