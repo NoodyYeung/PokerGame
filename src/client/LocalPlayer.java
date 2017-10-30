@@ -61,10 +61,41 @@ public class LocalPlayer extends Player {
 				exCardNoExists.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * If noone choose to be a landlord. You can choose to be it
+	 */
+	@Override
+	public void yourTurnToChooseToBeALandLord() {
 
 	}
 
+	/**
+	 * After someone choose to be a land lord. You can steal the position!
+	 */
+	@Override
+	public void yourTurnToGrapLandLord() {
 
+	}
 
+	@Override
+	public void informYouPlayerChooseToBeALandLord(Player theOneCalledToBeLandLord) {
 
+	}
+
+	@Override
+	public void informYouPlayerGrapToBeALandLord(Player theOneGrapedToBeLandLord) {
+
+	}
+
+	@Override
+	public void informPlayerPlayedCards(List<Card> cardsPlayed, Player thePlayerPlayedCard) {
+
+	}
+
+	@Override
+	public void endGame() {
+
+	}
 }

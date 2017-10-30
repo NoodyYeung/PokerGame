@@ -1,15 +1,19 @@
 package server;
 
+import cards.Card;
+import gameController.Player;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 
 /**
  * Server Player is the player on  the server
  * This class should extends Player.java. For development, i will add it later.
  */
-public class ServerPlayer  {
+public class ServerPlayer  extends Player{
 
     private static int id = 1;
     private String name;
@@ -42,5 +46,43 @@ public class ServerPlayer  {
     }
 
 
+    @Override
+    public void setHand(List<Card> hand) {
 
+    }
+
+    @Override
+    public void yourTurnToChooseToBeALandLord() {
+
+    }
+
+    @Override
+    public void informYouPlayerChooseToBeALandLord(Player theOneCalledToBeLandLord) {
+
+    }
+
+    @Override
+    public void yourTurnToGrapLandLord() {
+
+    }
+
+    @Override
+    public void informYouPlayerGrapToBeALandLord(Player theOneGrapedToBeLandLord) {
+
+    }
+
+    @Override
+    public void yourTurnToPlayCard(List<Card> lastTurnCards) {
+
+    }
+
+    @Override
+    public void informPlayerPlayedCards(List<Card> cardsPlayed, Player thePlayerPlayedCard) {
+
+    }
+
+    @Override
+    public void endGame() {
+
+    }
 }

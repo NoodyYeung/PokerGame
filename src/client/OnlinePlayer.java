@@ -6,20 +6,12 @@ import gameController.Player;
 import java.util.List;
 
 /**
- * Created by yeungchunyin on 29/10/2017.
+ * Online Player is used to communicate with server But not the local game controller (I think >.<)
+ * Created by yeungchunyin on 30/10/2017.
  */
-public class AIPlayer extends Player {
-    public AIPlayer() {
-    }
-
-
+public class OnlinePlayer extends Player {
     @Override
     public void setHand(List<Card> hand) {
-        this.hand = hand;
-    }
-
-    @Override
-    public void yourTurnToPlayCard(List<Card> lastTurnCards) {
 
     }
 
@@ -40,6 +32,11 @@ public class AIPlayer extends Player {
 
     @Override
     public void informYouPlayerGrapToBeALandLord(Player theOneGrapedToBeLandLord) {
+
+    }
+
+    @Override
+    public void yourTurnToPlayCard(List<Card> lastTurnCards) {
 
     }
 

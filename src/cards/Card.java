@@ -26,7 +26,7 @@ public class Card {
 			this.suit = Suit.JOKER;
 		}
 
-		String number = ""+shortForm.charAt(1);
+		String number = ""+shortForm.charAt(1) + (shortForm.length() == 3 ? shortForm.charAt(2) :  "");
 		String suit = ""+shortForm.charAt(0);
 
 		// Set number

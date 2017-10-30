@@ -12,6 +12,7 @@ public class GameController {
     private int turn = 0;
     private ArrayList<Player> playersInThisGame;
     private Deck deck;
+    private boolean isGameInit = false;
 
     public GameController(ArrayList<Player> players) throws InsufficientPlayerException {
         if(players.size() != 3){
@@ -19,6 +20,9 @@ public class GameController {
         }
         this.playersInThisGame = players;
         this.deck = new Deck();
+        for(Player p : this.playersInThisGame){
+            p.setGameController(this);
+        }
 
     }
 
@@ -31,12 +35,21 @@ public class GameController {
                 player.yourTurnToPlayCard(null);
             }
         }
-
     }
 
     public void playCard(Player player){
 
     }
+
+    public void callForLandLord(Player player){
+
+    }
+
+    public void grapForLandLord(Player player){
+
+    }
+
+    public void skipToPlayCard(Player player){}
 
 
 
