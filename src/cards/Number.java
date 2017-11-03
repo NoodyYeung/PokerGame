@@ -7,8 +7,8 @@ package cards;
  */
 public class Number extends SuitCard{
 
-	public Number(String shortForm, Suit suit, int value) {
-		super(shortForm, suit, value);
+	public Number(String shortForm, Suit suit, int value) throws ExCardNoExists {
+		super(shortForm);
 		// TODO Auto-generated constructor stub
 	}
 
