@@ -58,5 +58,9 @@ public class Card {
 	public void setValue(int value) {
 		this.value = value;
 	}*/
+
+	public Integer getValue() {
+		return value;
+	}
 	
 }

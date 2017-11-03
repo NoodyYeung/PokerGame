@@ -1,5 +1,5 @@
 package DDZ;
 
-public abstract class Rule {
+public abstract class Rules{
 
 }
