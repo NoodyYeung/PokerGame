@@ -45,6 +45,9 @@ public class ServerPlayer  extends Player{
         return name;
     }
 
+    public static int getId() {
+        return id;
+    }
 
     @Override
     public void setHand(List<Card> hand) {

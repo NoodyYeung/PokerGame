@@ -1,5 +1,6 @@
 package client;
 
+import message.Message;
 import server.ExInsuffientData;
 
 /**
@@ -9,7 +10,7 @@ public class OnMessageReceivedListener {
 
     private void onMsgReceived(String rawMessage){
         try {
-            ClientMessage clientMessage = new ClientMessage(rawMessage);
+            Message clientMessage = new Message(rawMessage);
 
         } catch (ExInsuffientData exInsuffientData) {
             exInsuffientData.printStackTrace();

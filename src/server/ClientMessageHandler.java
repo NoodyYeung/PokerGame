@@ -1,6 +1,6 @@
 package server;
 
-import cs3343.group8.messageEvent.MsgEvent;
+import message.Message;
 
 /**
  * Created by yeungchunyin on 7/10/2017.
@@ -28,9 +28,11 @@ public class ClientMessageHandler {
          * All the event that can trigger by client
          */
         switch (event){
-            case MsgEvent.CLIENT_EVENT_CMD_OPEN_ROOM:
+            case Message.CLIENT_EVENT_CMD_OPEN_ROOM:
                 break;
 
+            default:
+                break;
         }
     }
 

@@ -1,5 +1,7 @@
 package server;
 
+import message.ServerMessage;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -41,6 +43,9 @@ public class Server {
         }
     }
 
+    /**
+     * Each client will use one thread to handle
+     */
     class RequestThread implements Runnable {
 
         private ServerPlayer player;
@@ -58,11 +63,12 @@ public class Server {
             System.out.println("players: " +playerList.toString());
             DataInputStream input = null;
             DataOutputStream output = null;
-
+            ServerMessage.Builder builder = new ServerMessage.Builder();
             try {
                 input = new DataInputStream(this.clientSocket.getInputStream());
                 output = new DataOutputStream(this.clientSocket.getOutputStream());
-                output.writeUTF(String.format("Hi, %s!\n", clientSocket.getRemoteSocketAddress()));
+
+                builder.prepareClientConnectedMessage(player).sendToClient(output);
                 ClientMessageHandler handler = new ClientMessageHandler(player);
                 while (true) {
 
@@ -78,6 +84,8 @@ public class Server {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ExInsuffientData exInsuffientData) {
+                exInsuffientData.printStackTrace();
             } finally {
                 try {
                     if (input != null)
