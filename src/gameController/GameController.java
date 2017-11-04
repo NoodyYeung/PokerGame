@@ -37,7 +37,10 @@ public class GameController {
 		turn = 0;
 		this.playersInThisGame = players;
 		this.deck = new Deck();
+		int playerId = 0;
 		for (Player p : this.playersInThisGame) {
+		    if(p.getId() != -1)
+		        p.setId(playerId ++);
 			p.setGameController(this);
 		}
 	}
@@ -55,8 +58,11 @@ public class GameController {
 
     }
     **/
-  	
-  	
+
+    /**
+     * TODO 1.Prompt player got cards
+     * TODO 2.ASk Player to call for land lord
+     */
     public void startGame(){
 		try {
 			TableController.createTableForGame(playersInThisGame);
@@ -70,16 +76,21 @@ public class GameController {
   	public boolean checkGameEnd(){
   		return TableController.checkGameEnd();
   	}
-  	//return the card info in string format
-  	//the delimiter is ","
-  	//the sequence is based on the increasing player id	
+
+  	/**
+     *  return the card info in string format
+        the delimiter is ","
+        the sequence is based on the increasing player id
+     */
   	public String getCardsOfEachPlayer(){
   		return TableController.getCardsInfo();
   	}
+
   	//based on the input string by the player create the list of card objects
   	public ArrayList<Card> createThisHandOfCards(String input) throws ExCardNoExists{
   		return Cards.createCardsListFromString(input);
   	}
+
   	//when the player has cards to play
   	//then pass the following validation
   	//will automatically update table info
@@ -101,9 +112,9 @@ public class GameController {
   		}
   		if(checkGameEnd()) {
   			return getGameWinner();
-  		}
-  		else return null;
+  		} else return null;
   	}
+
   	private String getGameWinner() {
   		// TODO Auto-generated method stub
   		return TableController.getGameWinner();
@@ -119,7 +130,7 @@ public class GameController {
     }
 
     public void callForLandLord(Player player){
-
+        player.yourTurnToChooseToBeALandLord();
     }
 
     public void grapForLandLord(Player player){

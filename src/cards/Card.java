@@ -16,7 +16,7 @@ public class Card {
 
 	// Q rather than Queen
 	private Suit suit;
-	private String number;
+	private String type;
 	private int value = 0;
 
 	public Card(String shortForm) throws ExCardNoExists {
@@ -30,7 +30,7 @@ public class Card {
 		String suit = ""+shortForm.charAt(0);
 
 		// Set number
-		this.setNumber(number);
+		this.setType(number);
 
 		// Set suit
 		int suitIndex = cardSuitStr.indexOf(suit);
@@ -41,7 +41,7 @@ public class Card {
 
 	public Card(Suit suit, String number) throws ExCardNoExists {
 		this.suit = suit;
-		this.setNumber(number);
+		this.setType(number);
 	}
 
 
@@ -49,15 +49,15 @@ public class Card {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setNumber(String number) throws ExCardNoExists {
-		int typeIndex = cardType.indexOf(number);
-		if(typeIndex == -1) throw new ExCardNoExists("Card do not exists. Number not exists in card");
+	public void setType(String type) throws ExCardNoExists {
+		int typeIndex = cardType.indexOf(type);
+		if(typeIndex == -1) throw new ExCardNoExists("Card do not exists. Type not exists in card");
 		this.value = cardValues.get(typeIndex);
-		this.number = number;
+		this.type = type;
 	}
 
 	public String toString(){
-		return this.suit + this.number;
+		return this.suit + this.type;
 	}
 /*
 	public void setValue(int value) {

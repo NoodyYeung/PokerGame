@@ -69,6 +69,7 @@ public class Server {
                 output = new DataOutputStream(this.clientSocket.getOutputStream());
 
                 builder.prepareClientConnectedMessage(player).sendToClient(output);
+
                 ClientMessageHandler handler = new ClientMessageHandler(player);
                 while (true) {
 

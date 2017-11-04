@@ -33,6 +33,8 @@ public class Table {
 	List <Player> players;
 	List <PlayerAndCards> entities;
 	Cards lastHandCard;
+
+
 	int round;
 	int turn;
 	public Table(List<Player> players){
@@ -146,6 +148,7 @@ public class Table {
 		}
 		return result;
 	}
+
 	public Cards getLastHandCard(){
 		return lastHandCard;
 	}
@@ -156,12 +159,14 @@ public class Table {
 		addCardToTable(playerID,lastHandCard,round,turn);
 		return true;
 	}
+
 	public boolean checkGameEnd(){
 		for(PlayerAndCards e:entities){
 			if(e.isEmpty()) return true;
 		}
 		return false;
 	}
+
 	public Cards createLastHand(ArrayList<Card> cards, Pattern pattern){
 		Cards lastHandCard=new Cards(cards, pattern);
 		return lastHandCard;

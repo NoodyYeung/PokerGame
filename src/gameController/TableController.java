@@ -17,6 +17,7 @@ public class TableController {
 		table=new Table(players);		
 		return table.distributeCards();
 	}
+
 	public static boolean checkGameEnd(){
 		return table.checkGameEnd();
 	}
@@ -28,15 +29,19 @@ public class TableController {
 		// TODO Auto-generated method stub
 		return table.getCardsOfEachPlayer();
 	}
+
 	public static Cards getLastHandCard(){
 		return table.getLastHandCard();
 	}
+
 	public static boolean updateTableInfo(int playerID, ArrayList<Card> cards, Pattern pattern, int round, int turn){
 		return table.updateTableInfo(playerID, cards,pattern,round,turn);
 	}
+
 	public static void emptyLastHand(){
 		table.emptyLastHand();
 	}
+
 	public static void startANewRound() {
 		// TODO Auto-generated method stub
 		table.startANewRound();
@@ -48,7 +53,6 @@ public class TableController {
 	}
 	public static String getGameWinner() {
 		// TODO Auto-generated method stub
-		
 		return table.getGameWinner();
 	}
 }
