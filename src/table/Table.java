@@ -103,10 +103,10 @@ public class Table {
 		// TODO Auto-generated method stub
 		List<Card> wholeDeck=new ArrayList<>();
 		for (int i=0;i<13;i++){
-			String diamond="D"+new Integer((i+1)).toString();
-			String spade="S"+new Integer((i+1)).toString();
-			String club="C"+new Integer((i+1)).toString();
-			String heart="H"+new Integer((i+1)).toString();
+			String diamond="D"+ Card.cardType.get(i);
+			String spade="S"+Card.cardType.get(i);
+			String club="C"+Card.cardType.get(i);
+			String heart="H"+Card.cardType.get(i);
 			wholeDeck.add(new Card(diamond));
 			wholeDeck.add(new Card(spade));
 			wholeDeck.add(new Card(club));
