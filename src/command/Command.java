@@ -1,8 +1,10 @@
 package command;
 
+import cards.ExCardNoExists;
+
 public abstract class Command implements Running{
 
-    public abstract void execute();
+    public abstract void execute() throws ExCardNoExists;
 
 
     public String toString() {

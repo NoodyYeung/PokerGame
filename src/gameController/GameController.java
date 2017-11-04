@@ -1,11 +1,9 @@
 package gameController;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import cards.*;
-import player.Player;
 import cards.Card;
 
 
@@ -41,12 +39,12 @@ public class GameController {
     }
   	
   	
-
+// ????
     public void startGame(){
-        List<Card>[] decks = deck.distribute();
+        List<Card> decks = deck.distribute();
         for(int i = 0; i < playersInThisGame.size(); i ++) {
             Player player = playersInThisGame.get(i);
-            player.setHand(decks[i]);
+            player.setHand(decks.get(i));
             if (turn == i) {
                 player.yourTurnToPlayCard(null);
             }

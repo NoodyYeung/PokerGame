@@ -4,6 +4,7 @@ import java.util.*;
 
 
 import cards.Card;
+import cards.Cards;
 import pattern.*;
 public class DDZ extends Rules{
 	

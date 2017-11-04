@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cards.*;
-import player.Player;
 public class TableController {
 	static Table table;
 	

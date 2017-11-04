@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import cards.ExCardNoExists;
+
 // This is the main menu selection for the game: this is only a menu selection!
 
 /**
@@ -74,6 +76,10 @@ public class MenuGame extends Menu {
 		} catch (Exception e) {
 			// Same, maybe don't println in secretive places
 			System.out.println(e.getMessage());
+			return null;
+		} catch (ExCardNoExists e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return null;
 		}
 	}

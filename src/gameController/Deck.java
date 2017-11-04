@@ -1,6 +1,7 @@
 package gameController;
 
 import cards.Card;
+import cards.ExCardNoExists;
 import cards.Number;
 import cards.Royal;
 import cards.Suit;
@@ -55,7 +56,13 @@ public class Deck {
 					for (int i = 0; i < cards.length; i++)
 						for (Suit suit : Suit.values()) {
 							// identify card: card, suit, value in base 10
-							Card newCard = identifyCard(cards[i], suit, Integer.parseInt(value[i], 10));
+							Card newCard = null;
+							try {
+								newCard = identifyCard(cards[i], suit, Integer.parseInt(value[i], 10));
+							} catch (ExCardNoExists e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							if (newCard == null) throw new Exception("Unidentified card");
 							deck.add(newCard);
 						}
@@ -81,7 +88,7 @@ public class Deck {
 	} // end createDeck
 
 	// identifies cards: is this a suit or a number?
-	private Card identifyCard(String card, Suit suit, int value) {
+	private Card identifyCard(String card, Suit suit, int value) throws ExCardNoExists {
 		// Regular expression: card is J or Q or K
 		if (Pattern.matches("[JQK]", card)) {
 			return new Royal(card, suit, value);

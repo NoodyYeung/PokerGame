@@ -44,6 +44,10 @@ public class Card {
 		this.setNumber(number);
 	}
 
+	public Card(String string, int parseInt) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setNumber(String number) throws ExCardNoExists {
 		int typeIndex = cardType.indexOf(number);
 		if(typeIndex == -1) throw new ExCardNoExists("Card do not exists. Number not exists in card");
@@ -53,9 +57,6 @@ public class Card {
 
 	public String toString(){
 		return this.suit + this.number;
-
-	public int getValue(){
-		return value;
 	}
 /*
 	public void setValue(int value) {

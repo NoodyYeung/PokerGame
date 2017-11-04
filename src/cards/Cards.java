@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import pattern.Pattern;
+
 /**
  * Include some static function for Card
  */
@@ -51,4 +53,8 @@ public class Cards {
     public ArrayList<Card> getCards(){
     	return cards;
     }
+		public Pattern getPattern() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

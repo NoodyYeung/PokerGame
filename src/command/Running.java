@@ -1,8 +1,10 @@
 package command;
 
+import cards.ExCardNoExists;
+
 public interface Running {
 	// Stuff to do
-	public void execute();
+	public void execute() throws ExCardNoExists;
 	
 	// Description
   public String description();
