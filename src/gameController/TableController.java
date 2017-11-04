@@ -1,14 +1,19 @@
 package gameController;
+
+import cards.Card;
+import cards.Cards;
+import cards.ExCardNoExists;
+import pattern.Pattern;
 import table.Table;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cards.*;
 public class TableController {
 	static Table table;
-	
-	public static String createTableForGame(ArrayList<Player> players) throws ExCardNoExists{
+
+
+	public static String createTableForGame(List<Player> players) throws ExCardNoExists{
 		table=new Table(players);		
 		return table.distributeCards();
 	}

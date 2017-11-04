@@ -1,14 +1,16 @@
 package table;
+
+import cards.Card;
+import cards.Cards;
+import cards.ExCardNoExists;
+import gameController.Player;
+import pattern.Pattern;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import java.util.Random;
-
-import cards.*;
-import player.Player;
-
-import DDZ.*;
-import gameController.Deck;
 // Each table has 4 players and a deck: for testing, it only has 1 player: (54-6)/4 = 12
 
 public class Table {
@@ -33,7 +35,7 @@ public class Table {
 	Cards lastHandCard;
 	int round;
 	int turn;
-	public Table(ArrayList<Player> players){
+	public Table(List<Player> players){
 		this.players=players;
 		historyCard= new ArrayList<CardOfEachTurn>();
 		roundCard=new ArrayList<CardOfEachRound>();
@@ -41,8 +43,10 @@ public class Table {
 		round=0;
 		turn=0;		
 	}
-	
-	public boolean addCardToTable(int playerID, Cards cards,int round, int turn){
+
+
+
+    public boolean addCardToTable(int playerID, Cards cards,int round, int turn){
 		this.round=round;
 		this.turn=turn;
 		
@@ -53,7 +57,7 @@ public class Table {
 	private boolean updateEntityStatus(int playerID, Cards cards) {
 		// TODO Auto-generated method stub
 		for(PlayerAndCards e:entities){
-			if(e.getPlayer().getID()==playerID) {
+			if(e.getPlayer().getId()==playerID) {
 				e.updateCards(cards);
 			}
 		}
@@ -170,7 +174,7 @@ public class Table {
 
 	public boolean validateCards(int playerID, ArrayList<Card> cards) {
 		for (PlayerAndCards e:entities){
-			if(e.getPlayer().getID()==playerID) {
+			if(e.getPlayer().getId()==playerID) {
 				return e.checkCards(cards);
 			}		
 		}

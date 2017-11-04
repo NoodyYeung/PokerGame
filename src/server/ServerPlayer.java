@@ -41,9 +41,6 @@ public class ServerPlayer  extends Player{
         return socket;
     }
 
-    public String getName() {
-        return name;
-    }
 
 
     @Override

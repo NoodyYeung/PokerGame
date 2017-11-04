@@ -8,11 +8,9 @@ import gameController.Player;
 
 import java.util.ArrayList;
 
-import cards.ExCardNoExists;
-
 public class Cmd2Play extends Command{
 
-	public void execute() throws ExCardNoExists{
+	public void execute(){
 
 		ArrayList<Player> players = new ArrayList<>();
 		players.add(new LocalPlayer());

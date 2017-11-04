@@ -1,12 +1,19 @@
 package gameController;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import cards.*;
 import cards.Card;
+import cards.Cards;
+import cards.ExCardNoExists;
+import pattern.Pattern;
+
+import java.util.ArrayList;
 
 
+/**
+ *
+ * GameController should control the interaction with players
+ *
+ *
+ */
 public class GameController {
     /**
      * 0, 1, 2 for indicating the user turn
@@ -22,34 +29,43 @@ public class GameController {
   	//pass in the player object list, and create a table to play and distribute cards
   	//the Cards for each player is saved in the table.java
   	//before gamecontroller is created, the server should assign id to the player
-  	public GameController(ArrayList<Player> players) throws InsufficientPlayerException, ExCardNoExists {
-          if(players.size() != 3){
-              throw new InsufficientPlayerException("Insufficient players. At least three player is needed");
-          }      
-          round=0;
-          turn=0;
+  	public GameController(ArrayList<Player> players) throws InsufficientPlayerException {
+		if (players.size() != 3) {
+			throw new InsufficientPlayerException("Insufficient players. At least three player is needed");
+		}
+		round = 0;
+		turn = 0;
+		this.playersInThisGame = players;
+		this.deck = new Deck();
+		for (Player p : this.playersInThisGame) {
+			p.setGameController(this);
+		}
+	}
 
-        this.playersInThisGame = players;
-        this.deck = new Deck();
-        for(Player p : this.playersInThisGame){
-            p.setGameController(this);
-        }
-        TableController.createTableForGame(players);    
-
-    }
-  	
-  	
-// ????
+	/**
+	 * Noody: This is not my code.
+	 * The main main different i thought is that
+	 *
     public void startGame(){
-        List<Card> decks = deck.distribute();
+        List<Card>[] decks = deck.distribute();
         for(int i = 0; i < playersInThisGame.size(); i ++) {
             Player player = playersInThisGame.get(i);
-            player.setHand(decks.get(i));
-            if (turn == i) {
-                player.yourTurnToPlayCard(null);
-            }
-        }
+            player.setHand(decks[i]);
+        TableController.createTableForGame(players);
+
     }
+    **/
+  	
+  	
+    public void startGame(){
+		try {
+			TableController.createTableForGame(playersInThisGame);
+		} catch (ExCardNoExists exCardNoExists) {
+			exCardNoExists.printStackTrace();
+		}
+
+	}
+
 
   	public boolean checkGameEnd(){
   		return TableController.checkGameEnd();
@@ -92,6 +108,7 @@ public class GameController {
   		// TODO Auto-generated method stub
   		return TableController.getGameWinner();
   	}
+
   	private Pattern validateDDZ(ArrayList<Card> thisHandOfCards, Cards lastHand) {
   		// TODO Auto-generated method stub
   		return null;
@@ -122,12 +139,13 @@ public class GameController {
 		}
 		return true;
 	}
+
 	//when the player have cards to play
 	//if validation is passed, then call this function to 
 	//increase the turn and update the info in the table.java
 	//the parameter needed is the player id and cards 
 	public boolean updateTheTable(int playerID, ArrayList<Card> cards,Pattern pattern){
-		TableController.updateTableInfo(playerID, cards,pattern,round,turn);
+		TableController.updateTableInfo(playerID, cards, pattern, round,turn);
 		return true;
 	}
 	

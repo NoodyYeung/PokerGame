@@ -1,8 +1,5 @@
 package table;
 
-import java.util.ArrayList;
-
-import cards.Card;
 import cards.Cards;
 
 public class CardOfEachTurn {

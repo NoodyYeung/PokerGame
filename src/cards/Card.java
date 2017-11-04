@@ -44,6 +44,7 @@ public class Card {
 		this.setNumber(number);
 	}
 
+
 	public Card(String string, int parseInt) {
 		// TODO Auto-generated constructor stub
 	}

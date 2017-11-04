@@ -1,7 +1,6 @@
 package pattern;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PtripleStraight extends Pattern {
 	private ArrayList<Integer> listOfValues;

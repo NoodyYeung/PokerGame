@@ -1,11 +1,10 @@
 package DDZ;
 
-import java.util.*;
-
-
 import cards.Card;
 import cards.Cards;
 import pattern.*;
+
+import java.util.*;
 public class DDZ extends Rules{
 	
 	

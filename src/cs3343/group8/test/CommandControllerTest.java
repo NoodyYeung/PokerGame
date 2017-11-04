@@ -1,6 +1,5 @@
 package cs3343.group8.test;
 
-
 import junit.framework.TestCase;
 import command.CommandController;
 

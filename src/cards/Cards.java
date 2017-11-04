@@ -1,12 +1,11 @@
 package cards;
 
-import java.util.ArrayList;
+import pattern.Pattern;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import pattern.Pattern;
 
 /**
  * Include some static function for Card
@@ -18,12 +17,14 @@ public class Cards {
      * @return
      */
 
+
 	ArrayList<Card> cards;
 	Pattern pattern;
 	public Cards ( ArrayList<Card> cards, Pattern pattern){
 		this.cards=cards;
 		this.pattern=pattern;
 	}
+
     public static ArrayList<Card> createCardsListFromString(String rawString) throws ExCardNoExists {
         ArrayList<Card> cards = new ArrayList<Card>();
 
@@ -32,6 +33,7 @@ public class Cards {
             String tempCard  = cardsStr[i];
             cards.add(new Card(tempCard) );
         }
+
 
         Collections.sort((List<Card>) cards,new Comparator<Card>(){
         	public int compare(Card c1,Card c2){
@@ -53,8 +55,8 @@ public class Cards {
     public ArrayList<Card> getCards(){
     	return cards;
     }
-		public Pattern getPattern() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+    public Pattern getPattern() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

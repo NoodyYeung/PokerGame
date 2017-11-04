@@ -1,10 +1,10 @@
 package table;
 
-import java.util.ArrayList;
-
 import cards.Card;
 import cards.Cards;
-import player.Player;
+import gameController.Player;
+
+import java.util.ArrayList;
 
 public class PlayerAndCards {
 	Player player;

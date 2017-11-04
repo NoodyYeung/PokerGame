@@ -1,4 +1,4 @@
-package rules;
+package DDZ;
 
 public abstract class Rule {
 
