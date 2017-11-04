@@ -41,13 +41,7 @@ public class ServerPlayer  extends Player{
         return socket;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public static int getId() {
-        return id;
-    }
 
     @Override
     public void setHand(List<Card> hand) {

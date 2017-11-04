@@ -1,6 +1,10 @@
 package cards;
 
+import pattern.Pattern;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -12,13 +16,30 @@ public class Cards {
      * @param rawString Expect a input like "C1 S1 D1 H1" OR "JB JR"
      * @return
      */
-    public static List<Card> createCardsListFromString(String rawString) throws ExCardNoExists {
-        ArrayList cards = new ArrayList();
+
+
+	ArrayList<Card> cards;
+	Pattern pattern;
+	public Cards ( ArrayList<Card> cards, Pattern pattern){
+		this.cards=cards;
+		this.pattern=pattern;
+	}
+
+    public static ArrayList<Card> createCardsListFromString(String rawString) throws ExCardNoExists {
+        ArrayList<Card> cards = new ArrayList<Card>();
+
         String[] cardsStr = rawString.split(" ");
         for(int i = 0; i < cardsStr.length; i ++) {
             String tempCard  = cardsStr[i];
             cards.add(new Card(tempCard) );
         }
+
+
+        Collections.sort((List<Card>) cards,new Comparator<Card>(){
+        	public int compare(Card c1,Card c2){
+        		return Integer.compare(c1.getValue(),c2.getValue());
+        	}
+        });
         return cards;
     }
 
@@ -28,5 +49,14 @@ public class Cards {
             s += c + " ";
         }
         return s;
+    }
+
+    
+    public ArrayList<Card> getCards(){
+    	return cards;
+    }
+    public Pattern getPattern() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
