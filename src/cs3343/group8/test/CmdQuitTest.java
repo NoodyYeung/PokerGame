@@ -5,6 +5,9 @@ import command.*;
 
 import org.junit.Test;
 
+import Player.CmdBack;
+import Player.CommandController;
+
 public class CmdQuitTest extends TestCase {
 
     private CmdBack cmdQuit;

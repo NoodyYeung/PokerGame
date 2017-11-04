@@ -1,4 +1,11 @@
 package table;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+import cards.*;
+import player.Player;
 
 import DDZ.*;
 import gameController.Deck;
@@ -18,6 +25,171 @@ public class Table {
 //		me.take(deck.distribute());
 //		System.out.println(me);
 //	}
+
+	List <CardOfEachTurn> historyCard;
+	List <CardOfEachRound> roundCard;
+	List <Player> players;
+	List <PlayerAndCards> entities;
+	Cards lastHandCard;
+	int round;
+	int turn;
+	public Table(ArrayList<Player> players){
+		this.players=players;
+		historyCard= new ArrayList<CardOfEachTurn>();
+		roundCard=new ArrayList<CardOfEachRound>();
+		entities=new ArrayList<PlayerAndCards>();
+		round=0;
+		turn=0;		
+	}
+	
+	public boolean addCardToTable(int playerID, Cards cards,int round, int turn){
+		this.round=round;
+		this.turn=turn;
+		
+		return addCardToTurn(playerID, cards)&& addCardToRound(playerID, cards)&&updateEntityStatus(playerID, cards);
+	}
+	
+
+	private boolean updateEntityStatus(int playerID, Cards cards) {
+		// TODO Auto-generated method stub
+		for(PlayerAndCards e:entities){
+			if(e.getPlayer().getID()==playerID) {
+				e.updateCards(cards);
+			}
+		}
+		return false;
+	}
+
+	private boolean addCardToRound(int playerID, Cards cards) {
+		CardOfEachRound temp=new CardOfEachRound(round,playerID,cards);
+		roundCard.add(temp);
+		return true;
+	}
+	private boolean addCardToTurn(int playerID, Cards cards) {
+		CardOfEachTurn temp=new CardOfEachTurn(turn,playerID,cards);
+		historyCard.add(temp);
+		return true;		
+	}
+	//distribute the cards to the players and create entity for each player	
+	//each entity saves the player info and his related cards
+	//the entity is saved in the entities list
+	//return the distributed cards in string format and the delimiter is " "
+	public String distributeCards() throws ExCardNoExists {
+		// TODO Auto-generated method stub
+		ArrayList<ArrayList <Card>> cards=randomGenerateCards();
+		String result="";
+		int i=1;
+		PlayerAndCards entity;
+		for (Player p:players){
+			if(p.isDiZhu()) {
+				entity=new PlayerAndCards(p,cards.get(0));	
+			}
+			else{
+				entity=new PlayerAndCards(p,cards.get(i++));	
+			}
+			entities.add(entity);
+			result=result+cards.toString()+" ";			
+		}
+		return result;
+	}
+
+	private ArrayList<ArrayList<Card>> randomGenerateCards() throws ExCardNoExists {
+		// TODO Auto-generated method stub
+		List<Card> wholeDeck=new ArrayList<>();
+		for (int i=0;i<13;i++){
+			String diamond="D"+new Integer((i+1)).toString();
+			String spade="S"+new Integer((i+1)).toString();
+			String club="C"+new Integer((i+1)).toString();
+			String heart="H"+new Integer((i+1)).toString();
+			wholeDeck.add(new Card(diamond));
+			wholeDeck.add(new Card(spade));
+			wholeDeck.add(new Card(club));
+			wholeDeck.add(new Card(heart));
+		}
+		wholeDeck.add(new Card("JR"));
+		wholeDeck.add(new Card("JB"));
+		Collections.shuffle(wholeDeck);
+		ArrayList<Card> player1=new ArrayList<>();
+		ArrayList<Card> player2=new ArrayList<>();
+		ArrayList<Card> player3=new ArrayList<>();
+		//have dizhu
+		Random rand=new Random();
+		int n = rand.nextInt(53) + 0;
+		player1.add(wholeDeck.get(n));
+		n = rand.nextInt(53) + 0;
+		player1.add(wholeDeck.get(n));
+		n = rand.nextInt(53) + 0;
+		player1.add(wholeDeck.get(n));
+		//no dizhu
+		
+		ArrayList<ArrayList<Card>> result=new ArrayList<>();
+		for(int i=0;i<wholeDeck.size();i++){
+			if(i%3==0) player1.add(wholeDeck.get(i));
+			if(i%3==1) player2.add(wholeDeck.get(i));
+			if(i%3==2) player3.add(wholeDeck.get(i));
+		}
+		result.add(player1);
+		result.add(player2);
+		result.add(player3);
+		return result;
+	}
+
+	public String getCardsOfEachPlayer() {
+		// TODO Auto-generated method stub
+		String result="";
+		for(PlayerAndCards e:entities){
+			result+=e.getCardsString()+",";
+		}
+		return result;
+	}
+	public Cards getLastHandCard(){
+		return lastHandCard;
+	}
+
+	public boolean updateTableInfo(int playerID, ArrayList<Card> cards,Pattern pattern,int round, int turn) {
+		// TODO Auto-generated method stub
+		lastHandCard=createLastHand(cards,pattern);
+		addCardToTable(playerID,lastHandCard,round,turn);
+		return true;
+	}
+	public boolean checkGameEnd(){
+		for(PlayerAndCards e:entities){
+			if(e.isEmpty()) return true;
+		}
+		return false;
+	}
+	public Cards createLastHand(ArrayList<Card> cards, Pattern pattern){
+		Cards lastHandCard=new Cards(cards, pattern);
+		return lastHandCard;
+	}
+
+	public void startANewRound() {
+		// TODO Auto-generated method stub
+		round++;
+	}
+
+	public boolean validateCards(int playerID, ArrayList<Card> cards) {
+		for (PlayerAndCards e:entities){
+			if(e.getPlayer().getID()==playerID) {
+				return e.checkCards(cards);
+			}		
+		}
+		return false;
+	}
+
+	public void emptyLastHand() {
+		// TODO Auto-generated method stub
+		lastHandCard=null;
+	}
+
+	public String getGameWinner() {
+		// TODO Auto-generated method stub
+		for(PlayerAndCards e:entities){
+			if(e.isEmpty()) return e.getPlayer().getName();
+		}
+		return null;
+	}
+	
 }
 //Version1: table should keep the info about the card on the table and 
 //what cards each player hold
