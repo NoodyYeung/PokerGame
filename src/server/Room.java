@@ -43,4 +43,12 @@ public class Room {
     public String toString() {
         return name + "; Players : " + players.size() + "/3" ;
     }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public ArrayList<ServerPlayer> getPlayers() {
+        return players;
+    }
 }

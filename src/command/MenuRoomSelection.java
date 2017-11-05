@@ -6,6 +6,7 @@ import message.ClientMessage;
 
 /**
  * Created by yeungchunyin on 5/11/2017.
+ * For Online usage.
  */
 public class MenuRoomSelection extends Menu {
 

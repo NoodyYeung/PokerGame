@@ -1,6 +1,12 @@
 package server;
 
 import message.Message;
+import message.ServerMessage;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by yeungchunyin on 7/10/2017.
@@ -13,27 +19,65 @@ public class ClientMessageHandler {
         this.player = player;
     }
 
-    public void handleMessage(String rawString) throws ExInsuffientData {
-        String msgs[] = rawString.split("\t");
-        if(msgs.length < 1){
-            throw new ExInsuffientData("Server received message: needs a rawString that can be separate to event and data with a tab.");
-        }
-        String event = msgs[0];
+    public void handleMessage(Message msg) throws ExInsuffientData, IOException {
+        String event = msg.getEvent();
+        JSONObject value = msg.getJSONObject();
+        RoomsController roomsController = RoomsController.getInstance();
+        ServerMessage.Builder builder = new ServerMessage.Builder();
 
-        String jsonStr = null;
-        if(msgs.length > 1){
-            jsonStr = msgs[1];
-        }
+        System.out.println("[Debug] : " + value.toString());
         /**
          * All the event that can trigger by client
          */
         switch (event){
             case Message.CLIENT_EVENT_CMD_OPEN_ROOM:
+                try {
+                    Room room =  roomsController.createNewRoom(player, value.getString("name"));
+                    builder.prepareResponseMessageOnRoomCreated(player, room).sendToClient(player.getOutputStream());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
+
+            case Message.CLIENT_EVENT_JOIN_ROOM:
+                int roomId = -1;
+                try {
+                    roomId = value.getInt("roomId");
+                    roomsController.joinRoomWithRoomId(player, roomId);
+                    Room room = roomsController.findRoomById(roomId);
+                    List<ServerPlayer> players = room.getPlayers();
+                    for(ServerPlayer p : players){
+                        if(p == player){
+                            builder.prepareResponseRoomJoinedRoom(player, roomId).sendToClient(p);
+                        }else {
+                            builder.prepareResponseRoomSomeUserJoinedToThisRoom(player).sendToClient(p);
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                } catch (ExRoomNotFound exRoomNotFound) {
+                    builder.prepareResponseRoomIsNotFoundMsg(player, roomId).sendToClient(player);
+                    exRoomNotFound.printStackTrace();
+
+                } catch (ExRoomFullException e) {
+                    builder.prepareResponseRoomIsFullMessage(player, roomId).sendToClient(player);
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
 
             default:
                 break;
         }
     }
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package server;
 
+import message.Message;
 import message.ServerMessage;
 
 import java.io.DataInputStream;
@@ -67,6 +68,8 @@ public class Server {
             try {
                 input = new DataInputStream(this.clientSocket.getInputStream());
                 output = new DataOutputStream(this.clientSocket.getOutputStream());
+                player.setOutputStream(output);
+                player.setInputStream(input);
 
                 /** Send message to client to notify that "you are connected to server" */
                 builder.prepareClientConnectedMessage(player).sendToClient(output);
@@ -77,7 +80,7 @@ public class Server {
                     // TODO: received message form player's socket
                     String s = input.readUTF();
                     try {
-                        handler.handleMessage(s);
+                        handler.handleMessage(new Message(s));
                     } catch (ExInsuffientData exInsuffientData) {
                         exInsuffientData.printStackTrace();
                         output.writeUTF("Invalid Command");

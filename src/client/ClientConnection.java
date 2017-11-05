@@ -86,10 +86,6 @@ public class ClientConnection{
                 try {
                     input = new DataInputStream(socket.getInputStream());
                     output = new DataOutputStream(socket.getOutputStream());
-                    if(onConnectedListener != null){
-                        String messageFromServer = input.readUTF();
-                        onConnectedListener.onSuccessConnected(new Message(messageFromServer));
-                    }
                     /**
                      * Currently, there is no way to confirm whether the client is connecting. Heartbeat implementation could handle
                      * this problem.

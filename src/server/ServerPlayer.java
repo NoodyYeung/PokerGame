@@ -16,7 +16,6 @@ import java.util.List;
 public class ServerPlayer  extends Player{
 
     private static int id = 1;
-    private String name;
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
     private Socket socket;
@@ -82,5 +81,21 @@ public class ServerPlayer  extends Player{
     @Override
     public void endGame() {
 
+    }
+
+    public void setOutputStream(DataOutputStream outputStream) {
+        this.outputStream = outputStream;
+    }
+
+    public void setInputStream(DataInputStream inputStream) {
+        this.inputStream = inputStream;
+    }
+
+    public DataInputStream getInputStream() {
+        return inputStream;
+    }
+
+    public DataOutputStream getOutputStream() {
+        return outputStream;
     }
 }

@@ -32,6 +32,11 @@ public class Message {
     public static final String SERVER_EXCEPTION = "exception";
     public static final String SERVER_CONNECTED = "server connected";
 
+    public static final String SERVER_RESPONSE_ROOM_CREATED = "roomCreated";
+    public static final String SERVER_RESPONSE_ROOM_IS_FULL = "roomIsFull";
+    public static final String SERVER_RESPONSE_ROOM_IS_NOT_FOUND= "roomIsNeeded";
+    public static final String SERVER_RESPONSE_JOINED_ROOM = "joinedRoom";
+    public static final String SERVER_RESPONSE_SOME_USER_JOINED_ROOM = "someoneJoinedRoom";
 
 
 

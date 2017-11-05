@@ -15,7 +15,7 @@ public class RoomsController {
         instance = new RoomsController();
         return instance;
     }
-    public int roomId = 0;
+    public static int roomId = 0;
     public Map<Integer, Room> rooms = new LinkedHashMap<>();
 
     public Room createNewRoom(ServerPlayer host){
@@ -31,8 +31,12 @@ public class RoomsController {
     }
 
     public void joinRoomWithRoomId(ServerPlayer player, int id) throws ExRoomFullException, ExRoomNotFound {
+       findRoomById(id).join(player);
+    }
+
+    public Room findRoomById(int id) throws ExRoomNotFound {
         if(rooms.containsKey(id)){
-            rooms.get(id).join(player);
+            return rooms.get(id);
         }else throw new ExRoomNotFound("Room Not Found");
     }
 
