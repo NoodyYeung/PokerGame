@@ -12,7 +12,8 @@ public class RoomsController {
     private RoomsController(){}
     private static RoomsController instance;
     public static RoomsController getInstance(){
-        instance = new RoomsController();
+        if(instance == null)
+            instance = new RoomsController();
         return instance;
     }
     public static int roomId = 0;
