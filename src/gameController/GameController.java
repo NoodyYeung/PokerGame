@@ -23,7 +23,7 @@ public class GameController<T extends Player> {
   	int round=0;
 
     private ArrayList<T> playersInThisGame;
-    private Deck deck;
+    private TableController tableController;
     private boolean isGameInit = false;
   	ArrayList<Integer> playerSequence=new ArrayList<>();
   	
@@ -37,6 +37,7 @@ public class GameController<T extends Player> {
 		round = 0;
 		turn = 0;
 		this.playersInThisGame = players;
+		this.tableController = new TableController();
 
 		int playerId = 0;
 		for (Player p : this.playersInThisGame) {
@@ -66,7 +67,7 @@ public class GameController<T extends Player> {
      */
     public void startGame(){
 		try {
-			System.out.println(TableController.createTableForGame(playersInThisGame));
+			System.out.println(tableController.createTableForGame(playersInThisGame));
 		} catch (ExCardNoExists exCardNoExists) {
 			exCardNoExists.printStackTrace();
 		} catch (ExNotEnoughPlayers e) {
@@ -78,7 +79,7 @@ public class GameController<T extends Player> {
 
 
   	public boolean checkGameEnd(){
-  		return TableController.checkGameEnd();
+  		return tableController.checkGameEnd();
   	}
 
   	/**
@@ -87,7 +88,7 @@ public class GameController<T extends Player> {
         the sequence is based on the increasing player id
      */
   	public String getCardsOfEachPlayer(){
-  		return TableController.getCardsInfo();
+  		return tableController.getCardsInfo();
   	}
 
   	//based on the input string by the player create the list of card objects
@@ -101,9 +102,9 @@ public class GameController<T extends Player> {
   	public String cardsValidation(int playerID, String cards) throws ExCardNoExists{
   		ArrayList<Card> thisHandOfCards=createThisHandOfCards(cards);
   		//check if the player has those cards
-  		boolean isExist=TableController.validateCards(playerID,thisHandOfCards);
+  		boolean isExist=tableController.validateCards(playerID,thisHandOfCards);
   		if(isExist){
-  			Cards lastHand=TableController.getLastHandCard();
+  			Cards lastHand=tableController.getLastHandCard();
   			//validateDDZ need to check if the lastHand is null
   			Pattern pattern=validateDDZ(thisHandOfCards,lastHand);
   			if(pattern!=null){
@@ -121,7 +122,7 @@ public class GameController<T extends Player> {
 
   	private String getGameWinner() {
   		// TODO Auto-generated method stub
-  		return TableController.getGameWinner();
+  		return tableController.getGameWinner();
   	}
 
   	private Pattern validateDDZ(ArrayList<Card> thisHandOfCards, Cards lastHand) {
@@ -149,8 +150,8 @@ public class GameController<T extends Player> {
 	public boolean skipTheCurrentPlayer(int playerID){
 		if(playerID==playerSequence.get(playerSequence.size()-1)){
 			round++;
-			TableController.startANewRound();
-			TableController.emptyLastHand();
+			tableController.startANewRound();
+			tableController.emptyLastHand();
 		}
 		return true;
 	}
@@ -160,7 +161,7 @@ public class GameController<T extends Player> {
 	//increase the turn and update the info in the table.java
 	//the parameter needed is the player id and cards 
 	public boolean updateTheTable(int playerID, ArrayList<Card> cards,Pattern pattern){
-		TableController.updateTableInfo(playerID, cards, pattern, round,turn);
+		tableController.updateTableInfo(playerID, cards, pattern, round,turn);
 		return true;
 	}
 	
