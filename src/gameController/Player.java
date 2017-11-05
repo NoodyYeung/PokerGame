@@ -25,7 +25,10 @@ public abstract class Player {
         for(Card card: cards)
             hand.add(card);
     }
-
+    
+    public void take(Card card){
+          hand.add(card);
+    }
     public boolean isDiZhu(){
         return isDiZhu;
     }

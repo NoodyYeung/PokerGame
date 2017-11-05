@@ -4,6 +4,7 @@ import cards.Card;
 import cards.Cards;
 import cards.ExCardNoExists;
 import pattern.Pattern;
+import table.ExNotEnoughPlayers;
 import table.Table;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class TableController {
 	static Table table;
 
 
-	public static String createTableForGame(List<Player> players) throws ExCardNoExists{
+	public static String createTableForGame(List<Player> players) throws ExCardNoExists, ExNotEnoughPlayers{
 		table=new Table(players);		
 		return table.distributeCards();
 	}

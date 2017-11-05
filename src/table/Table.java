@@ -11,23 +11,8 @@ import java.util.Collections;
 import java.util.List;
 
 import java.util.Random;
-// Each table has 4 players and a deck: for testing, it only has 1 player: (54-6)/4 = 12
 
 public class Table {
-//	private Deck deck;
-//	// supposed to have 4 players, but just 1 now
-//	private Player me;
-//	public Table(Deck d) {
-//		System.out.println("Table.java initiating table");
-//		
-//		// Hack-like implementation: please expand on this (Priority 1)
-//		// Design question: should we let Table control player actions, or let the specific command control it?
-//		me = new Player();
-//		this.deck = d;
-//		me.take(deck.distribute());
-//		System.out.println(me);
-//	}
-
 	List <CardOfEachTurn> historyCard;
 	List <CardOfEachRound> roundCard;
 	List <Player> players;
@@ -76,32 +61,65 @@ public class Table {
 		historyCard.add(temp);
 		return true;		
 	}
+	
+	// add player????
+	
 	//distribute the cards to the players and create entity for each player	
 	//each entity saves the player info and his related cards
 	//the entity is saved in the entities list
 	//return the distributed cards in string format and the delimiter is " "
-	public String distributeCards() throws ExCardNoExists {
-		// TODO Auto-generated method stub
-		ArrayList<ArrayList <Card>> cards=randomGenerateCards();
+	public String distributeCards() throws ExCardNoExists, ExNotEnoughPlayers {
+		ArrayList<Card> cards=randomGenerateCards();
+		
+		if(players == null || players.size()<3)
+			throw new ExNotEnoughPlayers("Not enough players at this table! There are only "+players.size()+" players here.");
+		
+		if(hasDiZhu()){
+			Random rand=new Random();
+			ArrayList<Card> cardsOnBottom = new ArrayList<Card>();
+			for(int i=0; i<3; i++){
+				Card c = cards.get(rand.nextInt(53) + 0);
+				cardsOnBottom.add(c);
+				cards.remove(c);
+			}
+		}
+		
+		// TODO hardcoded here assuming 3 players
+		// PlayerAndCards immutable card checks:
+		ArrayList<ArrayList<Card>> playerAndCards = new ArrayList<ArrayList<Card>>();
+		playerAndCards.add(new ArrayList<Card>());
+		playerAndCards.add(new ArrayList<Card>());
+		playerAndCards.add(new ArrayList<Card>());
+		try{
+		// Takes card in turn
+		int playerCounter = 0;
+		while(cards.size()>0){
+			// System.out.println(cards.size());
+			Card c = cards.get(cards.size()-1);
+			players.get(playerCounter).take(c);
+			playerAndCards.get(playerCounter).add(cards.get(cards.size()-1));
+			cards.remove(cards.size()-1);
+			playerCounter++;
+			playerCounter = playerCounter%3;
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(cards);
 		String result="";
 		int i=0;
 		PlayerAndCards entity;
 		for (Player p:players){
-			if(p.isDiZhu()) {
-				entity=new PlayerAndCards(p,cards.get(0));
-			}
-			else{
-				entity=new PlayerAndCards(p,cards.get(i++));
-			}
+			entity=new PlayerAndCards(p,playerAndCards.get(i++));
 			entities.add(entity);
 			result=result+cards.toString()+" ";
 		}
 		return result;
 	}
 
-	private ArrayList<ArrayList<Card>> randomGenerateCards() throws ExCardNoExists {
+	private ArrayList<Card> randomGenerateCards() throws ExCardNoExists {
 		// TODO Auto-generated method stub
-		List<Card> wholeDeck=new ArrayList<>();
+		ArrayList<Card> wholeDeck=new ArrayList<>();
 		for (int i=0;i<13;i++){
 			String diamond="D"+ Card.cardType.get(i);
 			String spade="S"+Card.cardType.get(i);
@@ -116,29 +134,7 @@ public class Table {
 		wholeDeck.add(new Card("JB"));
 		Collections.shuffle(wholeDeck);
 
-		ArrayList<Card> player1=new ArrayList<>();
-		ArrayList<Card> player2=new ArrayList<>();
-		ArrayList<Card> player3=new ArrayList<>();
-		//have dizhu
-		Random rand=new Random();
-		int n = rand.nextInt(53) + 0;
-		player1.add(wholeDeck.get(n));
-		n = rand.nextInt(53) + 0;
-		player1.add(wholeDeck.get(n));
-		n = rand.nextInt(53) + 0;
-		player1.add(wholeDeck.get(n));
-		//no dizhu
-
-		ArrayList<ArrayList<Card>> result=new ArrayList<>();
-		for(int i=0;i<wholeDeck.size();i++){
-			if(i%3==0) player1.add(wholeDeck.get(i));
-			if(i%3==1) player2.add(wholeDeck.get(i));
-			if(i%3==2) player3.add(wholeDeck.get(i));
-		}
-		result.add(player1);
-		result.add(player2);
-		result.add(player3);
-		return result;
+		return wholeDeck;
 	}
 
 	public String getCardsOfEachPlayer() {
@@ -200,6 +196,13 @@ public class Table {
 		return null;
 	}
 	
+	public boolean hasDiZhu() {
+		if(players==null) return false;
+		for(Player p: players){
+			if(p.isDiZhu()) return true;
+		}
+		return false;
+	}
 }
 //Version1: table should keep the info about the card on the table and 
 //what cards each player hold
