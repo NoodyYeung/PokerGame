@@ -15,14 +15,14 @@ import java.util.ArrayList;
  *
  *
  */
-public class GameController {
+public class GameController<T extends Player> {
     /**
      * 0, 1, 2 for indicating the user turn
      */
     private int turn = 0;
   	int round=0;
 
-    private ArrayList<Player> playersInThisGame;
+    private ArrayList<T> playersInThisGame;
     private Deck deck;
     private boolean isGameInit = false;
   	ArrayList<Integer> playerSequence=new ArrayList<>();
@@ -30,7 +30,7 @@ public class GameController {
   	//pass in the player object list, and create a table to play and distribute cards
   	//the Cards for each player is saved in the table.java
   	//before gamecontroller is created, the server should assign id to the player
-  	public GameController(ArrayList<Player> players) throws InsufficientPlayerException {
+  	public GameController(ArrayList<T> players) throws InsufficientPlayerException {
 		if (players.size() != 3) {
 			throw new InsufficientPlayerException("Insufficient players. At least three player is needed");
 		}

@@ -48,12 +48,21 @@ public class ClientMessageHandler {
                     roomsController.joinRoomWithRoomId(player, roomId);
                     Room room = roomsController.findRoomById(roomId);
                     List<ServerPlayer> players = room.getPlayers();
+                    // broadcast the joined message
                     for(ServerPlayer p : players){
                         if(p == player){
                             builder.prepareResponseRoomJoinedRoom(player, roomId).sendToClient(p);
                         }else {
                             builder.prepareResponseRoomSomeUserJoinedToThisRoom(player).sendToClient(p);
                         }
+                    }
+
+                    // If the room is full, start the game
+                    if(players.size() == 3){
+                        for(ServerPlayer p : players){
+                            builder.prepareStartGameMessage().sendToClient(p);
+                        }
+                        room.startGame();
                     }
 
                 } catch (JSONException e) {

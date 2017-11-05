@@ -1,5 +1,8 @@
 package server;
 
+import gameController.GameController;
+import gameController.InsufficientPlayerException;
+
 import java.util.ArrayList;
 
 /**
@@ -11,11 +14,17 @@ public class Room {
     private String name;
     private ServerPlayer host;
     private ArrayList<ServerPlayer> players = new ArrayList<>();
+    private GameController gameController;
 
     public Room(int roomId, ServerPlayer host) {
         this.roomId = roomId;
         this.host = host;
         this.players.add(host);
+        try {
+            this.gameController = new GameController(players);
+        } catch (InsufficientPlayerException e) {
+            e.printStackTrace();
+        }
     }
 
     public void join (ServerPlayer newPlayer) throws ExRoomFullException {
@@ -50,5 +59,9 @@ public class Room {
 
     public ArrayList<ServerPlayer> getPlayers() {
         return players;
+    }
+
+    public void startGame(){
+        gameController.startGame();
     }
 }

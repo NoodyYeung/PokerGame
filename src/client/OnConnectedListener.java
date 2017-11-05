@@ -58,6 +58,11 @@ public class OnConnectedListener{
                     System.out.println(message);
                     break;
 
+                case Message.SERVER_START_GAME:
+                    message = msg.getJSONObject().getString("message");
+                    System.out.print(message);
+                    break;
+
                 default:
                     System.out.println("[Debug] ReceivedMessage : " + msg);
                     break;

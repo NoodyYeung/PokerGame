@@ -14,7 +14,7 @@ public class TableController {
 	static Table table;
 
 
-	public static String createTableForGame(List<Player> players) throws ExCardNoExists, ExNotEnoughPlayers{
+	public static  <T extends Player> String createTableForGame(List<T> players) throws ExCardNoExists, ExNotEnoughPlayers{
 		table=new Table(players);		
 		return table.distributeCards();
 	}

@@ -37,7 +37,7 @@ public class Message {
     public static final String SERVER_RESPONSE_ROOM_IS_NOT_FOUND= "roomIsNeeded";
     public static final String SERVER_RESPONSE_JOINED_ROOM = "joinedRoom";
     public static final String SERVER_RESPONSE_SOME_USER_JOINED_ROOM = "someoneJoinedRoom";
-
+    public static final String SERVER_START_GAME = "serverStartGame";
 
 
     protected String event;

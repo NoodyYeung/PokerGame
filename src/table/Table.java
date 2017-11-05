@@ -12,17 +12,17 @@ import java.util.List;
 
 import java.util.Random;
 
-public class Table {
+public class Table<T extends Player> {
 	List <CardOfEachTurn> historyCard;
 	List <CardOfEachRound> roundCard;
-	List <Player> players;
+	List <T> players;
 	List <PlayerAndCards> entities;
 	Cards lastHandCard;
 
 
 	int round;
 	int turn;
-	public Table(List<Player> players){
+	public Table(List<T> players){
 		this.players=players;
 		historyCard= new ArrayList<CardOfEachTurn>();
 		roundCard=new ArrayList<CardOfEachRound>();

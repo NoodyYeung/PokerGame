@@ -101,17 +101,25 @@ public class ServerMessage extends Message {
             return new ServerMessage(Message.SERVER_RESPONSE_JOINED_ROOM, json.toString());
         }
 
-        public ServerMessage prepareResponseRoomSomeUserJoinedToThisRoom(ServerPlayer player)throws ExInsuffientData{
+        public ServerMessage prepareResponseRoomSomeUserJoinedToThisRoom(ServerPlayer player){
             JSONObject json = new JSONObject();
             try{
-                json.put("message","Player" + player.getId() + "joined to room ");
+                json.put("message","Player" + player.getId() + " joined to room ");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             return new ServerMessage(Message.SERVER_RESPONSE_SOME_USER_JOINED_ROOM, json.toString());
         }
 
-
+        public ServerMessage prepareStartGameMessage(){
+            JSONObject json = new JSONObject();
+            try{
+                json.put("message", "Game start !!! ");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return new ServerMessage(Message.SERVER_START_GAME, json.toString());
+        }
 
     }
 
