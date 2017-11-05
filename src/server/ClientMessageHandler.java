@@ -48,7 +48,7 @@ public class ClientMessageHandler {
                     roomsController.joinRoomWithRoomId(player, roomId);
                     Room room = roomsController.findRoomById(roomId);
                     List<ServerPlayer> players = room.getPlayers();
-                    // broadcast the joined message
+                    // broadcast the "player joined" message
                     for(ServerPlayer p : players){
                         if(p == player){
                             builder.prepareResponseRoomJoinedRoom(player, roomId).sendToClient(p);

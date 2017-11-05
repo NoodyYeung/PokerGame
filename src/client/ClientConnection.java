@@ -91,7 +91,7 @@ public class ClientConnection{
                      * this problem.
                      */
                     while (socket.isConnected()) {
-                        if(onConnectedListener!= null)
+                        if(onConnectedListener!= null && input.available() > 0)
                             onConnectedListener.onMessageReceived(new Message(input.readUTF()));
                     }
 
