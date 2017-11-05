@@ -39,14 +39,8 @@ public class Room {
         this.name = name;
     }
 
-    /**
-     *
-     * @return Name for display room
-     */
-    public String getRoomDisplayName(){
-        if(name != null){
-            return "Room " + roomId + ":\t" + name;
-        }else return "Room " + roomId;
+    @Override
+    public String toString() {
+        return name + "; Players : " + players.size() + "/3" ;
     }
-
 }

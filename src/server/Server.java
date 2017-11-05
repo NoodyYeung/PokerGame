@@ -68,9 +68,10 @@ public class Server {
                 input = new DataInputStream(this.clientSocket.getInputStream());
                 output = new DataOutputStream(this.clientSocket.getOutputStream());
 
+                /** Send message to client to notify that "you are connected to server" */
                 builder.prepareClientConnectedMessage(player).sendToClient(output);
-
                 ClientMessageHandler handler = new ClientMessageHandler(player);
+
                 while (true) {
 
                     // TODO: received message form player's socket

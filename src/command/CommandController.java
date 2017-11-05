@@ -8,15 +8,25 @@ import java.util.List;
 public class CommandController {
 
 	private static CommandController controller = null;
-	private static boolean quit = false;
+	private boolean quit = false;
 	public static CommandController getInstance() {
 		if (controller == null) controller = new CommandController();
 		return controller;
 	}
 
+	/**
+	 * This function create a commandController without menu
+	 * @return
+	 */
+	public static CommandController createSubCommandController(){
+		CommandController commandController = new CommandController();
+		commandController.quitOne(true);
+		return commandController;
+	}
+
 
 	// Menu history allows up to record the last menu we were navigating in, and when we choose 'back', the menu will let you go to the last menu
-	private static ArrayList<Menu> menuHistory = new ArrayList<Menu>();
+	private ArrayList<Menu> menuHistory = new ArrayList<Menu>();
 
 	/**
 	 * Constructor initialization: loads main menu and adds commands to 'global commands'
@@ -25,8 +35,8 @@ public class CommandController {
 		menuHistory.add(MenuMain.getInstance());
 		
 		List<Command> cmds = Arrays.asList(new CmdHelp(), new CmdBack());
-
 	}
+
 
 	// Displays menu
 	public void display() {
@@ -72,12 +82,13 @@ public class CommandController {
 	}
 
 
+
 	public boolean shouldQuit() {
 		return quit;
 	}
 
 	protected void quitAll(boolean quit) {
-		CommandController.quit = true;
+		this.quit = true;
 	}
 
 	protected void quitOne(boolean quit) {

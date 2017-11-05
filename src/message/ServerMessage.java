@@ -3,6 +3,7 @@ package message;
 import org.json.JSONException;
 import org.json.JSONObject;
 import server.ExInsuffientData;
+import server.RoomsController;
 import server.ServerPlayer;
 
 import java.io.DataOutputStream;
@@ -32,9 +33,10 @@ public class ServerMessage extends Message {
             if(player == null){
                 throw new ExInsuffientData("Player is needed");
             }
-
+            RoomsController roomsController = RoomsController.getInstance();
             try {
                 json.put("message", "Hi, player" + player.getId());
+                json.put("roomInfo", roomsController.getRoomsInformation());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

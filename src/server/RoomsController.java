@@ -2,6 +2,7 @@ package server;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by yeungchunyin on 8/10/2017.
@@ -33,5 +34,23 @@ public class RoomsController {
         if(rooms.containsKey(id)){
             rooms.get(id).join(player);
         }else throw new ExRoomNotFound("Room Not Found");
+    }
+
+
+    /**
+     *
+     * @return {String} the rooms information. Each row for one room
+     */
+    public String getRoomsInformation(){
+        String roomInfoStr = "";
+        Set<Map.Entry<Integer, Room>> set = this.rooms.entrySet();
+        if(set.size() == 0){ // No room is available
+            roomInfoStr = "No room is available";
+        }else{ // At least one room is available
+            for(Map.Entry<Integer, Room> entry : set){
+                roomInfoStr += "Room " + entry.getKey() + " : " + entry.getValue().toString() + "\n";
+            }
+        }
+        return roomInfoStr;
     }
 }

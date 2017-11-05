@@ -1,5 +1,8 @@
 package client;
 
+import message.Message;
+import server.ExInsuffientData;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,16 +12,30 @@ import java.util.concurrent.Executors;
 
 
 
-public class ClientConnection extends Client{
+public class ClientConnection{
 
-    public ClientConnection(){
-        super();
+    private ClientConnection(){
     };
 
+    private static ClientConnection instance;
+    public static ClientConnection getInstance(){
+        if(instance == null)
+            instance = new ClientConnection();
+        return instance;
+    }
+
+    private boolean shouldBackToMainThread = false;
     private DataInputStream input;
     private DataOutputStream output;
     private Socket socket;
-    private boolean shouldBackToMainThread = false;
+
+    protected OnConnectedListener onConnectedListener;
+
+    public void setOnConnectedListener(OnConnectedListener onConnectedListener) {
+        this.onConnectedListener = onConnectedListener;
+    }
+
+
 
     public void connectTo(String host, int port) {
         ExecutorService threadExecutor = Executors.newCachedThreadPool();
@@ -30,9 +47,11 @@ public class ClientConnection extends Client{
              * Block the main thread, and use the Receiver to communicate with the client
              */
             while(!shouldBackToMainThread){
-
+                Thread.sleep(1000); // Check shouldBackToMainThread per 1 second
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -66,15 +85,17 @@ public class ClientConnection extends Client{
                 try {
                     input = new DataInputStream(socket.getInputStream());
                     output = new DataOutputStream(socket.getOutputStream());
-                    if(onConnectedListener != null)
-                        onConnectedListener.onSuccessConnected(input.readUTF());
+                    if(onConnectedListener != null){
+                        String messageFromServer = input.readUTF();
+                        onConnectedListener.onSuccessConnected(new Message(messageFromServer));
+                    }
                     /**
                      * Currently, there is no way to confirm whether the client is connecting. Heartbeat implementation could handle
                      * this problem.
                      */
                     while (socket.isConnected()) {
                         if(onConnectedListener!= null)
-                            onConnectedListener.onMessageReceived(input.readUTF());
+                            onConnectedListener.onMessageReceived(new Message(input.readUTF()));
                     }
 
 
@@ -82,6 +103,8 @@ public class ClientConnection extends Client{
                     e.printStackTrace();
                     if(onConnectedListener != null)
                         onConnectedListener.onFailConnected();
+                } catch (ExInsuffientData exInsuffientData) {
+                    exInsuffientData.printStackTrace();
                 } finally {
                     if (input != null)
                         input.close();

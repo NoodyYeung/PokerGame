@@ -1,5 +1,7 @@
 package message;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import server.ExInsuffientData;
 
 /**
@@ -42,9 +44,9 @@ public class Message {
      * @throws ExInsuffientData
      */
     public Message(String rawString) throws ExInsuffientData {
-        String msgs[] = rawString.split("\t");
-        if(msgs.length < 1){
-            throw new ExInsuffientData("ClientMessage construct needs a rawString that can be separate to event and data with a tab.");
+        String msgs[] = rawString.split("\t\t");
+        if(msgs.length < 2){
+            throw new ExInsuffientData("ClientMessage construct needs a rawString that can be separate to event and data with a tab. \n" +rawString);
         }
         this.event = msgs[0];
         this.jsonStr = msgs[1];
@@ -53,6 +55,19 @@ public class Message {
     public Message(String event, String jsonStr) {
         this.event = event;
         this.jsonStr = jsonStr;
+    }
+
+    /**
+     *
+     * @return the jsonObject by using the jsonStr
+     */
+    public JSONObject getJSONObject(){
+        try {
+            return new JSONObject(this.jsonStr);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String getEvent() {
@@ -65,6 +80,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return this.event + " " + this.jsonStr;
+        return this.event + "\t\t" + this.jsonStr;
     }
 }

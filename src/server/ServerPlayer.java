@@ -22,6 +22,7 @@ public class ServerPlayer  extends Player{
     private Socket socket;
 
     public ServerPlayer(Socket socket) throws IOException {
+        this.setId(id);
         this.name = "Player" + id++;
         this.socket = socket;
         inputStream = new DataInputStream(socket.getInputStream());
