@@ -76,6 +76,12 @@ public class MenuRoomSelection extends Menu {
                     break;
                 break;
 
+            case "3":
+                goBack = false;
+                userSelectedCorrectCmd = true;
+                ClientConnection.getInstance().disconnect();
+                break;
+
             default:
                 invalidCommandKey = commandKey;
                 userSelectedCorrectCmd = false;
@@ -89,6 +95,7 @@ public class MenuRoomSelection extends Menu {
     public void displayCommandList() {
         System.out.println("1. Create Room");
         System.out.println("2. Join Room");
+        System.out.println("3. Disconnect");
     }
 
 

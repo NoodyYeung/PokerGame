@@ -24,7 +24,7 @@ public class ClientConnection{
         return instance;
     }
 
-    private boolean shouldBackToMainThread = false;
+    public boolean shouldBackToMainThread = false;
     private DataInputStream input;
     private DataOutputStream output;
     private Socket socket;
@@ -57,6 +57,7 @@ public class ClientConnection{
     }
 
     public void disconnect(){
+        shouldBackToMainThread = true;
         if(socket.isConnected()){
             try {
                 socket.close();
