@@ -4,6 +4,7 @@ import cards.Card;
 import cards.Cards;
 import cards.ExCardNoExists;
 import pattern.Pattern;
+import table.ExNotEnoughPlayers;
 
 import java.util.ArrayList;
 
@@ -65,9 +66,12 @@ public class GameController {
      */
     public void startGame(){
 		try {
-			TableController.createTableForGame(playersInThisGame);
+			System.out.println(TableController.createTableForGame(playersInThisGame));
 		} catch (ExCardNoExists exCardNoExists) {
 			exCardNoExists.printStackTrace();
+		} catch (ExNotEnoughPlayers e) {
+			System.out.println("From game controller"+ e.getMessage());
+			e.printStackTrace();
 		}
 
 	}
