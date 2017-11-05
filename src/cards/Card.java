@@ -54,6 +54,7 @@ public class Card {
 	}
 
 	public String toString(){
+		if(this.type == null ) return this.suit.toString();
 		return this.suit + this.type;
 	}
 /*
