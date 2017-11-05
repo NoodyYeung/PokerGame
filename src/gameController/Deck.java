@@ -36,12 +36,14 @@ public class Deck {
 	// exception
 	private void createDeck() throws FileNotFoundException, IOException, Exception, ExCardNoExists {
 		for(Suit s : Suit.values()){
-			if(s == Suit.JOKER){
-				deck.add(new Card(s, "R"));
-				deck.add(new Card(s, "B"));
+			if(s == Suit.JOKER_BLACK){
+				deck.add(new Card( "JB"));
+
+			}else if(s==Suit.JOKER_RED){
+				deck.add(new Card( "JR"));
 			}else{
 				for(int i =0; i < 13 ;i ++ ){
-					deck.add(new Card(s, Card.cardType.get(i)));
+					deck.add(new Card(s.toString() +  Card.cardType.get(i)));
 				}
 			}
 		}

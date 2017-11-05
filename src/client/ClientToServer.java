@@ -71,6 +71,7 @@ public class ClientToServer extends Client{
                             // TODO: do something when receive message form server
 
                         } catch (EOFException e) {
+                            e.printStackTrace();
                             System.out.println(e.getMessage());
                         }
                     }

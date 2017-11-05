@@ -84,17 +84,17 @@ public class Table {
 		// TODO Auto-generated method stub
 		ArrayList<ArrayList <Card>> cards=randomGenerateCards();
 		String result="";
-		int i=1;
+		int i=0;
 		PlayerAndCards entity;
 		for (Player p:players){
 			if(p.isDiZhu()) {
-				entity=new PlayerAndCards(p,cards.get(0));	
+				entity=new PlayerAndCards(p,cards.get(0));
 			}
 			else{
-				entity=new PlayerAndCards(p,cards.get(i++));	
+				entity=new PlayerAndCards(p,cards.get(i++));
 			}
 			entities.add(entity);
-			result=result+cards.toString()+" ";			
+			result=result+cards.toString()+" ";
 		}
 		return result;
 	}
@@ -115,6 +115,7 @@ public class Table {
 		wholeDeck.add(new Card("JR"));
 		wholeDeck.add(new Card("JB"));
 		Collections.shuffle(wholeDeck);
+
 		ArrayList<Card> player1=new ArrayList<>();
 		ArrayList<Card> player2=new ArrayList<>();
 		ArrayList<Card> player3=new ArrayList<>();
@@ -127,7 +128,7 @@ public class Table {
 		n = rand.nextInt(53) + 0;
 		player1.add(wholeDeck.get(n));
 		//no dizhu
-		
+
 		ArrayList<ArrayList<Card>> result=new ArrayList<>();
 		for(int i=0;i<wholeDeck.size();i++){
 			if(i%3==0) player1.add(wholeDeck.get(i));

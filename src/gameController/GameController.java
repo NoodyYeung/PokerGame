@@ -36,7 +36,7 @@ public class GameController {
 		round = 0;
 		turn = 0;
 		this.playersInThisGame = players;
-		this.deck = new Deck();
+
 		int playerId = 0;
 		for (Player p : this.playersInThisGame) {
 		    if(p.getId() != -1)

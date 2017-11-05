@@ -60,6 +60,7 @@ public class MenuMain extends Menu {
 		} catch (Exception e) {
 			// I am somewhat averse to allowing any random class use
 			// System.out.println... change this later maybe
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 			return null;
 		}

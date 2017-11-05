@@ -73,6 +73,7 @@ public class MenuGame extends Menu {
 			throw new Exception("cmdOrMenu not instanceof Menu nor instanceof Command: error [" + commandKey + "]!");
 		} catch (Exception e) {
 			// Same, maybe don't println in secretive places
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 			return null;
 		}
