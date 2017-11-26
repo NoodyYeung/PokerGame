@@ -7,7 +7,7 @@ import pattern.*;
 import java.util.*;
 public class DDZ extends Rules{
 	
-	private static final String Set = null;
+	private static final String Set = null; // what is this doing here?
 
 	public Pattern validateDDZ(ArrayList<Card> cards, Cards lastHand) {
 		Pattern thisPattern;
@@ -29,7 +29,7 @@ public class DDZ extends Rules{
 	}
 	
 	public HashMap<Integer,Integer> hashAllCards(ArrayList<Card> cards) {
-		HashMap<Integer, Integer> cardsMap = new HashMap();
+		HashMap<Integer, Integer> cardsMap = new HashMap<>();
 		for(Card aCard: cards) {
 			int cardValue = aCard.getValue();
 			if(cardsMap.get(cardValue) != null) {
@@ -45,7 +45,7 @@ public class DDZ extends Rules{
 	public Pattern identifyPattern(ArrayList<Card> cards) {
 		
 		Pattern pattern=null;
-		HashMap cardsMap = hashAllCards(cards); 
+		HashMap<Integer, Integer> cardsMap = hashAllCards(cards); 
 
 		if(cards.size()==1) { // TODO : condition 1
 			pattern = new Pone(cards.get(0).getValue()); 
@@ -55,7 +55,7 @@ public class DDZ extends Rules{
 				if(cards.size()<5) // TODO : condition 2
 					return null;
 				else {
-					ArrayList<Integer> sortedCards = new ArrayList();
+					ArrayList<Integer> sortedCards = new ArrayList<>();
 					for(int i=0;i<cards.size();i++) {
 						sortedCards.add(cards.get(i).getValue());
 					}
@@ -135,10 +135,10 @@ public class DDZ extends Rules{
 		return null;
 	}
 
-	private int isMultipleBomb(HashMap cardsMap) {
+	private int isMultipleBomb(HashMap<Integer, Integer> cardsMap) {
 		Set<Integer> cardsValues= cardsMap.keySet();
 		List<Integer> valuelist = new ArrayList<Integer>(cardsValues);
-		ArrayList<Integer> listOfAllValues = new ArrayList();
+		ArrayList<Integer> listOfAllValues = new ArrayList<>();
  		for(int i=0;i<valuelist.size();i++) {
  			int num = (int) cardsMap.get(valuelist.get(i));
  			if(num == 4) {
@@ -157,10 +157,10 @@ public class DDZ extends Rules{
  		return -1;
 	}
 
-	private int isTripleStraight(HashMap cardsMap) {
+	private int isTripleStraight(HashMap<Integer, Integer> cardsMap) {
 		Set<Integer> cardsValues= cardsMap.keySet();
 		List<Integer> valuelist = new ArrayList<Integer>(cardsValues);
-		ArrayList<Integer> listOfAllValues = new ArrayList();
+		ArrayList<Integer> listOfAllValues = new ArrayList<>();
  		for(int i=0;i<valuelist.size();i++) {
  			int num = (int) cardsMap.get(valuelist.get(i));
  			if(num == 3) {
@@ -178,10 +178,10 @@ public class DDZ extends Rules{
  		return -1;
 	}
 
-	private int isDoubleStraight(HashMap cardsMap) {
+	private int isDoubleStraight(HashMap<Integer, Integer> cardsMap) {
 		Set<Integer> cardsValues= cardsMap.keySet();
 		List<Integer> valuelist = new ArrayList<Integer>(cardsValues);
-		ArrayList<Integer> listOfAllValues = new ArrayList();
+		ArrayList<Integer> listOfAllValues = new ArrayList<>();
  		for(int i=0;i<valuelist.size();i++) {
  			int num = (int) cardsMap.get(valuelist.get(i));
  			if(num == 2) {
@@ -199,7 +199,7 @@ public class DDZ extends Rules{
  		return -1;
 	}
 
-	private int isFullHouse(HashMap cardsMap, int numOfAll) {
+	private int isFullHouse(HashMap<Integer, Integer> cardsMap, int numOfAll) {
 		ArrayList<Integer> listOfThree = numOfN(cardsMap,3);
 		Collections.sort(listOfThree);
 		if(isStraight(listOfThree)) {
@@ -210,7 +210,7 @@ public class DDZ extends Rules{
  		return -1;
 	}
 
-	private int isTripleWithOne(HashMap cardsMap,int numOfAll) {
+	private int isTripleWithOne(HashMap<Integer, Integer> cardsMap,int numOfAll) {
 		ArrayList<Integer> listOfThree = numOfN(cardsMap,3);
 		Collections.sort(listOfThree);
  		
@@ -222,10 +222,10 @@ public class DDZ extends Rules{
 	}
 
 
-	private ArrayList<Integer> numOfN(HashMap cardsMap, int n){
+	private ArrayList<Integer> numOfN(HashMap<Integer, Integer> cardsMap, int n){
 		Set<Integer> cardsValues= cardsMap.keySet();
 		List<Integer> valuelist = new ArrayList<Integer>(cardsValues);
-		ArrayList<Integer> listOfN = new ArrayList();
+		ArrayList<Integer> listOfN = new ArrayList<>();
  		for(int i=0;i<valuelist.size();i++) {
  			int num = (int) cardsMap.get(valuelist.get(i));
  			if(num == n) {
@@ -236,13 +236,17 @@ public class DDZ extends Rules{
 	}
 	
 	private boolean allSame(ArrayList<Card> cards, int length) {
+		boolean result = true;
 		for(int i=0;i<length-1;i++) {
-			if(cards.get(i).getValue()==cards.get(1).getValue())
+			if(cards.get(i).getValue()==cards.get(1).getValue()) {
 				continue;
-			else
-				return false;
+			}
+			else {
+				result =  false;
+				break;
+			}
 		}
-		return true;
+		return result;
 	}
 	
 	// TODO : What is the precondition on the input here? is it sorted?
@@ -256,10 +260,10 @@ public class DDZ extends Rules{
 		return true;
 	}
 
-	private boolean allDifferent(HashMap cardsMap) {
+	private boolean allDifferent(HashMap<Integer, Integer> cardsMap) {
 		Set<Integer> cardValues = cardsMap.keySet();
 		for(int card:cardValues) {
-			int num = (int) cardsMap.get(card); // TODO : why do we need to typecast this when it is already a set of ints?
+			int num = cardsMap.get(card); // TODO : why do we need to typecast this when it is already a set of ints?
 			if(num>1)
 				return false;
 		}
