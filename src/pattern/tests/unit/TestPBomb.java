@@ -39,7 +39,7 @@ public class TestPBomb {
 	@Test
 	// PBomb x PDoubleStraight
 	public void testIsSamePattern2() {
-		Pbomb another = new Pbomb(10);
+		PbombTestStubA another = new PbombTestStubA(10);
 		boolean result = thisBomb.isSamePattern(another);
 		assertEquals(false,result);
 	}
