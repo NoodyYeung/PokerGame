@@ -16,7 +16,7 @@ public class Pbomb extends Pattern {
 
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
-		if (lastPattern.getClass() == this.getClass()) {
+		if (lastPattern instanceof Pbomb) {
 			if(value>((Pbomb)lastPattern).getValue())
 				return true;
 			else

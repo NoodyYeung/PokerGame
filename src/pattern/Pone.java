@@ -7,14 +7,18 @@ public class Pone extends Pattern{
 	}
 	@Override
 	public boolean isSamePattern(Pattern nextPattern) {
-		if(this.getClass().equals(nextPattern.getClass()))
+		if(nextPattern instanceof Pone)
 			return true;
 		return false;
 	}
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
-		if(card > ((Pone) lastPattern).getValue())
-			return true;
+		if(lastPattern instanceof Pone) {
+			if(card > lastPattern.getValue())
+				return true;
+			else
+				return false;
+		}
 		return false;
 	}
 	@Override
