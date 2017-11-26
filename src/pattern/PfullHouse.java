@@ -14,7 +14,6 @@ public class PfullHouse extends Pattern {
 	}
 
 	
-
 	@Override
 	public boolean isSamePattern(Pattern another) {
 		if(this.getClass().equals(another.getClass())) {
