@@ -25,16 +25,16 @@ public class Deck {
 		} catch (IOException e) {
 			ErrorHandling.handle(
 					"Please double check the settings. Format: 3 lines, 1 line for definition, 1 for cards, 1 for values", e);
-		} catch (Exception e) {
-			ErrorHandling.handle("Exception occured.", e);
-		} catch (ExCardNoExists exCardNoExists) {
+		}  catch (ExCardNoExists exCardNoExists) {
 			exCardNoExists.printStackTrace();
+		}catch (Exception e) {
+			ErrorHandling.handle("Exception occured.", e);
 		}
 	}
 
 	// input assumes a certain format: if format is not reached, throw a general
 	// exception
-	private void createDeck() throws FileNotFoundException, IOException, Exception, ExCardNoExists {
+	private void createDeck() throws Exception {
 		for(Suit s : Suit.values()){
 			if(s == Suit.JOKER_BLACK){
 				deck.add(new Card( "JB"));
