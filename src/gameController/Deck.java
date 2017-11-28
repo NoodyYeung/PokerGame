@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 // with a deck reader
 public class Deck {
 	private List<Card> deck = new ArrayList<Card>();
-	private List<Card> usedCard = new ArrayList<Card>();
 
 	public Deck() {
 		// Creates one deck of cards
@@ -50,7 +49,7 @@ public class Deck {
 	} // end createDeck
 
 	// identifies cards: is this a suit or a number?
-	private Card identifyCard(String card, Suit suit, int value) throws ExCardNoExists {
+	public Card identifyCard(String card, Suit suit, int value) throws ExCardNoExists {
 		// Regular expression: card is J or Q or K
 		if (Pattern.matches("[JQK]", card)) {
 			return new Royal(card, suit, value);
@@ -68,18 +67,16 @@ public class Deck {
 
 	// Distribute all cards at once
 	// want to distribute one card at once? Classic playstyle?
-	public List<Card>[] distribute() {
+	public ArrayList<ArrayList<Card>> distribute() {
 		Collections.shuffle(deck);
-		List<Card>[] cards = new ArrayList[3];
-
+		ArrayList<ArrayList<Card>> allHands = new ArrayList<>();
 		for(int j = 0; j < 3; j ++) {
 			ArrayList<Card> hand = new ArrayList<>();
 			for (int i = 0; i < 17; i++) {
  				hand.add(deck.remove(0));
 			}
-			cards[j] = hand;
-
+			allHands.set(j, hand);
 		}
-		return cards;
+		return allHands;
 	}
 }
