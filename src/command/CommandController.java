@@ -33,7 +33,6 @@ public class CommandController {
 	 */
 	private CommandController() {
 		menuHistory.add(MenuMain.getInstance());
-		
 		List<Command> cmds = Arrays.asList(new CmdHelp(), new CmdBack());
 	}
 

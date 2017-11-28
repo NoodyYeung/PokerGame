@@ -17,7 +17,7 @@ public class Cmd2Play extends Command{
 		players.add(new AIPlayer());
 		players.add(new AIPlayer());
 		try {
-			GameController gameController = new GameController(players);
+			GameController<Player> gameController = new GameController<Player>(players);
 			gameController.startGame();
 
 		}  catch (InsufficientPlayerException e) {
