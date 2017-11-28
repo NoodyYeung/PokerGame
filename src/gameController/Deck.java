@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 // with a deck reader
 public class Deck {
 	private List<Card> deck = new ArrayList<Card>();
-	private List<Card> usedCard = new ArrayList<Card>();
 
 	public Deck() {
 		// Creates one deck of cards
@@ -25,16 +24,16 @@ public class Deck {
 		} catch (IOException e) {
 			ErrorHandling.handle(
 					"Please double check the settings. Format: 3 lines, 1 line for definition, 1 for cards, 1 for values", e);
-		} catch (Exception e) {
-			ErrorHandling.handle("Exception occured.", e);
-		} catch (ExCardNoExists exCardNoExists) {
+		}  catch (ExCardNoExists exCardNoExists) {
 			exCardNoExists.printStackTrace();
+		}catch (Exception e) {
+			ErrorHandling.handle("Exception occured.", e);
 		}
 	}
 
 	// input assumes a certain format: if format is not reached, throw a general
 	// exception
-	private void createDeck() throws FileNotFoundException, IOException, Exception, ExCardNoExists {
+	private void createDeck() throws Exception {
 		for(Suit s : Suit.values()){
 			if(s == Suit.JOKER_BLACK){
 				deck.add(new Card( "JB"));
@@ -50,7 +49,7 @@ public class Deck {
 	} // end createDeck
 
 	// identifies cards: is this a suit or a number?
-	private Card identifyCard(String card, Suit suit, int value) throws ExCardNoExists {
+	public Card identifyCard(String card, Suit suit, int value) throws ExCardNoExists {
 		// Regular expression: card is J or Q or K
 		if (Pattern.matches("[JQK]", card)) {
 			return new Royal(card, suit, value);
@@ -68,18 +67,16 @@ public class Deck {
 
 	// Distribute all cards at once
 	// want to distribute one card at once? Classic playstyle?
-	public List<Card>[] distribute() {
+	public ArrayList<ArrayList<Card>> distribute() {
 		Collections.shuffle(deck);
-		List<Card>[] cards = new ArrayList[3];
-
+		ArrayList<ArrayList<Card>> allHands = new ArrayList<>();
 		for(int j = 0; j < 3; j ++) {
 			ArrayList<Card> hand = new ArrayList<>();
 			for (int i = 0; i < 17; i++) {
  				hand.add(deck.remove(0));
 			}
-			cards[j] = hand;
-
+			allHands.set(j, hand);
 		}
-		return cards;
+		return allHands;
 	}
 }
