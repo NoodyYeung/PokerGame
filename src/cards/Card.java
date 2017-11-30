@@ -65,5 +65,11 @@ public class Card {
 	public Integer getValue() {
 		return value;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Card)
+			return obj.toString().equals(toString());
+		else return false;
+	}
 }

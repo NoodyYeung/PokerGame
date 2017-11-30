@@ -1,6 +1,7 @@
 package server;
 
 import cards.Card;
+import cards.Cards;
 import gameController.Player;
 
 import java.io.DataInputStream;
@@ -43,45 +44,47 @@ public class ServerPlayer  extends Player{
 
 
 
+
     @Override
-    public void setHand(List<Card> hand) {
+    public List<Card> yourTurnToPlayCard(Cards lastTurnCards, List<Card> yourCard) {
+        return null;
+    }
+
+    @Override
+    public void waitPlayerToPlayerCard(Player playerToPlay, boolean isLandLordToPlayCard) {
 
     }
 
     @Override
-    public void yourTurnToChooseToBeALandLord() {
+    public void youAreFarmer(Player teammates) {
 
     }
 
     @Override
-    public void informYouPlayerChooseToBeALandLord(Player theOneCalledToBeLandLord) {
+    public void youAreLandLord() {
 
     }
 
     @Override
-    public void yourTurnToGrapLandLord() {
+    public List<Card> yourTurnToPlayCardOrSkipCard(List<Card> cardsThatThePlayerHave, Cards lastTurnCards) {
+        return null;
+    }
+
+    @Override
+    public void youWin() {
 
     }
 
     @Override
-    public void informYouPlayerGrapToBeALandLord(Player theOneGrapedToBeLandLord) {
+    public void youLose() {
 
     }
 
     @Override
-    public void yourTurnToPlayCard(List<Card> lastTurnCards) {
+    public void pleaseMakeAValidPlay() {
 
     }
 
-    @Override
-    public void informPlayerPlayedCards(List<Card> cardsPlayed, Player thePlayerPlayedCard) {
-
-    }
-
-    @Override
-    public void endGame() {
-
-    }
 
     public void setOutputStream(DataOutputStream outputStream) {
         this.outputStream = outputStream;

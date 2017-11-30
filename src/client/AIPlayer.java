@@ -1,8 +1,12 @@
 package client;
 
+import DDZ.DDZ;
 import cards.Card;
+import cards.Cards;
 import gameController.Player;
+import pattern.Pattern;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,44 +16,97 @@ public class AIPlayer extends Player {
     public AIPlayer() {
     }
 
-
     @Override
-    public void setHand(List<Card> hand) {
-        this.hand = hand;
+    public List<Card> yourTurnToPlayCard(Cards lastTurnCards, List<Card> yourCard) {
+        System.out.println("AI is selecting card ...");
+        return autoPlaysCard(yourCard,lastTurnCards);
     }
 
     @Override
-    public void yourTurnToPlayCard(List<Card> lastTurnCards) {
-
-    }
-
-    @Override
-    public void yourTurnToChooseToBeALandLord() {
+    public void waitPlayerToPlayerCard(Player playerToPlay, boolean isLandLordToPlayCard) {
 
     }
 
     @Override
-    public void informYouPlayerChooseToBeALandLord(Player theOneCalledToBeLandLord) {
+    public void youAreFarmer(Player teammates) {
 
     }
 
     @Override
-    public void yourTurnToGrapLandLord() {
+    public void youAreLandLord() {
 
     }
 
     @Override
-    public void informYouPlayerGrapToBeALandLord(Player theOneGrapedToBeLandLord) {
+    public List<Card> yourTurnToPlayCardOrSkipCard(List<Card> cardsThatThePlayerHave, Cards lastTurnCards) {
+        System.out.println("AI is selecting card ...");
+        return autoPlaysCard(cardsThatThePlayerHave,lastTurnCards);
+    }
+
+    @Override
+    public void youWin() {
 
     }
 
     @Override
-    public void informPlayerPlayedCards(List<Card> cardsPlayed, Player thePlayerPlayedCard) {
+    public void youLose() {
 
     }
 
     @Override
-    public void endGame() {
+    public void pleaseMakeAValidPlay() {
 
     }
+
+
+    private boolean autoPlaysCardR(List<Card> cardInHand, Cards lastTurnCard, int depth, List<Card> canPlayedList, DDZ ddz){
+        if(depth > 5) {
+//            System.out.println("[DEbug] : autoPlaysCardR return FALSE");
+            return false;
+        }
+        Pattern p = ddz.validateDDZ(canPlayedList, lastTurnCard);
+        if(p != null){
+            if(lastTurnCard != null){
+                System.out.println("[Debug] : lastTurnCard "+ Cards.toString(lastTurnCard.getCards()));
+                System.out.println("[Debug] : lastTurnCard pattern "+ lastTurnCard.getPattern());
+            }
+            System.out.println("[Debug] : found play " + p.getClass().getName() );
+        }
+        if(canPlayedList.size() > 0 && ddz.validateDDZ(canPlayedList, lastTurnCard) != null){
+            System.out.println("[DEbug] : autoPlaysCardR return TRUE");
+            return true;
+        }
+        for(int i = 0; i < cardInHand.size(); i ++){
+            Card tempCard = cardInHand.get(i);
+            if(canPlayedList.indexOf(tempCard)== -1){
+                canPlayedList.add(tempCard);
+                if(autoPlaysCardR(cardInHand, lastTurnCard, depth+ 1, canPlayedList, ddz)){
+                    System.out.println("[DEbug] : autoPlaysCardR return TRUE");
+                    return true;
+                };
+                canPlayedList.remove(tempCard);
+            }
+        }
+//        System.out.println("[DEbug] : autoPlaysCardR return FALSE");
+        return false;
+    }
+
+
+    /**
+     *
+     * @param cardsInHand
+     * @param lastTureCards
+     * @return the played card, null for no combination
+     */
+    public List<Card> autoPlaysCard(List<Card> cardsInHand, Cards lastTureCards){
+        DDZ ddz = new DDZ();
+        List<Card> combination = new ArrayList<>();
+        autoPlaysCardR(cardsInHand, lastTureCards, 0, combination, ddz);
+
+        System.out.println("AI Auto play size :" + combination.size());
+        System.out.println("AI Auto play :" + Cards.toString(combination));
+
+        return combination.size() == 0 ? null : combination;
+    }
+
 }

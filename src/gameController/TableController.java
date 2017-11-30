@@ -5,6 +5,7 @@ import cards.Cards;
 import cards.ExCardNoExists;
 import pattern.Pattern;
 import table.ExNotEnoughPlayers;
+import table.PlayerAndCards;
 import table.Table;
 
 import java.util.ArrayList;
@@ -34,25 +35,57 @@ public class TableController {
 		return table.getLastHandCard();
 	}
 
-	public boolean updateTableInfo(int playerID, ArrayList<Card> cards, Pattern pattern, int round, int turn){
-		return table.updateTableInfo(playerID, cards,pattern,round,turn);
+	public boolean updateTableInfo(int playerID, ArrayList<Card> cards, Pattern pattern){
+		return table.updateTableInfo(playerID, cards,pattern);
 	}
 
 	public void emptyLastHand(){
 		table.emptyLastHand();
 	}
 
-	public void startANewRound() {
-		// TODO Auto-generated method stub
-		table.startANewRound();
-	}
 
 	public boolean validateCards(int playerID, ArrayList<Card> cards) {
 		// TODO Auto-generated method stub
 		return table.validateCards(playerID,cards);
 	}
-	public String getGameWinner() {
+	public Player getGameWinner() {
 		// TODO Auto-generated method stub
 		return table.getGameWinner();
 	}
+
+	public List getTablePlayerCards() {
+		return table.getPlayerCardsEntities();
+	}
+
+	public List<Card> getCardsByPlayer(Player player){
+		List<PlayerAndCards> playerAndCardss = table.getPlayerCardsEntities();
+		for(PlayerAndCards i : playerAndCardss ){
+			if(i.equalsPlayer(player)){
+				return i.getCards();
+			}
+		}
+		return null;
+	}
+
+	public void setLastHandCard(List<Card> playedAndValidCard){
+		table.setLastHand(playedAndValidCard);
+	}
+
+
+	public PlayerAndCards getPlayerAndCardsObjByPlayer(Player p){
+		List<PlayerAndCards> playerAndCardss = table.getPlayerCardsEntities();
+		for(PlayerAndCards i : playerAndCardss ){
+			if(i.equalsPlayer(p)){
+				return i;
+			}
+		}
+		return  null;
+	}
+	public void  reduceUserPlayedCard(Player player, List<Card> playedCard){
+		PlayerAndCards playerAndCards =  getPlayerAndCardsObjByPlayer(player);
+		table.reduceTheCardFromPlayer( player, playedCard);
+		System.out.println("[DEBUG] : Card after delete : " + Cards.toString(		getCardsByPlayer(player)));
+
+	}
+
 }

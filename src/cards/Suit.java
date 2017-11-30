@@ -11,6 +11,12 @@ public enum Suit {
 		// (otherName == null) check is not needed because name.equals(null) returns false
 		return name.equals(otherName);
 	}
+
+	public boolean equals(Suit suit){
+		return name.equals(suit.name);
+
+	}
+
 	public String toString() {
 		return this.name;
 	}

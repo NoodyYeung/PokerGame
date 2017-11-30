@@ -9,12 +9,30 @@ public class DDZ extends Rules{
 	
 	private static final String Set = null; // what is this doing here?
 
-	public Pattern validateDDZ(ArrayList<Card> cards, Cards lastHand) {
+	/**
+	 *
+	 * @param cards
+	 * @param lastHand
+	 * @return The played card pattern if the plays is valid. If cards is not belongs any pattern , return null
+	 */
+	public Pattern validateDDZ(List<Card> cards, Cards lastHand) {
 		Pattern thisPattern;
 		thisPattern = identifyPattern(cards);
+		if(thisPattern != null) {
+//			System.out.println("[Debug] thisPattern:" + thisPattern.getClass().getName());
+		}else{
+//			System.out.println("[Debug] thisPattern: null");
+
+		}
 		if(thisPattern!=null) { // TODO 1 : validate for isNull == true
 			if(lastHand!= null) { // TODO 2 : validate for lastHand isNull == true
-				Pattern lastPattern = lastHand.getPattern(); 
+				Pattern lastPattern = identifyPattern(lastHand.getCards());
+				if(lastPattern != null) {
+//					System.out.println("[Debug] identifyPattern:" + lastPattern.getClass().getName());
+				}else{
+					System.out.println("[Debug] identifyPattern: null");
+
+				}
 				if(lastPattern.isSamePattern(thisPattern)) { // TODO 3 : validate for is not same
 					if(thisPattern.isLarger(lastPattern)) {  // TODO 4 : validate for is not larger
 						return thisPattern;
@@ -28,7 +46,7 @@ public class DDZ extends Rules{
 		return null;
 	}
 	
-	public HashMap<Integer,Integer> hashAllCards(ArrayList<Card> cards) {
+	public HashMap<Integer,Integer> hashAllCards(List<Card> cards) {
 		HashMap<Integer, Integer> cardsMap = new HashMap<>();
 		for(Card aCard: cards) {
 			int cardValue = aCard.getValue();
@@ -42,7 +60,7 @@ public class DDZ extends Rules{
 		return cardsMap;
 	}
 	
-	public Pattern identifyPattern(ArrayList<Card> cards) {
+	public Pattern identifyPattern(List<Card> cards) {
 		
 		Pattern pattern=null;
 		HashMap<Integer, Integer> cardsMap = hashAllCards(cards); 
@@ -235,7 +253,7 @@ public class DDZ extends Rules{
 		return listOfN;
 	}
 	
-	private boolean allSame(ArrayList<Card> cards, int length) {
+	public boolean allSame(List<Card> cards, int length) {
 		boolean result = true;
 		for(int i=0;i<length-1;i++) {
 			if(cards.get(i).getValue()==cards.get(1).getValue()) {

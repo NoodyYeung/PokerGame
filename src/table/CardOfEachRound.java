@@ -3,11 +3,9 @@ package table;
 import cards.Cards;
 
 public class CardOfEachRound {
-	int round;
 	int playerID;
 	Cards cards;
-	public CardOfEachRound(int round,int playerID, Cards cards){
-		this.round=round;
+	public CardOfEachRound(int playerID, Cards cards){
 		this.playerID=playerID;
 		this.cards=cards;
 	}
