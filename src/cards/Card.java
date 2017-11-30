@@ -85,7 +85,7 @@ public class Card {
 					break;
 			}
 
-			return value * 4 - minus;
+			return (value * 4) - minus;
 		}
 	}
 

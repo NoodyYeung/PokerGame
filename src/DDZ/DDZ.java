@@ -16,6 +16,7 @@ public class DDZ extends Rules{
 	 * @return The played card pattern if the plays is valid. If cards is not belongs any pattern , return null
 	 */
 	public Pattern validateDDZ(List<Card> cards, Cards lastHand) {
+//		System.out.printf("[Debug] : cards.toString() %s \n" ,cards.toString() );
 		Pattern thisPattern;
 		thisPattern = identifyPattern(cards);
 		if(thisPattern != null) {
@@ -63,7 +64,7 @@ public class DDZ extends Rules{
 	public HashMap<Integer,Integer> hashAllCards(List<Card> cards) {
 		HashMap<Integer, Integer> cardsMap = new HashMap<>();
 		for(Card aCard: cards) {
-			int cardValue = aCard.getValue();
+			int cardValue = aCard.getNumber();
 			if(cardsMap.get(cardValue) != null) {
 				cardsMap.put(cardValue,cardsMap.get(cardValue)+1);
 			}
@@ -284,6 +285,7 @@ public class DDZ extends Rules{
 	public boolean allSame(List<Card> cards, int length) {
 		boolean result = true;
 		for(int i=0;i<length-1;i++) {
+//			System.out.printf("[Debug] : %d %d \n", cards.get(i).getNumber(), cards.get(i+ 1).getNumber());
 			if(cards.get(i).getNumber()==cards.get(i+ 1).getNumber()) {
 				continue;
 			}

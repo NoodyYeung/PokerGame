@@ -14,6 +14,7 @@ public class Pone extends Pattern{
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
 		if(lastPattern instanceof Pone) {
+//			System.out.printf("[DEBUG] comparing in Pone.class -- values; %d %d\n", card, lastPattern.getValue());
 			if(card > lastPattern.getValue())
 				return true;
 			else
