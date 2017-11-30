@@ -4,34 +4,39 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import pattern.*;
-import pattern.tests.stubs.*;
 
 public class TestPBomb {
 	Pbomb thisBomb;
+	ArrayList<Integer> smallerListOfValues;
+	ArrayList<Integer> biggerListOfValues;
+	
 	@Before
 	public void setUp() throws Exception {
 		thisBomb = new Pbomb(4);
+		smallerListOfValues = new ArrayList<>();
+		biggerListOfValues = new ArrayList<>();
+		for(int i = 0; i<= 5; i++) {
+			biggerListOfValues.add(i + 5);
+			smallerListOfValues.add(i);
+			biggerListOfValues.add(i + 5);
+			smallerListOfValues.add(i);
+		}
 	}
-
-	@After
-	public void tearDown() throws Exception {
-		
+	
+	@Test
+	//get Num
+	public void testGetNum1() {
+		int result = thisBomb.getNum();
+		assertEquals(4, result);
 	}
-
 	@Test
 	// PBomb x PDoubleStraight
 	public void testIsSamePattern1() {
-		ArrayList<Integer> thisListOfValues = new ArrayList<>();
-		for(int i = 0; i< 5; i++) {
-			thisListOfValues.add(i + 1);
-			thisListOfValues.add(i + 1);
-		}
-		PdoubleStraightTestStubA another = new PdoubleStraightTestStubA(thisListOfValues);
+		PdoubleStraight another = new PdoubleStraight(smallerListOfValues);
 		boolean result = thisBomb.isSamePattern(another);
 		assertEquals(false,result);
 	}
@@ -39,35 +44,37 @@ public class TestPBomb {
 	@Test
 	// PBomb x PDoubleStraight
 	public void testIsSamePattern2() {
-		PbombTestStubA another = new PbombTestStubA(10);
+		Pbomb another = new Pbomb(10);
 		boolean result = thisBomb.isSamePattern(another);
-		assertEquals(false,result);
+		assertEquals(true,result);
 	}
 	
 	@Test
 	public void isLarger1() {
-		ArrayList<Integer> thisListOfValues = new ArrayList<>();
-		for(int i = 0; i< 5; i++) {
-			thisListOfValues.add(i + 1);
-			thisListOfValues.add(i + 1);
-		}
-		PdoubleStraightTestStubA another = new PdoubleStraightTestStubA(thisListOfValues);
+		PdoubleStraight another = new PdoubleStraight(biggerListOfValues);
 		boolean result = thisBomb.isLarger(another);
 		assertEquals(true, result);
 	}	
 	
 	@Test
 	public void isLarger2() {
-		PbombTestStubA another = new PbombTestStubA(3);
+		Pbomb another = new Pbomb(3);
 		boolean result = thisBomb.isLarger(another);
 		assertEquals(true, result);
 	}	
 	
 	@Test
 	public void isLarger3() {
-		PbombTestStubA another = new PbombTestStubA(5);
+		Pbomb another = new Pbomb(5);
 		boolean result = thisBomb.isLarger(another);
-		assertEquals(true, result);
+		assertEquals(false, result);
 	}
+	
+	@Test
+	public void isLarger4() {
+		Procket another = new Procket();
+		boolean result = thisBomb.isLarger(another);
+		assertEquals(false, result);
+	}	
 	
 }
