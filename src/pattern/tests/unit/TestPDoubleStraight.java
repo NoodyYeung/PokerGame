@@ -33,7 +33,6 @@ public class TestPDoubleStraight {
 		assertEquals(5, result);
 	}
 	
-	
 	@Test 
 	// precondition , list input is sorted
 	public void testIsSamePattern1() {
@@ -58,4 +57,39 @@ public class TestPDoubleStraight {
 		assertEquals(true, result);
 	}
 	
+	@Test
+	//precondition , list input is sorted
+	public void testIsLarger1() {
+		PoneTestStubA thisOneStub = new PoneTestStubA(1);
+		boolean result = thisDoubleStraight.isLarger(thisOneStub);
+		assertEquals(true, result);
+	}
+	
+	@Test
+	// precondition, list input is sorted
+	public void testIsLarger2() {
+		PoneTestStubA thisOneStub = new PoneTestStubA(6);
+		boolean result = thisDoubleStraight.isLarger(thisOneStub);
+		assertEquals(false, result);
+	}
+	
+	@Test
+	//precondition, list input is sorted
+	public void testIsLarger3() {
+		PbombTestStubA thisBombStub = new PbombTestStubA(6);
+		boolean result = thisDoubleStraight.isLarger(thisBombStub);
+		assertEquals(false, result);
+	}
+	
+	@Test
+	//  precondition , list input is sorted
+	public void testIsLarger4() {
+		ArrayList<Integer> anotherListOfValues = new ArrayList<>();
+		for (int i = 3; i<=8; i++) {
+			anotherListOfValues.add(i);
+		}
+		PdoubleStraightTestStubA thisDoubleStraightStub = new PdoubleStraightTestStubA(anotherListOfValues);
+		boolean result = thisDoubleStraight.isLarger(thisDoubleStraightStub);
+		assertEquals(false, result);
+	}
 }
