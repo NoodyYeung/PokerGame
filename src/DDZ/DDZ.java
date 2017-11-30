@@ -86,16 +86,22 @@ public class DDZ extends Rules{
 		}
 		else if(allDifferent(cardsMap)) {
 				if(cards.size()<5) // TODO : condition 2
+					if(cards.size() == 2) {
+						if(isRocket(cards)) { // TODO 5b : condition coverage
+							pattern = new Procket();
+							return pattern;
+						}
+					}else
 					return null;
 				else {
 					ArrayList<Integer> sortedCards = new ArrayList<>();
 					for(int i=0;i<cards.size();i++) {
-						sortedCards.add(cards.get(i).getValue());
+						sortedCards.add(cards.get(i).getNumber());
 					}
 					Collections.sort(sortedCards);
-					
+//					System.out.println("[DEBUG] : " + sortedCards.toString());
 					if(isStraight(sortedCards)) { // TODO : condition 3 - what happens when pattern !isStraight?
-						ArrayList<Integer> listOfStraight = numOfN(cardsMap,3);
+						ArrayList<Integer> listOfStraight = numOfN(cardsMap,1);
 						Collections.sort(listOfStraight);
 						pattern = new Pstraight(listOfStraight);
 						return pattern;
@@ -119,13 +125,13 @@ public class DDZ extends Rules{
 						
 				}
 		else {
-			if(cards.size() == 2) {
-				if(isRocket(cards)) { // TODO 5b : condition coverage
-					pattern = new Procket();
-					return pattern;
-				}
-			}
-			else if(cards.size()>=4) {
+//			if(cards.size() == 2) {
+//				if(isRocket(cards)) { // TODO 5b : condition coverage
+//					pattern = new Procket();
+//					return pattern;
+//				}
+//			}
+			 if(cards.size()>=4) {
 				int numOfTripleWithOne = isTripleWithOne(cardsMap,cards.size());
 				int numOfFullHouse = isFullHouse(cardsMap,cards.size()); 
 				
