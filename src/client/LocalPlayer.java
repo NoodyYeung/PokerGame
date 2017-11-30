@@ -10,7 +10,9 @@ import java.util.List;
 public class LocalPlayer extends Player {
 	// TODO: each player needs a unique name or id to play in multiplayer (probably version 2): non-urgent
 
-	public LocalPlayer(){}
+	public LocalPlayer(){
+		id = playerIdForLocalAndAI++;
+	}
 
 
 

@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class AIPlayer extends Player {
     public AIPlayer() {
+        id = playerIdForLocalAndAI++;
     }
 
     @Override
@@ -103,8 +104,8 @@ public class AIPlayer extends Player {
         List<Card> combination = new ArrayList<>();
         autoPlaysCardR(cardsInHand, lastTureCards, 0, combination, ddz);
 
-        System.out.println("AI Auto play size :" + combination.size());
-        System.out.println("AI Auto play :" + Cards.toString(combination));
+        System.out.println("[Debug] AI Auto play size :" + combination.size());
+        System.out.println("[Debug] AI Auto play :" + Cards.toString(combination));
 
         return combination.size() == 0 ? null : combination;
     }

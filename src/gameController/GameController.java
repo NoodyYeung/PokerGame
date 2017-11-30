@@ -131,7 +131,7 @@ public class GameController<T extends Player> {
 	 */
 	public void nextTurn(){
     	try{
-    		System.out.println("Debug : next turn : " + (turn + 1) );
+    		System.out.println("[Debug] : next turn : " + (turn + 1) );
     		if(tableController.checkGameEnd()){
     			gameEnd();
     			return;

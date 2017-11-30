@@ -9,7 +9,7 @@ import java.util.List;
  * Created by yeungchunyin on 29/10/2017.
  */
 public abstract class Player {
-
+    public static int playerIdForLocalAndAI = 1;
     protected String name;
     protected GameController gameController;
     protected int id = -1;

@@ -284,7 +284,7 @@ public class DDZ extends Rules{
 	public boolean allSame(List<Card> cards, int length) {
 		boolean result = true;
 		for(int i=0;i<length-1;i++) {
-			if(cards.get(i).getValue()==cards.get(1).getValue()) {
+			if(cards.get(i).getValue()==cards.get(i+ 1).getValue()) {
 				continue;
 			}
 			else {
