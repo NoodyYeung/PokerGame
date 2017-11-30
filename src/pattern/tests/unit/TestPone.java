@@ -5,42 +5,48 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import pattern.*;
-import pattern.tests.stubs.*;
 
 public class TestPone {
 
 	Pone thisPone;
+	Pone higherPone;
+	
 	@Before
 	public void setUp() throws Exception {
-
 		thisPone = new Pone(4);
+		higherPone = new Pone(6);
+	}
+	
+	@Test
+	public void testGetValue1() {
+		assertEquals(6, higherPone.getValue());
 	}
 	
 	@Test
 	public void testIsSamePattern1() {
-		PbombTestStubA another = new PbombTestStubA(4);
-		boolean result = thisPone.isSamePattern(another);
-		assertEquals(false, result);
+		assertEquals(true, thisPone.isSamePattern(higherPone));
 	}
 	
 	@Test
 	public void testIsSamePattern2() {
-		PoneTestStubA another = new PoneTestStubA(1);
-		boolean result = thisPone.isSamePattern(another);
-		assertEquals(true, result);
+		Pbomb thisBomb = new Pbomb(5);
+		assertEquals(false, thisPone.isSamePattern(thisBomb));
 	}
 	
-	@Test
+	@Test 
 	public void testIsLarger1() {
-		PoneTestStubA another = new PoneTestStubA(1);
-		boolean result = thisPone.isLarger(another);
-		assertEquals(true, result);
+		assertEquals(false, thisPone.isLarger(higherPone));
 	}
 	
 	@Test
 	public void testIsLarger2() {
-		PbombTestStubA another = new PbombTestStubA(3);
-		boolean result = thisPone.isLarger(another);
-		assertEquals(false, result);
+		assertEquals(true, higherPone.isLarger(thisPone));
+	}
+	
+	@Test
+	// this case will never arise, so the code should logically return false
+	public void testIsLarger3() {
+		Ptwo thisPtwo = new Ptwo(2);
+		assertEquals(false, thisPone.isLarger(thisPtwo));
 	}
 }

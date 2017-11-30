@@ -1,9 +1,9 @@
 package pattern;
 
 public class Pone extends Pattern{
-	private int card;
-	public Pone(int thiscard) {
-		this.card=thiscard;
+	private int value;
+	public Pone(int val) {
+		this.value=val;
 	}
 	@Override
 	public boolean isSamePattern(Pattern nextPattern) {
@@ -14,25 +14,20 @@ public class Pone extends Pattern{
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
 		if(lastPattern instanceof Pone) {
-//			System.out.printf("[DEBUG] comparing in Pone.class -- values; %d %d\n", card, lastPattern.getValue());
-			if(card > lastPattern.getValue())
+			if(value > lastPattern.getValue())
 				return true;
 			else
 				return false;
 		}
-		return false;
+		return false; // will never have to compare with a hand that is not the same
 	}
+	
 	@Override
 	public int getValue() {
-		return card;
+		return value;
 	}
 	@Override
 	public int getNum() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
-	
-	
-
-
 }
