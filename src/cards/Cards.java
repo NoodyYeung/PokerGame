@@ -41,6 +41,9 @@ public class Cards {
     }
 
     public static String toString(List<Card> cards){
+	    if(cards== null){
+	        return null;
+        }
         String s = "";
         for(Card c : cards){
             s += c + " ";

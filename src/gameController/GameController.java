@@ -160,7 +160,8 @@ public class GameController<T extends Player> {
 					if (pattern != null) {
 						System.out.println("DEBUG: GOT Pattern " + pattern.getClass().getName());
 					} else {
-						System.out.println("DEBUG: GOT Pattern FAIL");
+						List<Card> lastHands = tableController.getLastHandCard() != null ? tableController.getLastHandCard().getCards() : null;
+						System.out.println("DEBUG: GOT Pattern FAIL " + Cards.toString(lastHands));
 					}
 					if (pattern != null) { // exit when user input valid pattern
 						break;

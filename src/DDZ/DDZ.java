@@ -99,6 +99,7 @@ public class DDZ extends Rules{
 						else {
 							pattern = new Ptwo(cards.get(0).getValue());
 						}
+						return pattern;
 					}
 						
 				}
