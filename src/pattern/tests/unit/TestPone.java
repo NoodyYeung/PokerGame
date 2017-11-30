@@ -22,6 +22,10 @@ public class TestPone {
 		assertEquals(6, higherPone.getValue());
 	}
 	
+	@Test 
+	public void testGetNum1() {
+		assertEquals(1, thisPone.getNum());
+	}
 	@Test
 	public void testIsSamePattern1() {
 		assertEquals(true, thisPone.isSamePattern(higherPone));
