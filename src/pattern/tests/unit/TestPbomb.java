@@ -1,15 +1,14 @@
 package pattern.tests.unit;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
 import pattern.*;
 
-public class TestPBomb {
+public class TestPbomb {
 	Pbomb thisBomb;
 	ArrayList<Integer> smallerListOfValues;
 	ArrayList<Integer> biggerListOfValues;

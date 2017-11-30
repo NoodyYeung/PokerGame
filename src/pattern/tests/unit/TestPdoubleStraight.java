@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import pattern.*;
 
-public class TestPDoubleStraight {
+public class TestPdoubleStraight {
 	PdoubleStraight thisDoubleStraight;
 	ArrayList<Integer> lowerValueList;
 	ArrayList<Integer> higherValueList;

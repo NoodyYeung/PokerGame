@@ -14,7 +14,7 @@ public class Procket extends Pattern {
 	@Override
 	public int getValue() {
 		
-		return 0;
+		return 16;
 	}
 	@Override
 	public int getNum() {
