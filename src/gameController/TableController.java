@@ -3,12 +3,10 @@ package gameController;
 import cards.Card;
 import cards.Cards;
 import cards.ExCardNoExists;
-import pattern.Pattern;
 import table.ExNotEnoughPlayers;
 import table.PlayerAndCards;
 import table.Table;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TableController {
@@ -23,31 +21,17 @@ public class TableController {
 		return table.checkGameEnd();
 	}
 
-	//return the card info in string format
-	//the delimiter is ","
-	//the sequence is based on the increasing player id
-	public String getCardsInfo() {
-		// TODO Auto-generated method stub
-		return table.getCardsOfEachPlayer();
-	}
 
 	public Cards getLastHandCard(){
 		return table.getLastHandCard();
 	}
 
-	public boolean updateTableInfo(int playerID, ArrayList<Card> cards, Pattern pattern){
-		return table.updateTableInfo(playerID, cards,pattern);
-	}
 
 	public void emptyLastHand(){
 		table.emptyLastHand();
 	}
 
 
-	public boolean validateCards(int playerID, ArrayList<Card> cards) {
-		// TODO Auto-generated method stub
-		return table.validateCards(playerID,cards);
-	}
 	public Player getGameWinner() {
 		// TODO Auto-generated method stub
 		return table.getGameWinner();

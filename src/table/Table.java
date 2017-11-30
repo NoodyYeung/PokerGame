@@ -143,25 +143,11 @@ public class Table<T extends Player> {
 		return wholeDeck;
 	}
 
-	public String getCardsOfEachPlayer() {
-		// TODO Auto-generated method stub
-		String result="";
-		for(PlayerAndCards e:entities){
-			result+=e.getCardsString()+",";
-		}
-		return result;
-	}
 
 	public Cards getLastHandCard(){
 		return lastHandCard;
 	}
 
-	public boolean updateTableInfo(int playerID, ArrayList<Card> cards,Pattern pattern) {
-		// TODO Auto-generated method stub
-		lastHandCard=createLastHand(cards,pattern);
-		addCardToTable(playerID,lastHandCard);
-		return true;
-	}
 
 	public boolean checkGameEnd(){
 		for(PlayerAndCards e:entities){
@@ -170,20 +156,6 @@ public class Table<T extends Player> {
 		return false;
 	}
 
-	public Cards createLastHand(ArrayList<Card> cards, Pattern pattern){
-		Cards lastHandCard=new Cards(cards, pattern);
-		return lastHandCard;
-	}
-
-
-	public boolean validateCards(int playerID, ArrayList<Card> cards) {
-		for (PlayerAndCards e:entities){
-			if(e.getPlayer().getId()==playerID) {
-				return e.checkCards(cards);
-			}		
-		}
-		return false;
-	}
 
 	public void emptyLastHand() {
 		// TODO Auto-generated method stub

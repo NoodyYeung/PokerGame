@@ -323,39 +323,7 @@ public class GameController<T extends Player> {
   		return tableController.checkGameEnd();
   	}
 
-  	/**
-     *  return the card info in string format
-        the delimiter is ","
-        the sequence is based on the increasing player id
-     */
-  	public String getCardsOfEachPlayer(){
-  		return tableController.getCardsInfo();
-  	}
-
-  	//based on the input string by the player create the list of card objects
-  	public ArrayList<Card> createThisHandOfCards(String input) throws ExCardNoExists{
-  		return Cards.createCardsListFromString(input);
-  	}
 
 
-
-
-	//when the player has no cards to play
-	public boolean skipTheCurrentPlayer(int playerID){
-		if(playerID==playerSequence.get(playerSequence.size()-1)){
-//			round++;
-			tableController.emptyLastHand();
-		}
-		return true;
-	}
-
-	//when the player have cards to play
-	//if validation is passed, then call this function to 
-	//increase the turn and update the info in the table.java
-	//the parameter needed is the player id and cards 
-	public boolean updateTheTable(int playerID, ArrayList<Card> cards,Pattern pattern){
-		tableController.updateTableInfo(playerID, cards, pattern);
-		return true;
-	}
 	
 }
