@@ -169,8 +169,8 @@ public class DDZ extends Rules{
 
 	private boolean isRocket(List<Card> cards) {
 		return cards.size() == 2 && (
-				(cards.get(0).getValue()==16 && cards.get(1).getValue()==17) || // TODO 5a : decision coverage
-				(cards.get(1).getValue()==16 && cards.get(0).getValue()==17));
+				(cards.get(0).getValue()==53 && cards.get(1).getValue()==54) || // TODO 5a : decision coverage
+				(cards.get(1).getValue()==53 && cards.get(0).getValue()==54));
 	}
 
 	private boolean isBomb(List<Card> cards) {
@@ -284,7 +284,7 @@ public class DDZ extends Rules{
 	public boolean allSame(List<Card> cards, int length) {
 		boolean result = true;
 		for(int i=0;i<length-1;i++) {
-			if(cards.get(i).getValue()==cards.get(i+ 1).getValue()) {
+			if(cards.get(i).getNumber()==cards.get(i+ 1).getNumber()) {
 				continue;
 			}
 			else {

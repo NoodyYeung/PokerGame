@@ -158,10 +158,10 @@ public class GameController<T extends Player> {
 					}
 					Pattern pattern = ddz.validateDDZ(playedCard, tableController.getLastHandCard());
 					if (pattern != null) {
-						System.out.println("DEBUG: GOT Pattern " + pattern.getClass().getName());
+						System.out.println("[DEBUG] : GOT Pattern " + pattern.getClass().getName());
 					} else {
 						List<Card> lastHands = tableController.getLastHandCard() != null ? tableController.getLastHandCard().getCards() : null;
-						System.out.println("DEBUG: GOT Pattern FAIL " + Cards.toString(lastHands));
+						System.out.println("[DEBUG]: GOT Pattern FAIL " + Cards.toString(lastHands));
 					}
 					if (pattern != null) { // exit when user input valid pattern
 						break;
@@ -258,6 +258,7 @@ public class GameController<T extends Player> {
 	 * Only trigger on the numberOfskip == 2
 	 */
 	public void newRound(){
+		System.out.println("[Debug] : new round");
 		numberOfSkip = 0;
 		tableController.emptyLastHand();
 	}
