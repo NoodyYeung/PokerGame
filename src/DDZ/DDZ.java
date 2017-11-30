@@ -26,6 +26,7 @@ public class DDZ extends Rules{
 		}
 		if(thisPattern!=null) { // TODO 1 : validate for isNull == true
 			if(lastHand!= null) { // TODO 2 : validate for lastHand isNull == true
+				List<Card> lastHandCard = lastHand.getCards();
 				Pattern lastPattern = identifyPattern(lastHand.getCards());
 				if(lastPattern != null) {
 //					System.out.println("[Debug] identifyPattern:" + lastPattern.getClass().getName());
@@ -34,9 +35,22 @@ public class DDZ extends Rules{
 
 				}
 				if(lastPattern.isSamePattern(thisPattern)) { // TODO 3 : validate for is not same
-					if(thisPattern.isLarger(lastPattern)) {  // TODO 4 : validate for is not larger
+					if (thisPattern.isLarger(lastPattern)) {  // TODO 4 : validate for is not larger
 						return thisPattern;
 					}
+				}else if(isBomb(cards)){
+					if(!isRocket(lastHandCard) && isMultipleBomb(hashAllCards(lastHandCard)) == -1){
+						return thisPattern;
+					}else{
+						return null;
+					}
+
+				}else if(isRocket(cards)){
+					return thisPattern;
+				}else if (isMultipleBomb(hashAllCards(cards)) != -1){
+					if(!isRocket(lastHand.getCards())){
+						return thisPattern;
+					}else return null;
 				}
 			}
 			else{
@@ -88,7 +102,7 @@ public class DDZ extends Rules{
 				}
 			}
 		else if(allSame(cards,cards.size())) {
-					if(cards.size()==4) { // TODO : condition 4a (line 72 + 73)
+					if(isBomb(cards)) { // TODO : condition 4a (line 72 + 73)
 						pattern = new Pbomb(cards.get(0).getValue());
 						return pattern;
 					}
@@ -105,8 +119,7 @@ public class DDZ extends Rules{
 				}
 		else {
 			if(cards.size() == 2) {
-				if((cards.get(0).getValue()==16 && cards.get(1).getValue()==17) || // TODO 5a : decision coverage 
-						(cards.get(1).getValue()==16 && cards.get(0).getValue()==17)) { // TODO 5b : condition coverage
+				if(isRocket(cards)) { // TODO 5b : condition coverage
 					pattern = new Procket();
 					return pattern;
 				}
@@ -152,6 +165,20 @@ public class DDZ extends Rules{
 		}
 			
 		return null;
+	}
+
+	private boolean isRocket(List<Card> cards) {
+		return cards.size() == 2 && (
+				(cards.get(0).getValue()==16 && cards.get(1).getValue()==17) || // TODO 5a : decision coverage
+				(cards.get(1).getValue()==16 && cards.get(0).getValue()==17));
+	}
+
+	private boolean isBomb(List<Card> cards) {
+		if(cards == null) return false;
+		if(cards.size() == 4 && allSame(cards, cards.size())){
+			return true;
+		}
+		return false;
 	}
 
 	private int isMultipleBomb(HashMap<Integer, Integer> cardsMap) {
