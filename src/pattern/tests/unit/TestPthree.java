@@ -1,7 +1,5 @@
 package pattern.tests.unit;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +19,14 @@ public class TestPthree {
 		lowPthree = new Pthree(9);
 	}
 	
+	@Test
+	public void testGetValue() {
+		assertEquals(11, highPthree.getValue());
+	}
+	
+	@Test public void testGetNum() {
+		assertEquals(3, highPthree.getNum());
+	}
 	@Test
 	public void testIsSamePattern1() {
 		thisPbomb = new Pbomb(1);

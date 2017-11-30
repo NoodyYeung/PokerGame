@@ -25,7 +25,7 @@ public class TestPStraight {
 			lowerValueStraightList.add(i);
 			higherValueStraightList.add(i + 5);
 			if(i>=3) {
-				shortStraightList.add(i+2);
+				shortStraightList.add(i+2); 
 			}
 		}
 	}

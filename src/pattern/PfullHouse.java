@@ -26,7 +26,7 @@ public class PfullHouse extends Pattern {
 
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
-		if(max>lastPattern.getValue())
+		if(max > lastPattern.getValue())
 			return true;
 		return false;
 	}
