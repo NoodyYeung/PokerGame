@@ -13,15 +13,13 @@ public class Procket extends Pattern {
 	}
 	@Override
 	public int getValue() {
-		
 		return 16;
 	}
+	
 	@Override
 	public int getNum() {
 		
-		return 0;
+		return 2;
 	}
-
-	
 
 }

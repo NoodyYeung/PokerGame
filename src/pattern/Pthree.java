@@ -2,6 +2,7 @@ package pattern;
 
 public class Pthree extends Pattern {
 	private int value;
+	private int num = 3;
 	
 	public Pthree(int threeValue) {
 		value = threeValue;
@@ -9,8 +10,8 @@ public class Pthree extends Pattern {
 
 	@Override
 	public boolean isSamePattern(Pattern another) {
-		if(this.getClass().equals(another.getClass())) {
-			return true;
+		if(another instanceof Pthree) {
+				return true;
 		}
 		return false;
 	}
@@ -29,8 +30,7 @@ public class Pthree extends Pattern {
 
 	@Override
 	public int getNum() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 3;
 	}
 
 	
