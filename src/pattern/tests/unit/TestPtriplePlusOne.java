@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import pattern.*;
 
-
 public class TestPtriplePlusOne {
 	
 	ArrayList<Integer> triple1list;
