@@ -39,5 +39,15 @@ public class PmultiBomb extends Pattern {
 	public int getNum() {
 		return num;
 	}
+	
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof PmultiBomb)) {
+	        return false;
+	    }
+	    PmultiBomb other = (PmultiBomb)o;
+	    return getValue()==other.getValue()&&getNum()==other.getNum();
+	}
+	
 
 }

@@ -32,6 +32,14 @@ public class Pthree extends Pattern {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof Pthree)) {
+	        return false;
+	    }
+	    Pthree other = (Pthree)o;
+	    return getValue()==other.getValue();
+	}
+	
 	
 }

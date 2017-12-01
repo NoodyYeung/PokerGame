@@ -44,5 +44,14 @@ public class PfullHouse extends Pattern {
 	public int getNum() {
 		return num;
 	}
-
+	
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof PfullHouse)) {
+	        return false;
+	    }
+	    PfullHouse other = (PfullHouse)o;
+	    return getValue()==other.getValue()&&getNum()==other.getNum();
+	}
+	
 }

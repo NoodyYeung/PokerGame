@@ -33,6 +33,13 @@ public class Ptwo extends Pattern {
 		return 0;
 	}
 
-	
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof Ptwo)) {
+	        return false;
+	    }
+	    Ptwo other = (Ptwo)o;
+	    return getValue()==other.getValue()&&getNum()==other.getNum();
+	}
 
 }

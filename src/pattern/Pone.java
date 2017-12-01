@@ -14,7 +14,6 @@ public class Pone extends Pattern{
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
 		if(lastPattern instanceof Pone) {
-//			System.out.printf("[DEBUG] comparing in Pone.class -- values; %d %d\n", card, lastPattern.getValue());
 			if(card > lastPattern.getValue())
 				return true;
 			else
@@ -31,8 +30,14 @@ public class Pone extends Pattern{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof Pone)) {
+	        return false;
+	    }
+	    Pone other = (Pone)o;
+	    return getValue()==other.getValue();
+	}
 
 
 }

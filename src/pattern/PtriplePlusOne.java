@@ -40,6 +40,15 @@ public class PtriplePlusOne extends Pattern {
 	public int getNum() {
 		return num;
 	}
+	
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof PtriplePlusOne)) {
+	        return false;
+	    }
+	    PtriplePlusOne other = (PtriplePlusOne)o;
+	    return getValue()==other.getValue()&&getNum()==other.getNum();
+	}
 
 	
 }

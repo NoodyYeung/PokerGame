@@ -33,7 +33,7 @@ public class DDZ extends Rules{
 //					System.out.println("[Debug] identifyPattern:" + lastPattern.getClass().getName());
 				}else{
 					System.out.println("[Debug] identifyPattern: null");
-
+					return null;
 				}
 				if(lastPattern.isSamePattern(thisPattern)) { // TODO 3 : validate for is not same
 					if (thisPattern.isLarger(lastPattern)) {  // TODO 4 : validate for is not larger
@@ -63,6 +63,8 @@ public class DDZ extends Rules{
 	
 	public HashMap<Integer,Integer> hashAllCards(List<Card> cards) {
 		HashMap<Integer, Integer> cardsMap = new HashMap<>();
+		if(cards == null)
+			return null;
 		for(Card aCard: cards) {
 			int cardValue = aCard.getNumber();
 			if(cardsMap.get(cardValue) != null) {
@@ -174,13 +176,13 @@ public class DDZ extends Rules{
 		return null;
 	}
 
-	private boolean isRocket(List<Card> cards) {
+	public boolean isRocket(List<Card> cards) {
 		return cards.size() == 2 && (
 				(cards.get(0).getValue()==53 && cards.get(1).getValue()==54) || // TODO 5a : decision coverage
 				(cards.get(1).getValue()==53 && cards.get(0).getValue()==54));
 	}
 
-	private boolean isBomb(List<Card> cards) {
+	public boolean isBomb(List<Card> cards) {
 		if(cards == null) return false;
 		if(cards.size() == 4 && allSame(cards, cards.size())){
 			return true;
@@ -188,7 +190,7 @@ public class DDZ extends Rules{
 		return false;
 	}
 
-	private int isMultipleBomb(HashMap<Integer, Integer> cardsMap) {
+	public int isMultipleBomb(HashMap<Integer, Integer> cardsMap) {
 		Set<Integer> cardsValues= cardsMap.keySet();
 		List<Integer> valuelist = new ArrayList<Integer>(cardsValues);
 		ArrayList<Integer> listOfAllValues = new ArrayList<>();
@@ -210,7 +212,7 @@ public class DDZ extends Rules{
  		return -1;
 	}
 
-	private int isTripleStraight(HashMap<Integer, Integer> cardsMap) {
+	public int isTripleStraight(HashMap<Integer, Integer> cardsMap) {
 		Set<Integer> cardsValues= cardsMap.keySet();
 		List<Integer> valuelist = new ArrayList<Integer>(cardsValues);
 		ArrayList<Integer> listOfAllValues = new ArrayList<>();
@@ -231,7 +233,7 @@ public class DDZ extends Rules{
  		return -1;
 	}
 
-	private int isDoubleStraight(HashMap<Integer, Integer> cardsMap) {
+	public int isDoubleStraight(HashMap<Integer, Integer> cardsMap) {
 		Set<Integer> cardsValues= cardsMap.keySet();
 		List<Integer> valuelist = new ArrayList<Integer>(cardsValues);
 		ArrayList<Integer> listOfAllValues = new ArrayList<>();
@@ -252,7 +254,7 @@ public class DDZ extends Rules{
  		return -1;
 	}
 
-	private int isFullHouse(HashMap<Integer, Integer> cardsMap, int numOfAll) {
+	public int isFullHouse(HashMap<Integer, Integer> cardsMap, int numOfAll) {
 		ArrayList<Integer> listOfThree = numOfN(cardsMap,3);
 		Collections.sort(listOfThree);
 		if(isStraight(listOfThree)) {
@@ -263,7 +265,7 @@ public class DDZ extends Rules{
  		return -1;
 	}
 
-	private int isTripleWithOne(HashMap<Integer, Integer> cardsMap,int numOfAll) {
+	public int isTripleWithOne(HashMap<Integer, Integer> cardsMap, int numOfAll) {
 		ArrayList<Integer> listOfThree = numOfN(cardsMap,3);
 		Collections.sort(listOfThree);
  		
@@ -275,7 +277,7 @@ public class DDZ extends Rules{
 	}
 
 
-	private ArrayList<Integer> numOfN(HashMap<Integer, Integer> cardsMap, int n){
+	public ArrayList<Integer> numOfN(HashMap<Integer, Integer> cardsMap, int n){
 		Set<Integer> cardsValues= cardsMap.keySet();
 		List<Integer> valuelist = new ArrayList<Integer>(cardsValues);
 		ArrayList<Integer> listOfN = new ArrayList<>();
@@ -304,7 +306,7 @@ public class DDZ extends Rules{
 	}
 	
 	// TODO : What is the precondition on the input here? is it sorted?
-	private boolean isStraight(ArrayList<Integer> cards) {
+	public boolean isStraight(ArrayList<Integer> cards) {
 		for(int i=0;i<cards.size()-1;i++) {
 			if(cards.get(i)+1 == cards.get(i+1))
 				continue;
@@ -314,7 +316,7 @@ public class DDZ extends Rules{
 		return true;
 	}
 
-	private boolean allDifferent(HashMap<Integer, Integer> cardsMap) {
+	public boolean allDifferent(HashMap<Integer, Integer> cardsMap) {
 		Set<Integer> cardValues = cardsMap.keySet();
 		for(int card:cardValues) {
 			int num = cardsMap.get(card); // TODO : why do we need to typecast this when it is already a set of ints?

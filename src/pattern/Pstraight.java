@@ -35,7 +35,14 @@ public class Pstraight extends Pattern {
 	public int getNum() {
 		return num;
 	}
-
+	@Override
+	public boolean equals (Object o) {
+		if (!(o instanceof Pstraight)) {
+			return false;
+		}
+		Pstraight other = (Pstraight)o;
+		return getNum()==other.getNum();
+	}
 }
 
 

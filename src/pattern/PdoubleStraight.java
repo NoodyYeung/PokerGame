@@ -41,6 +41,14 @@ public class PdoubleStraight extends Pattern {
 		return num;
 	}
 	
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof PdoubleStraight)) {
+	        return false;
+	    }
+	    PdoubleStraight other = (PdoubleStraight)o;
+	    return getValue()==other.getValue()&&getNum()==other.getNum();
+	}
 	
 	
 

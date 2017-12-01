@@ -22,6 +22,10 @@ public class Procket extends Pattern {
 		return 0;
 	}
 
+	@Override
+	public boolean equals (Object o) {
+	    return true;
+	}
 	
 
 }

@@ -68,6 +68,6 @@ public class Cards {
     
     public Pattern getPattern() {
         // TODO Auto-generated method stub
-        return null;
+        return pattern;
     }
 }

@@ -42,5 +42,13 @@ public class PtripleStraight extends Pattern {
 	public int getNum() {
 		return num;
 	}
-
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof PtripleStraight)) {
+	        return false;
+	    }
+	    
+	    PtripleStraight other = (PtripleStraight)o;
+	    return getValue()==other.getValue()&&getNum()==other.getNum();
+	}
 }

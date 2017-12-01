@@ -36,7 +36,14 @@ public class Pbomb extends Pattern {
 		return 0;
 	}
 
-	
+	@Override
+	public boolean equals (Object o) {
+	    if (!(o instanceof Pbomb)) {
+	        return false;
+	    }
+	    Pbomb other = (Pbomb)o;
+	    return getValue()==other.getValue();
+	}
 	
 	
 
