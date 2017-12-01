@@ -16,18 +16,17 @@ public class PtripleStraight extends Pattern {
 
 	@Override
 	public boolean isSamePattern(Pattern another) {
-		if(this.getClass().equals(another.getClass())) {
-			if(this.num == ((PtripleStraight) another).getNum()) {
+		if(another instanceof PtripleStraight) {
+			if(this.num == another.getNum()) {
 				return true;
 			}
 		}
 		return false;
-		
 	}
 
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
-		if(max>lastPattern.getValue()) {
+		if(max > lastPattern.getValue()) {
 			return true;
 		}
 		return false;

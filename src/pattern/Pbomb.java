@@ -22,7 +22,12 @@ public class Pbomb extends Pattern {
 			else
 				return false;
 		} else {
-			return true; // Pbomb is always bigger than any other pattern
+			if(lastPattern instanceof Procket) {
+				return false;
+			}
+			else {
+				return true;
+			}	 // Pbomb is always bigger than any other pattern
 		}
 	}
 
@@ -33,7 +38,7 @@ public class Pbomb extends Pattern {
 
 	@Override
 	public int getNum() {
-		return 0;
+		return 4;
 	}
 
 	@Override

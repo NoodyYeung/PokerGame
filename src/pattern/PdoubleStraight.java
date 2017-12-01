@@ -15,24 +15,32 @@ public class PdoubleStraight extends Pattern {
 
 	@Override
 	public boolean isSamePattern(Pattern nextPattern) {
-		if(this.getClass().equals(nextPattern.getClass())) {
-			if(this.num == ((PdoubleStraight) nextPattern).getNum()) {
+		if(nextPattern instanceof PdoubleStraight) {
+			if(this.num == nextPattern.getNum()) {
 				return true;
+			} else {
+				return false;
 			}
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
-		if(this.max > lastPattern.getValue())
+		if(lastPattern instanceof Pbomb || lastPattern instanceof Procket){ 
+			return false;
+		} 
+		else if(this.max > lastPattern.getValue()){
 			return true;
-		return false;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
-	public int getValue() {
-		
+	public int getValue() {	
 		return max;
 	}
 

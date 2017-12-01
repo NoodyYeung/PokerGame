@@ -4,20 +4,19 @@ import java.util.ArrayList;
 //import java.util.HashMap;
 
 public class PtriplePlusOne extends Pattern {
-	
+
 	private int num;
-	//private ArrayList<Integer> listOfThrees;
 	private int maxOfThrees;
+	
 	public PtriplePlusOne(ArrayList<Integer> thislistOfThree, int numOfTripleWithOne) {
-		//listOfThrees = thislistOfThree;
 		maxOfThrees = thislistOfThree.get(thislistOfThree.size()-1);
 		num = thislistOfThree.size();
 	}
 
 	@Override
 	public boolean isSamePattern(Pattern another) {
-		if(this.getClass().equals(another.getClass())) {
-			if(this.num == ((PtriplePlusOne) another).getNum()) {
+		if(another instanceof PtriplePlusOne) {
+			if(this.num ==  another.getNum()) {
 				return true;
 			}
 		}
@@ -26,7 +25,7 @@ public class PtriplePlusOne extends Pattern {
 
 	@Override
 	public boolean isLarger(Pattern lastPattern) {
-		if(maxOfThrees>lastPattern.getValue())
+		if(maxOfThrees > lastPattern.getValue())
 			return true;
 		return false;
 	}
