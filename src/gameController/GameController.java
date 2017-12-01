@@ -19,33 +19,33 @@ import java.util.List;
  */
 public class GameController<T extends Player> {
 	private boolean isEnd = false;
-    /**
-     * turn is always increasing
-     */
-    private int turn = 0;
+	/**
+	 * turn is always increasing
+	 */
+	private int turn = 0;
 	/** A new round is started when a user if free to play card (no last hand).
 	 * 	And two case will generate this situation:
 	 * 	1. The first turn
 	 * 	2. Two user skip the turn
 	 * **/
-  	private int round=0;
+	private int round=0;
 	/**
 	 * Count the number of skip. If the nubmer of skip == 2, it reset to 0 and a new round is started
 	 */
 	private int numberOfSkip = 0;
 
-    private ArrayList<T> playersInThisGame;
-    private TableController tableController;
-    private DDZ ddz;
-    private boolean isGameInit = false;
-  	ArrayList<Integer> playerSequence=new ArrayList<>();
+	private ArrayList<T> playersInThisGame;
+	private TableController tableController;
+	private DDZ ddz;
+	private boolean isGameInit = false;
+	ArrayList<Integer> playerSequence=new ArrayList<>();
 	/** used to identify which user to play. playersInThisGame[initTurn + turn % 3] = the player play card in this turn **/
 	private int initTurn = 0;
 
 	//pass in the player object list, and create a table to play and distribute cards
-  	//the Cards for each player is saved in the table.java
-  	//before gamecontroller is created, the server should assign id to the player
-  	public GameController(ArrayList<T> players) throws InsufficientPlayerException {
+	//the Cards for each player is saved in the table.java
+	//before gamecontroller is created, the server should assign id to the player
+	public GameController(ArrayList<T> players) throws InsufficientPlayerException {
 		if (players.size() != 3) {
 			throw new InsufficientPlayerException("Insufficient players. At least three player is needed");
 		}
@@ -57,8 +57,8 @@ public class GameController<T extends Player> {
 
 		int playerId = 0;
 		for (Player p : this.playersInThisGame) {
-		    if(p.getId() != -1)
-		        p.setId(playerId ++);
+			if(p.getId() != -1)
+				p.setId(playerId ++);
 			p.setGameController(this);
 		}
 	}
@@ -67,20 +67,20 @@ public class GameController<T extends Player> {
 	 * Noody: This is not my code.
 	 * The main main different i thought is that
 	 *
-    public void startGame(){
-        List<Card>[] decks = deck.distribute();
-        for(int i = 0; i < playersInThisGame.size(); i ++) {
-            Player player = playersInThisGame.get(i);
-            player.setHand(decks[i]);
-        TableController.createTableForGame(players);
-    }
-    **/
+	 public void startGame(){
+	 List<Card>[] decks = deck.distribute();
+	 for(int i = 0; i < playersInThisGame.size(); i ++) {
+	 Player player = playersInThisGame.get(i);
+	 player.setHand(decks[i]);
+	 TableController.createTableForGame(players);
+	 }
+	 **/
 
-    /**
-     * TODO 1.Prompt player got cards
-     * TODO 2.ASk Player to call for land lord
-     */
-    public void startGame(){
+	/**
+	 * TODO 1.Prompt player got cards
+	 * TODO 2.ASk Player to call for land lord
+	 */
+	public void startGame(){
 		try {
 			tableController.createTableForGame(playersInThisGame);
 			newRound();
@@ -131,13 +131,13 @@ public class GameController<T extends Player> {
 	 * Called when the turn is finish
 	 */
 	public void nextTurn(){
-    	try{
-    		System.out.println("[Debug] : next turn : " + (turn + 1) );
-    		if(tableController.checkGameEnd()){
-    			gameEnd();
-    			return;
+		try{
+			System.out.println("[Debug] : next turn : " + (turn + 1) );
+			if(tableController.checkGameEnd()){
+				gameEnd();
+				return;
 			}
-    		turn ++;
+			turn ++;
 			Player currentPlayCardPlayer =getCurrentTurnPlayer();
 			List<Player> otherPlayers = getNotCurrentTurnPlayer();
 
@@ -150,13 +150,6 @@ public class GameController<T extends Player> {
 			while(true) {
 				try {
 					List<Card> hands = tableController.getCardsByPlayer(currentPlayCardPlayer);
-					List<String> cardCountInfo = new ArrayList<>();
-					for( Player p : playersInThisGame){
-						PlayerAndCards tc = tableController.getPlayerAndCardsObjByPlayer(p);
-						cardCountInfo.add(String.format("[%s] %s: %d card left", tc.isLandLord() ? "Landlord" : "Farmer",
-								p.getName(), tc.getCards().size()));
-					}
-					currentPlayCardPlayer.playerCardCountInfo(cardCountInfo);
 					playedCard = currentPlayCardPlayer.yourTurnToPlayCardOrSkipCard(hands, tableController.getLastHandCard());
 					if(playedCard!=null && !checkPlayedCardInsideHands(playedCard, hands)){
 						throw new ExPlayedCardNotInYourHands();
@@ -191,7 +184,7 @@ public class GameController<T extends Player> {
 			/** End of ask for card play **/
 			nextTurn();
 		}catch (Exception e){
-    		e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
@@ -328,9 +321,9 @@ public class GameController<T extends Player> {
 
 
 
-  	public boolean checkGameEnd(){
-  		return tableController.checkGameEnd();
-  	}
+	public boolean checkGameEnd(){
+		return tableController.checkGameEnd();
+	}
 
 
 	public boolean getIsEnd() {
