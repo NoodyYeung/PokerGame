@@ -4,10 +4,13 @@ import java.util.*;
 
 public class Pstraight extends Pattern {
 	private int num;
-	private int max;
+	private int max = 0;
 	
 	public Pstraight(ArrayList<Integer> listOfStraight) {
 		num =  listOfStraight.size();
+		for(Integer i : listOfStraight){
+			max = Math.max(i,max);
+		}
 	}
 	@Override
 	public boolean isSamePattern(Pattern another) {

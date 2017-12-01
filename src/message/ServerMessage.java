@@ -241,7 +241,7 @@ public class ServerMessage extends Message {
         public ServerMessage prepareCountInfoMessage(String s) {
             JSONObject json = new JSONObject();
             try{
-                json.put("message", "s\n");
+                json.put("message", s+ "\n");
             }catch (JSONException e) {
                 e.printStackTrace();
             }
