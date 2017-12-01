@@ -21,7 +21,7 @@ public class Cmd2Play extends Command{
 			gameController.startGame();
 
 		}  catch (InsufficientPlayerException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 	}
 	

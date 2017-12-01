@@ -125,7 +125,7 @@ public class LocalPlayer extends Player {
 				return card;
 			} catch (ExCardNoExists exCardNoExists) {
 				System.out.println("Invalid Cards Combination");
-				exCardNoExists.printStackTrace();
+//				exCardNoExists.printStackTrace();
 			}
 		}
 		return null;
