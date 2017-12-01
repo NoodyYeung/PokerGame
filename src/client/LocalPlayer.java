@@ -5,6 +5,7 @@ import cards.Cards;
 import cards.ExCardNoExists;
 import gameController.Player;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class LocalPlayer extends Player {
@@ -13,7 +14,12 @@ public class LocalPlayer extends Player {
 	public LocalPlayer(){
 		id = playerIdForLocalAndAI++;
 	}
-
+	public Comparator<Card> cardCpm = new Comparator<Card>() {
+		@Override
+		public int compare(Card o1, Card o2) {
+			return o1.getValue() - o2.getValue();
+		}
+	};
 
 
 	public String toString(){
@@ -32,7 +38,9 @@ public class LocalPlayer extends Player {
 			System.out.println("Last player cards : " + Cards.toString(lastTurnCards.getCards()) );
 		else
 			System.out.println("No last player cards. You are free to put cards on the table");
-		System.out.println("Card in your hand : " + Cards.toString(tablePlayerCards) );
+
+		tablePlayerCards.sort(cardCpm);
+		System.out.println("Card in your hand : " + Cards.toString(tablePlayerCards));
 		while(true) {
 			System.out.println("Please put the cards: (Example: \"D1 S1\")");
 			String cardStr = Main.systemIn.nextLine();
@@ -104,6 +112,7 @@ public class LocalPlayer extends Player {
 			System.out.println("Last player cards : " + Cards.toString(lastTurnCards.getCards()) );
 		else
 			System.out.println("No last player cards. You are free to put cards on the table");
+		cardsThatThePlayerHave.sort(cardCpm);
 		System.out.println("Card in your hand : " + Cards.toString(cardsThatThePlayerHave) );
 		while(true) {
 			System.out.println("Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:");
@@ -136,5 +145,12 @@ public class LocalPlayer extends Player {
 	@Override
 	public void pleaseMakeAValidPlay() {
 		System.out.println("Please make a valid play");
+	}
+
+	@Override
+	public void playerCardCountInfo(List<String> playersCountsInfo) {
+		for(String s : playersCountsInfo){
+			System.out.println(s);
+		}
 	}
 }

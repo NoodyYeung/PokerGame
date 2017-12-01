@@ -59,6 +59,11 @@ public class AIPlayer extends Player {
 
     }
 
+    @Override
+    public void playerCardCountInfo(List<String> playerCountsInfo) {
+
+    }
+
 
     private boolean autoPlaysCardR(List<Card> cardInHand, Cards lastTurnCard, int depth, List<Card> canPlayedList, DDZ ddz){
         if(depth > 5) {

@@ -89,4 +89,6 @@ public abstract class Player {
     public abstract void youLose();
 
     public abstract void pleaseMakeAValidPlay();
+
+    public abstract void playerCardCountInfo(List<String> playerCountsInfo);
 }

@@ -216,6 +216,19 @@ public class ServerPlayer  extends Player{
         }
     }
 
+    @Override
+    public void playerCardCountInfo(List<String> playerCountsInfo) {
+        while(true) {
+            try {
+                for(String s: playerCountsInfo)
+                    serverMessageBuilder.prepareCountInfoMessage(s).sendToClient(getOutputStream());
+                break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     public void setOutputStream(DataOutputStream outputStream) {
         this.outputStream = outputStream;

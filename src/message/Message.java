@@ -50,6 +50,7 @@ public class Message {
     public static final java.lang.String SERVER_YOU_LOSE = "youLose";
     public static final java.lang.String SERVER_PLEASE_MAKE_A_VALID_PLAY = "pleaseMakeAValidPlay";
     public static final java.lang.String SERVER_INVALID_CMD = "SERVER_INVALID_CMD" ;
+    public static final java.lang.String SERVER_CARD_COUNT_MESSAGE = "SERVER_CARD_COUNT_MESSAGE";
 
 
     protected String event;

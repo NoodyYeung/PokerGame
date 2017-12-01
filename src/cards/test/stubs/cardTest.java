@@ -1,38 +1,36 @@
-package cards.cardsTestCase;
+package cards.test.stubs;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
+import cards.Card;
+import cards.ExCardNoExists;
 import org.junit.Test;
 
-import cards.*;
-import pattern.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class cardTest {
 
 	 @Test
 	    public void test1() throws ExCardNoExists {
 	        Card card = new Card("JB");
-	        assertEquals(Integer.valueOf(14),card.getValue());
+	        assertEquals(53,card.getValue());
 	    }
 	     
 	    @Test
 	    public void test2() throws ExCardNoExists {
 	        Card card = new Card("JR");
-	        assertEquals(Integer.valueOf(15),card.getValue());
+	        assertEquals(54,card.getValue());
 	    }
 	     
 	    @Test
 	    public void test3() throws ExCardNoExists {
 	        Card card = new Card("C10");
-	        assertEquals(Integer.valueOf(8),card.getValue());
+	        assertEquals(8,card.getValue());
 	    }
 	     
 	    @Test
 	    public void test4() throws ExCardNoExists {
 	        Card card = new Card("C3");
-	        assertEquals(Integer.valueOf(1),card.getValue());
+	        assertEquals(1,card.getValue());
 	    }
 	     
 	    @Test

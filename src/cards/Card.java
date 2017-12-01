@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Card {
+public class Card implements Comparable<Card> {
 
 	public static List<String> cardType = new ArrayList(Arrays.asList("3", "4", "5", "6", "7", "8", "9", "10", "J", "Q" ,"K" ,"A" ,"2"));
 	public static List<Integer> cardValues = new ArrayList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)); // joker value
@@ -65,6 +65,7 @@ public class Card {
 		this.value = value;
 	}*/
 
+
 	public int getValue() {
 		if(this.suit.equals(Suit.JOKER_RED) || suit.equals(Suit.JOKER_BLACK))
 			return value;
@@ -98,5 +99,11 @@ public class Card {
 
 	public int getNumber() {
 		return value;
+	}
+
+
+	@Override
+	public int compareTo(Card o) {
+		return getValue() - o.getValue();
 	}
 }

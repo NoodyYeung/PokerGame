@@ -148,6 +148,10 @@ public class OnConnectedListener{
                     System.out.print(message);
                     break;
 
+                case Message.SERVER_CARD_COUNT_MESSAGE:
+                    message = msg.getJSONObject().getString("message");
+                    System.out.print(message);
+                    break;
 
                 default:
                     System.out.println("[Debug] ReceivedMessage : " + msg);

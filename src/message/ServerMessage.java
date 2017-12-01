@@ -237,6 +237,16 @@ public class ServerMessage extends Message {
             }
             return new ServerMessage(Message.SERVER_INVALID_CMD, json.toString());
         }
+
+        public ServerMessage prepareCountInfoMessage(String s) {
+            JSONObject json = new JSONObject();
+            try{
+                json.put("message", "s\n");
+            }catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return new ServerMessage(Message.SERVER_CARD_COUNT_MESSAGE, json.toString());
+        }
     }
 
 }
