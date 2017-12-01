@@ -55,10 +55,23 @@ public class Card {
 		this.value = cardValues.get(typeIndex);
 		this.type = type;
 	}
-
+	
 	public String toString(){
 		if(this.type == null ) return this.suit.toString();
-		return this.suit + this.type;
+		// UTF8 suit types
+		//Window -> Preferences -> Workspace -> text file encoding -> Other -> UTF-8
+		String symbol = "";
+		switch(this.suit) {
+			case CLUB:
+			symbol = "\u2663";
+			break;
+			case SPADE: symbol = "\u2660"; break;
+			case HEART: symbol = "\u2665"; break;
+			case DIAMOND: symbol = "\u2666"; break;
+			default: break;
+		}
+		return symbol + this.type;
+		//return this.suit + this.type;
 	}
 /*
 	public void setValue(int value) {
