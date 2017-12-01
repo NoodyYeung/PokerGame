@@ -70,7 +70,7 @@ public class Card implements Comparable<Card> {
 			case DIAMOND: symbol = "\u2666"; break;
 			default: break;
 		}
-		return symbol + this.type;
+		return symbol + this.suit +  this.type;
 		//return this.suit + this.type;
 	}
 /*
