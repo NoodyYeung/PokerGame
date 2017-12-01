@@ -25,6 +25,7 @@ public class Server {
             serverSocket = new ServerSocket(LISTEN_PORT);
             System.out.println("Server listening requests...");
             while (true) {
+                System.out.println("Server listening requests...");
                 Socket socket = serverSocket.accept();
                 ServerPlayer player = new ServerPlayer(socket);
                 playerList.add(player);
@@ -35,6 +36,7 @@ public class Server {
         } finally {
             if (threadExecutor != null)
                 threadExecutor.shutdown();
+
             if (serverSocket != null)
                 try {
                     serverSocket.close();
@@ -78,19 +80,28 @@ public class Server {
                 while (true) {
 
                     // TODO: received message form player's socket
+                    if(input.available() <= 0)
+                        continue;
+                    while(player.isGameStarted()){
+                        System.out.println("[DEBUG] Reset");
+                        Thread.sleep(1000);
+                    }
                     String s = input.readUTF();
+                    System.out.println("[Debug] getMessage 2: " + s);
+                    System.out.println("[Debug] getMessage : " + s);
                     try {
                         handler.handleMessage(new Message(s));
                     } catch (ExInsuffientData exInsuffientData) {
                         exInsuffientData.printStackTrace();
-                        output.writeUTF("Invalid Command");
-                        output.flush();
+                        builder.prepareInvalidCmd().sendToClient(output);
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ExInsuffientData exInsuffientData) {
                 exInsuffientData.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             } finally {
                 try {
                     if (input != null)

@@ -25,7 +25,7 @@ public class ClientMessageHandler {
         RoomsController roomsController = RoomsController.getInstance();
         ServerMessage.Builder builder = new ServerMessage.Builder();
 
-        System.out.println("[Debug] : " + value.toString());
+        System.out.println("[Debug] : receivedMessage " + value.toString());
         /**
          * All the event that can trigger by client
          */

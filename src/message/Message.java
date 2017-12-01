@@ -24,6 +24,8 @@ public class Message {
      */
     public static final String CLIENT_EVENT_CMD_OPEN_ROOM = "create room";
     public static final String CLIENT_EVENT_JOIN_ROOM = "join room";
+    public static final java.lang.String CLIENT_RAW = "raw";
+
 
 
     /**
@@ -38,6 +40,16 @@ public class Message {
     public static final String SERVER_RESPONSE_JOINED_ROOM = "joinedRoom";
     public static final String SERVER_RESPONSE_SOME_USER_JOINED_ROOM = "someoneJoinedRoom";
     public static final String SERVER_START_GAME = "serverStartGame";
+    public static final java.lang.String SERVER_YOUR_TURN_TO_PLAY = "yourTurnToPlay";
+    public static final java.lang.String SERVER_WAIT_PLAYER_TO_PLAY_CARD = "waitPlayerToPlayCard";
+    public static final java.lang.String SERVER_YOU_ARE_FARMER = "youAreFarmer";
+    public static final java.lang.String SERVER_YOU_ARE_LANDLORD = "youAreLandLord";
+    public static final java.lang.String SERVER_YOUR_TURN_TO_PLAY_CARD_OR_SKIP = "yourTurnToPlayCardOrSkip";
+    public static final java.lang.String SERVER_INVALID_PLAY = "invalidPlay";
+    public static final java.lang.String SERVER_YOU_WIN = "youWin";
+    public static final java.lang.String SERVER_YOU_LOSE = "youLose";
+    public static final java.lang.String SERVER_PLEASE_MAKE_A_VALID_PLAY = "pleaseMakeAValidPlay";
+    public static final java.lang.String SERVER_INVALID_CMD = "SERVER_INVALID_CMD" ;
 
 
     protected String event;

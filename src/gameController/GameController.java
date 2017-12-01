@@ -18,6 +18,7 @@ import java.util.List;
  *
  */
 public class GameController<T extends Player> {
+	private boolean isEnd = false;
     /**
      * turn is always increasing
      */
@@ -72,7 +73,6 @@ public class GameController<T extends Player> {
             Player player = playersInThisGame.get(i);
             player.setHand(decks[i]);
         TableController.createTableForGame(players);
-
     }
     **/
 
@@ -101,6 +101,7 @@ public class GameController<T extends Player> {
 			List<Card> playedCard = null;
 			do {
 				try {
+					System.out.println("[DEBUG] tried loop here 1:");
 					List<Card> hands = tableController.getCardsByPlayer(landLord);
 					playedCard = landLord.yourTurnToPlayCard(null, hands);
 					if(playedCard!= null && !checkPlayedCardInsideHands(playedCard, hands)){
@@ -232,6 +233,7 @@ public class GameController<T extends Player> {
 					}
 				}
 			}
+			isEnd = true;
 
 		}catch(Exception e){
 			e.printStackTrace();
@@ -324,6 +326,7 @@ public class GameController<T extends Player> {
   	}
 
 
-
-	
+	public boolean getIsEnd() {
+		return isEnd;
+	}
 }

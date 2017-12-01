@@ -1,5 +1,6 @@
 package cards;
 
+import DDZ.DDZ;
 import pattern.Pattern;
 
 import java.util.ArrayList;
@@ -16,13 +17,20 @@ public class Cards {
      * @param rawString Expect a input like "C1 S1 D1 H1" OR "JB JR"
      * @return
      */
-	ArrayList<Card> cards;
+	List<Card> cards;
 	Pattern pattern;
 	
 	public Cards (ArrayList<Card> cards, Pattern pattern){
 		this.cards=cards;
 		this.pattern=pattern;
 	}
+
+	public Cards(List<Card> cards){
+	    this.cards = cards;
+	    DDZ ddz = new DDZ();
+	    this.pattern = ddz.identifyPattern(cards);
+    }
+
 
     public static ArrayList<Card> createCardsListFromString(String rawString) throws ExCardNoExists {
         ArrayList<Card> cards = new ArrayList<Card>();
@@ -51,8 +59,10 @@ public class Cards {
         return s;
     }
 
+
+
     
-    public ArrayList<Card> getCards(){
+    public List<Card> getCards(){
     	return cards;
     }
     

@@ -32,7 +32,7 @@ public class ClientMessageHandler {
         switch (event){
             case Message.CLIENT_EVENT_CMD_OPEN_ROOM:
                 try {
-                    Room room =  roomsController.createNewRoom(player, value.getString("name"));
+                    Room room = roomsController.createNewRoom(player, value.getString("name"));
                     builder.prepareResponseMessageOnRoomCreated(player, room).sendToClient(player.getOutputStream());
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -61,8 +61,27 @@ public class ClientMessageHandler {
                     if(players.size() == 3){
                         for(ServerPlayer p : players){
                             builder.prepareStartGameMessage().sendToClient(p);
+                            p.setGameStarted(true);
                         }
                         room.startGame();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                while(true){
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if(room.getGameController().getIsEnd()){
+                                        for(ServerPlayer p : players){
+                                            p.setGameStarted(false);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }).start();
                     }
 
                 } catch (JSONException e) {

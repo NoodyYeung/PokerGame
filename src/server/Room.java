@@ -20,11 +20,7 @@ public class Room {
         this.roomId = roomId;
         this.host = host;
         this.players.add(host);
-        try {
-            this.gameController = new GameController(players);
-        } catch (InsufficientPlayerException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void join (ServerPlayer newPlayer) throws ExRoomFullException {
@@ -62,6 +58,22 @@ public class Room {
     }
 
     public void startGame(){
-        gameController.startGame();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    gameController = new GameController(players);
+                    gameController.startGame();
+
+                } catch (InsufficientPlayerException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
+
+    public GameController getGameController() {
+        return gameController;
     }
 }

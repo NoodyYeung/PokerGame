@@ -54,6 +54,16 @@ public class ClientMessage extends Message {
             return new ClientMessage(Message.CLIENT_EVENT_JOIN_ROOM, json.toString());
 
         }
+
+        public ClientMessage prepareRawTextMessage(String message){
+            JSONObject json = new JSONObject();
+            try {
+                json.put("raw", message);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return new ClientMessage(Message.CLIENT_RAW, json.toString());
+        }
     }
 
 }

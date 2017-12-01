@@ -23,7 +23,7 @@ public class PlayerAndCards {
 		}
 	}
 	public boolean updateCards(Cards tempCard){
-		ArrayList<Card> temp=tempCard.getCards();
+		List<Card> temp=tempCard.getCards();
 		for(Card c: temp){
 			cards.remove(c);
 		}

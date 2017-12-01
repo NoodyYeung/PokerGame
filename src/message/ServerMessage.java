@@ -1,5 +1,8 @@
 package message;
 
+import cards.Card;
+import cards.Cards;
+import gameController.Player;
 import org.json.JSONException;
 import org.json.JSONObject;
 import server.ExInsuffientData;
@@ -9,6 +12,9 @@ import server.ServerPlayer;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.util.List;
 
 /**
  * Created by yeungchunyin on 4/11/2017.
@@ -30,8 +36,14 @@ public class ServerMessage extends Message {
         player.getOutputStream().writeUTF(this.toString());
     }
 
+    public void sendToClient(SocketChannel socket) throws IOException {
+        byte[] message = new String(toString()).getBytes();
+        ByteBuffer buffer = ByteBuffer.wrap(message);
+        socket.write(buffer);
+    }
 
-     public static class Builder {
+
+    public static class Builder {
 
         public ServerMessage prepareClientConnectedMessage(ServerPlayer player) throws ExInsuffientData {
             JSONObject json = new JSONObject();
@@ -121,6 +133,110 @@ public class ServerMessage extends Message {
             return new ServerMessage(Message.SERVER_START_GAME, json.toString());
         }
 
+         public ServerMessage prepareYourTurnToPlayCard(Cards lastTurnCards, List<Card> yourCard) {
+            JSONObject json = new JSONObject();
+            try{
+                List<Card> lastHands = lastTurnCards != null ? lastTurnCards.getCards() : null;
+                json.put("lastTurn", lastHands != null ? Cards.toString(lastHands) : "-1");
+                json.put("yourCard", Cards.toString(yourCard));
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+            return new ServerMessage(Message.SERVER_YOUR_TURN_TO_PLAY, json.toString());
+         }
+
+         public ServerMessage prepareWaitPlayerToPlayerCardMessage(Player playerToPlay, boolean isLandLordToPlayCard) {
+            JSONObject json = new JSONObject();
+            try{
+                json.put("message", String.format("Player %d -- Name %s is choosing cards to play !!\n", playerToPlay.getId(), playerToPlay.getName()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return new ServerMessage(Message.SERVER_WAIT_PLAYER_TO_PLAY_CARD, json.toString());
+         }
+
+         public ServerMessage prepareYouAreFarmerMessage(ServerPlayer serverPlayer, Player teammates) {
+            JSONObject json = new JSONObject();
+            try{
+                json.put("message", String.format("You are farmer. Your teammate is Player %d -- Name %s \n", teammates.getId(), teammates.getName()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return new ServerMessage(Message.SERVER_YOU_ARE_FARMER, json.toString());
+         }
+
+         public ServerMessage prepareYouLandLordMessage() {
+             JSONObject json = new JSONObject();
+             try{
+                 json.put("message", String.format("You are landLoad !\n"));
+             } catch (JSONException e) {
+                 e.printStackTrace();
+             }
+             return new ServerMessage(Message.SERVER_YOU_ARE_LANDLORD, json.toString());
+        }
+
+         public ServerMessage prepareYourTurnToPlayCardOrSkipCard(List<Card> cardsThatThePlayerHave,  Cards lastTurnCards ) {
+             JSONObject json = new JSONObject();
+             try{
+                 List<Card> lastHand = lastTurnCards != null ? lastTurnCards.getCards() : null;
+                 json.put("lastHand", lastHand != null ? Cards.toString(lastHand) : "-1");
+                 json.put("hand", Cards.toString(cardsThatThePlayerHave));
+             } catch (JSONException e) {
+                 e.printStackTrace();
+             }
+             return new ServerMessage(Message.SERVER_YOUR_TURN_TO_PLAY_CARD_OR_SKIP, json.toString());
+         }
+
+         public ServerMessage prepareInvalidPlaysMessage() {
+             JSONObject json = new JSONObject();
+             try{
+                  json.put("message", "Invalid Cards Combination");
+             }catch (JSONException e) {
+                 e.printStackTrace();
+             }
+             return new ServerMessage(Message.SERVER_INVALID_PLAY, json.toString());
+         }
+
+         public ServerMessage prepareYouWinMessage() {
+             JSONObject json = new JSONObject();
+             try{
+                 json.put("message", "You win\n");
+             }catch (JSONException e) {
+                 e.printStackTrace();
+             }
+             return new ServerMessage(Message.SERVER_YOU_WIN, json.toString());
+         }
+
+         public ServerMessage prepareYouLoseMessage() {
+             JSONObject json = new JSONObject();
+             try{
+                 json.put("message", "You lose\n");
+             }catch (JSONException e) {
+                 e.printStackTrace();
+             }
+             return new ServerMessage(Message.SERVER_YOU_LOSE, json.toString());
+
+         }
+
+         public ServerMessage preparePleaseMakeAValidPlayMessage() {
+             JSONObject json = new JSONObject();
+             try{
+                 json.put("message", "Please make a valid play\n");
+             }catch (JSONException e) {
+                 e.printStackTrace();
+             }
+             return new ServerMessage(Message.SERVER_PLEASE_MAKE_A_VALID_PLAY, json.toString());
+        }
+
+        public ServerMessage prepareInvalidCmd() {
+            JSONObject json = new JSONObject();
+            try{
+                json.put("message", "Invalid Command\n");
+            }catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return new ServerMessage(Message.SERVER_INVALID_CMD, json.toString());
+        }
     }
 
 }
