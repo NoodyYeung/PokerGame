@@ -1,19 +1,18 @@
-package test.cards.cardsTestCase;
-
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import org.junit.Test;
+package test.cards;
 
 import cards.Card;
 import cards.Cards;
 import cards.ExCardNoExists;
+import org.junit.Test;
 import pattern.Pattern;
 import pattern.Pbomb;
 
-public class cardsTest {
+import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
+
+
+public class TestCards {
 	@Test
     public void test1() throws ExCardNoExists {
         String rawString = "C3 S5 D4 H3";
@@ -28,14 +27,12 @@ public class cardsTest {
         expectCards.add(card2);
         expectCards.add(card3);
         expectCards.add(card4);
-        Boolean result = (cards.get(0).equals(card1) 
-        		&& cards.get(1).equals(card2) 
-        		&& cards.get(2).equals(card3) 
-        		&& cards.get(3).equals(card4));
+        Boolean result = (cards.get(0).equals(card1) && cards.get(1).equals(card2) && cards.get(2).equals(card3) && cards.get(3).equals(card4));
          
         assertEquals(true,result);
     }
- 
+
+	
     @Test
     public void test2() throws ExCardNoExists {
         Card card1 = new Card("C3");
@@ -47,13 +44,12 @@ public class cardsTest {
         expectCards.add(card2);
         expectCards.add(card3);
         expectCards.add(card4);
-        String expect ="C3 H3 D4 S5 ";
+        String expect ="\u2663C3 \u2665H3 \u2666D4 \u2660S5 ";
         assertEquals(expect,Cards.toString(expectCards));
  
     }
  
 
- 
     @Test
     public void test3() throws ExCardNoExists {
         Card card1 = new Card("C3");

@@ -81,7 +81,9 @@ public class DDZ extends Rules{
 		
 		Pattern pattern=null;
 		HashMap<Integer, Integer> cardsMap = hashAllCards(cards); 
-
+		if(cards == null) {
+			return null;
+		}
 		if(cards.size()==1) { // TODO : condition 1
 			pattern = new Pone(cards.get(0).getValue()); 
 			return pattern;

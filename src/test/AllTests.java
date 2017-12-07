@@ -25,8 +25,7 @@ import test.cards.*;
 	test.pattern.TestPmultiBomb.class,
 	test.cards.stubs.cardTest.class,
 	test.cards.cardsTest.class,
-	test.cards.cardTest.class,
-	test.cards.cardsTestCase.cardsTest.class
+	test.cards.cardTest.class
 	})
 
 public class AllTests {
