@@ -36,7 +36,7 @@ public class cardTest {
 	    @Test
 	    public void test5() throws ExCardNoExists {
 	        Card card = new Card("C3");
-	        assertEquals("C3",card.toString());
+	        assertEquals("\u2663C3",card.toString());
 	    }
 	     
 	    @Test

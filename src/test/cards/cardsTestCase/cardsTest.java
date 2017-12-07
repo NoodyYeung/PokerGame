@@ -28,7 +28,10 @@ public class cardsTest {
         expectCards.add(card2);
         expectCards.add(card3);
         expectCards.add(card4);
-        Boolean result = (cards.get(0).equals(card1) && cards.get(1).equals(card2) && cards.get(2).equals(card3) && cards.get(3).equals(card4));
+        Boolean result = (cards.get(0).equals(card1) 
+        		&& cards.get(1).equals(card2) 
+        		&& cards.get(2).equals(card3) 
+        		&& cards.get(3).equals(card4));
          
         assertEquals(true,result);
     }
