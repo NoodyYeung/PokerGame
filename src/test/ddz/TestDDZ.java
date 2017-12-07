@@ -1,4 +1,4 @@
-package test;
+package test.ddz;
 import DDZ.DDZ;
 import cards.Card;
 import cards.Cards;

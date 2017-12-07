@@ -1,4 +1,4 @@
-package cards.test.stubs;
+package test.cards.stubs;
 import cards.*;
 
 public class CardStubA {
