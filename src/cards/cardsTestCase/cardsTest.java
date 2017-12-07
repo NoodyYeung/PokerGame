@@ -6,8 +6,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import cards.*;
-import pattern.*;
+import cards.Card;
+import cards.Cards;
+import cards.ExCardNoExists;
+import pattern.Pattern;
+import pattern.Pbomb;
 
 public class cardsTest {
 
