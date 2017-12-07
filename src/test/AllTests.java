@@ -23,9 +23,8 @@ import test.cards.*;
 	test.pattern.TestPbomb.class,
 	test.pattern.TestPdoubleStraight.class,
 	test.pattern.TestPmultiBomb.class,
-	test.cards.stubs.cardTest.class,
-	test.cards.cardsTest.class,
-	test.cards.cardTest.class
+	test.cards.TestCard.class,
+	test.cards.TestCards.class
 	})
 
 public class AllTests {
