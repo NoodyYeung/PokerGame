@@ -15,7 +15,7 @@ public class Card implements Comparable<Card> {
 
 
     // Q rather than Queen
-    public Suit suit;
+    private Suit suit;
     private String type;
     /**
      * Joker value is hard-coded to 53 (black) and 53 (red)
@@ -32,6 +32,7 @@ public class Card implements Comparable<Card> {
             this.facevalue = 54;
             this.suit = Suit.JOKER_RED;
         } else {
+        	
             // Handle the case with type equals 10
             String number = ""+shortForm.charAt(1) + (shortForm.length() == 3 ? shortForm.charAt(2) :  "");
             String suit = ""+shortForm.charAt(0);
@@ -99,8 +100,9 @@ public class Card implements Comparable<Card> {
 
 
     /**
-     * 
-     * 
+     * sets the value of the card from the facevalue
+     * called by constructor when a card is instantiated
+     * @return void
      */
     public void setValue() {
         if(this.suit.equals(Suit.JOKER_RED) || suit.equals(Suit.JOKER_BLACK)) {

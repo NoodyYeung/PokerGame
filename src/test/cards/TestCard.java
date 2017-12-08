@@ -21,8 +21,6 @@ public class TestCard {
 	 @Test
 	 public void testGetValueJB() throws ExCardNoExists {
 		 Card card = new Card("JB");
-		 System.out.printf("the suit is %S", card.suit);
-		 System.out.printf("the equals method for this and Suit.JOKER_BLACK returns %s", card.suit.equals(Suit.JOKER_BLACK));
 		 assertEquals(53,card.getValue());
 	 }
 
@@ -35,17 +33,19 @@ public class TestCard {
 	 @Test 
 	 public void testGetValueDiamond10() throws ExCardNoExists{
 		 Card card = new Card("D10");
+		 assertEquals(28,card.getValue());
 	 }
 	 
 	 @Test 
 	 public void testGetValueSpade10() throws ExCardNoExists {
 		 Card card = new Card("S10");
-		 
+		 assertEquals(31,card.getValue());
 	 }
 	 
 	 @Test 
 	 public void testGetValueHeart10() throws ExCardNoExists {
 		 Card card = new Card("H10");
+		 assertEquals(30,card.getValue());
 	 }
 
 	 @Test
