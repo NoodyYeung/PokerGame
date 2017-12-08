@@ -73,8 +73,9 @@ public class TestDDZ {
 		boolean result=ddz.isStraight(cards);
 		assertEquals(false,result);
 	}
+	
 	@Test
-	public void hashAllCards() throws ExCardNoExists{
+	public void testHashAllCards() throws ExCardNoExists{
 		ArrayList<Card> cards=new ArrayList<>();
 		DDZ ddz=new DDZ();
 		cards.add(new Card("C3"));
@@ -422,7 +423,6 @@ public class TestDDZ {
 		cards.add(new Card("C3"));
 		DDZ ddz=new DDZ();
 		Pattern testResult=ddz.identifyPattern(cards);
-	System.out.println(testResult.getValue());
 		Pattern result=new Pone(1);
 		assertEquals(result,testResult);
 	}
@@ -459,10 +459,10 @@ public class TestDDZ {
 		cards.add(new Card("S3"));
 		cards.add(new Card("H3"));
 		DDZ ddz=new DDZ();
-		Pattern testResult=ddz.identifyPattern(cards);
-		System.out.println("bomb"+testResult.getValue());
+		Pattern testResult = ddz.identifyPattern(cards);
+//		System.out.println("bomb"+testResult.getValue());
 		Pattern result=new Pbomb(1);
-		System.out.println("aaabomb"+result.getValue());
+//		System.out.println("aaabomb"+result.getValue());
 		assertEquals(new Pbomb(1),testResult);
 	}
 	@Test
@@ -813,6 +813,15 @@ public class TestDDZ {
 		Pattern result=new PmultiBomb(temp);
 		Pattern testResult=ddz.validateDDZ(cards,lastHand);
 		assertEquals(result,testResult);		
+	}
+	
+	@Test
+	public void testAllSame1() throws ExCardNoExists {
+		ArrayList<Card> lastHandCards = new ArrayList<>();
+		lastHandCards.add(new Card("C8"));
+		lastHandCards.add(new Card("S8"));
+		DDZ ddz = new DDZ();
+		assertEquals(true, ddz.allSame(lastHandCards, 2) );
 	}
 	@Test
 	public void validateDDZ12() throws ExCardNoExists{
