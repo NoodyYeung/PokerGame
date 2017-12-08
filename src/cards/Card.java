@@ -50,6 +50,7 @@ public class Card implements Comparable<Card> {
             throw new ExCardNoExists("Card does not exist. Suit \""+ suit +"\" does not exist in card");
         }
         this.suit = cardSuit.get(suitIndex);
+        this.setValue();
 
     }
 
