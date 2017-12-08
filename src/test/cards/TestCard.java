@@ -2,6 +2,8 @@ package test.cards;
 
 import cards.Card;
 import cards.ExCardNoExists;
+import cards.Suit;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,14 +14,16 @@ import static org.junit.Assert.fail;
 public class TestCard {
 	 @Test
 	 public void testGetValueJR() throws ExCardNoExists {
-		 Card card = new Card("JB");
-		 assertEquals(53,card.getValue());
+		 Card card = new Card("JR");
+		 assertEquals(54,card.getValue());
 	 }
 
 	 @Test
 	 public void testGetValueJB() throws ExCardNoExists {
-		 Card card = new Card("JR");
-		 assertEquals(54,card.getValue());
+		 Card card = new Card("JB");
+		 System.out.printf("the suit is %S", card.suit);
+		 System.out.printf("the equals method for this and Suit.JOKER_BLACK returns %s", card.suit.equals(Suit.JOKER_BLACK));
+		 assertEquals(53,card.getValue());
 	 }
 
 	 @Test
@@ -30,17 +34,18 @@ public class TestCard {
 	 
 	 @Test 
 	 public void testGetValueDiamond10() throws ExCardNoExists{
-		 
+		 Card card = new Card("D10");
 	 }
 	 
 	 @Test 
 	 public void testGetValueSpade10() throws ExCardNoExists {
+		 Card card = new Card("S10");
 		 
 	 }
 	 
 	 @Test 
 	 public void testGetValueHeart10() throws ExCardNoExists {
-		 
+		 Card card = new Card("H10");
 	 }
 
 	 @Test
@@ -50,7 +55,7 @@ public class TestCard {
 	 }
 
 	 @Test
-	 public void test6()  {
+	 public void testCardValidationError1()  {
 		 try{
 			 Card card = new Card("A3");
 			 fail("No exception for non-existent suit");
@@ -60,7 +65,7 @@ public class TestCard {
 	 }
 
 	 @Test
-	 public void test7()  {
+	 public void testCardValidationError2()  {
 		 try{
 			 Card card = new Card("C1");
 			 fail("No exception for non-existent type");
@@ -92,6 +97,24 @@ public class TestCard {
 	 public void testToString2() throws ExCardNoExists  {
 		 Card card = new Card("JB");
 		 assertEquals("JB",card.toString());
+	 }
+	 
+	 @Test
+	 public void testGetInputString1() throws ExCardNoExists {
+		 Card card = new Card("JB");
+		 String suit = "JB";
+		 String type = "";
+		 String inputString = suit + type;
+		 assertEquals(inputString, card.getInputString());
+	 }
+	 
+	 @Test
+	 public void testGetInputString2() throws ExCardNoExists {
+		 Card card = new Card("C3");
+		 String suit = "C";
+		 String type = "3";
+		 String inputString = suit + type;
+		 assertEquals(inputString, card.getInputString());
 	 }
  
 }

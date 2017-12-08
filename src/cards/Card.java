@@ -15,10 +15,10 @@ public class Card implements Comparable<Card> {
 
 
     // Q rather than Queen
-    private Suit suit;
+    public Suit suit;
     private String type;
     /**
-     * Joker value is hard-coded to 53 (red) and 54 (black)
+     * Joker value is hard-coded to 53 (black) and 53 (red)
      */
     private int value = 0;
     private int facevalue = 0;
@@ -26,30 +26,27 @@ public class Card implements Comparable<Card> {
     public Card(String shortForm) throws ExCardNoExists {
         if(shortForm.equals("JB") ) {
             this.facevalue = 53;
-            this.value = this.facevalue;
             this.suit = Suit.JOKER_BLACK;
-            return;
         }
-        if(shortForm.equals("JR") ) {
+        else if(shortForm.equals("JR") ) {
             this.facevalue = 54;
-            this.value = this.facevalue;
             this.suit = Suit.JOKER_RED;
-            return;
+        } else {
+            // Handle the case with type equals 10
+            String number = ""+shortForm.charAt(1) + (shortForm.length() == 3 ? shortForm.charAt(2) :  "");
+            String suit = ""+shortForm.charAt(0);
+
+            // Set number
+            this.setType(number);
+
+            // Set suit
+            int suitIndex = cardSuitStr.indexOf(suit);
+            if(suitIndex == -1) {
+                throw new ExCardNoExists("Card does not exist. Suit \""+ suit +"\" does not exist in card");
+            }
+            this.suit = cardSuit.get(suitIndex);
         }
 
-        // Handle the case with type equals 10
-        String number = ""+shortForm.charAt(1) + (shortForm.length() == 3 ? shortForm.charAt(2) :  "");
-        String suit = ""+shortForm.charAt(0);
-
-        // Set number
-        this.setType(number);
-
-        // Set suit
-        int suitIndex = cardSuitStr.indexOf(suit);
-        if(suitIndex == -1) {
-            throw new ExCardNoExists("Card does not exist. Suit \""+ suit +"\" does not exist in card");
-        }
-        this.suit = cardSuit.get(suitIndex);
         this.setValue();
 
     }
@@ -106,9 +103,10 @@ public class Card implements Comparable<Card> {
      * 
      */
     public void setValue() {
-        if(this.suit.equals(Suit.JOKER_RED) || suit.equals(Suit.JOKER_BLACK))
+        if(this.suit.equals(Suit.JOKER_RED) || suit.equals(Suit.JOKER_BLACK)) {
             this.value =  this.facevalue;
-        else{
+        }
+        else {
             int minus = 0;
             switch (suit){
                 case CLUB:
