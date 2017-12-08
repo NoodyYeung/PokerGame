@@ -37,7 +37,7 @@ public class Card implements Comparable<Card> {
             String suit = ""+shortForm.charAt(0);
 
             // Set number
-            this.setType(number);
+            this.setTypeAndFaceValue(number);
 
             // Set suit
             int suitIndex = cardSuitStr.indexOf(suit);
@@ -51,7 +51,7 @@ public class Card implements Comparable<Card> {
 
     }
 
-    public void setType(String type) throws ExCardNoExists {
+    public void setTypeAndFaceValue(String type) throws ExCardNoExists {
         int typeIndex = cardType.indexOf(type);
         if(typeIndex == -1) {
             throw new ExCardNoExists("Card does not exist. Type \"" + type + "\" does not exist in card");
