@@ -61,6 +61,10 @@ public class Card implements Comparable<Card> {
         this.type = type;
     }
     
+    /**
+     * returns the facevalue (suit independent)
+     * @return int
+     */
     public int getFaceValue() {
     	return this.facevalue;
     }
