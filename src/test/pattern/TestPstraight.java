@@ -1,4 +1,4 @@
-package pattern.tests.unit;
+package test.pattern;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pattern.*;
 
-public class TestPStraight {
+public class TestPstraight {
 	
 	ArrayList<Integer> lowerValueStraightList;
 	ArrayList<Integer> higherValueStraightList;

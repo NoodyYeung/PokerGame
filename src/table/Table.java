@@ -38,7 +38,6 @@ public class Table<T extends Player> {
 	
 
 	private boolean updateEntityStatus(int playerID, Cards cards) {
-		// TODO Auto-generated method stub
 		for(PlayerAndCards e:entities){
 			if(e.getPlayer().getId()==playerID) {
 				e.updateCards(cards);

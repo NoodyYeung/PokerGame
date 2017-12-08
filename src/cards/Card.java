@@ -18,7 +18,7 @@ public class Card implements Comparable<Card> {
 	private Suit suit;
 	private String type;
 	/**
-	 * Joker value is hardcoded to 53 (red) and 54 (black)
+	 * Joker value is hard-coded to 53 (red) and 54 (black)
 	 */
 	private int value = 0;
 
@@ -65,10 +65,17 @@ public class Card implements Comparable<Card> {
 			case CLUB:
 			symbol = "\u2663";
 			break;
-			case SPADE: symbol = "\u2660"; break;
-			case HEART: symbol = "\u2665"; break;
-			case DIAMOND: symbol = "\u2666"; break;
-			default: break;
+			case SPADE: 
+				symbol = "\u2660"; 
+				break;
+			case HEART:
+				symbol = "\u2665"; 
+				break;
+			case DIAMOND: 
+				symbol = "\u2666"; 
+				break;
+			default: 
+				break;
 		}
 		return symbol + this.suit +  this.type;
 		//return this.suit + this.type;

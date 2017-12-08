@@ -1,6 +1,9 @@
 .idea
 .metadata
-/bin/
+/bin
 .project
 .classpath
 out
+.DS_STORE
+*.class
+

@@ -1,4 +1,4 @@
-package pattern.tests.unit;
+package test.pattern;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;

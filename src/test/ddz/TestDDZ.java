@@ -1,4 +1,4 @@
-package test;
+package test.ddz;
 import DDZ.DDZ;
 import cards.Card;
 import cards.Cards;
@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class TestDDZ {
 	@Before
@@ -824,7 +825,7 @@ public class TestDDZ {
 		DDZ ddz=new DDZ();
 		Pattern testResult=ddz.validateDDZ(cards,lastHand);
 
-		assertEquals(null,testResult);
+		assertNull(testResult);
 	}
 	@Test
 	public void validateDDZ13() throws ExCardNoExists{
