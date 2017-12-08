@@ -54,9 +54,21 @@ public class Cards {
         }
         String s = "";
         for(Card c : cards){
+            s += c.getInputString() + " ";
+        }
+        return s;
+    }
+
+    public static String toStringWithSymbol(List<Card> cards){
+        if(cards== null){
+            return null;
+        }
+        String s = "";
+        for(Card c : cards){
             s += c + " ";
         }
         return s;
+
     }
 
 

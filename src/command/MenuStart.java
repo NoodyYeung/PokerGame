@@ -1,15 +1,15 @@
 package command;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import client.AIPlayer;
 import client.LocalPlayer;
 import gameController.GameController;
 import gameController.InsufficientPlayerException;
 import gameController.Player;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class MenuStart extends Menu {
 	private LinkedHashMap<String, Running> commands = new LinkedHashMap<>();
@@ -46,7 +46,7 @@ public class MenuStart extends Menu {
 //			e.printStackTrace();
 		}
 		
-		
+		return null;
 	}
 
 	@Override

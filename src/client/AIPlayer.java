@@ -73,7 +73,7 @@ public class AIPlayer extends Player {
         Pattern p = ddz.validateDDZ(canPlayedList, lastTurnCard);
         if(p != null){
             if(lastTurnCard != null){
-                System.out.println("[Debug] : lastTurnCard "+ Cards.toString(lastTurnCard.getCards()));
+                System.out.println("[Debug] : lastTurnCard "+ Cards.toStringWithSymbol(lastTurnCard.getCards()));
                 System.out.println("[Debug] : lastTurnCard pattern "+ lastTurnCard.getPattern());
             }
             System.out.println("[Debug] : found play " + p.getClass().getName() );
@@ -110,7 +110,7 @@ public class AIPlayer extends Player {
         autoPlaysCardR(cardsInHand, lastTureCards, 0, combination, ddz);
 
         System.out.println("[Debug] AI Auto play size :" + combination.size());
-        System.out.println("[Debug] AI Auto play :" + Cards.toString(combination));
+        System.out.println("[Debug] AI Auto play :" + Cards.toStringWithSymbol(combination));
 
         return combination.size() == 0 ? null : combination;
     }
