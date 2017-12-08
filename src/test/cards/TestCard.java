@@ -49,12 +49,6 @@ public class TestCard {
 	 }
 
 	 @Test
-	 public void testToString1() throws ExCardNoExists {
-		 Card card = new Card("C3");
-		 assertEquals("\u2663C3",card.toString());
-	 }
-
-	 @Test
 	 public void testCardValidationError1()  {
 		 try{
 			 Card card = new Card("A3");
@@ -94,11 +88,45 @@ public class TestCard {
 		 assertFalse(card.equals(another));
 	 }
 	 @Test
-	 public void testToString2() throws ExCardNoExists  {
+	 public void testToStringNullTypeJB() throws ExCardNoExists  {
 		 Card card = new Card("JB");
 		 assertEquals("JB",card.toString());
 	 }
+	 /**
+	  *             case CLUB:
+            symbol = "\u2663";
+            break;
+            case SPADE: 
+                symbol = "\u2660"; 
+                break;
+            case HEART:
+                symbol = "\u2665"; 
+                break;
+            case DIAMOND: 
+                symbol = "\u2666"; 
+	  * @throws ExCardNoExists
+	  */
+	 @Test
+	 public void testToStringClub() throws ExCardNoExists {
+		 Card card = new Card("C3");
+		 assertEquals("\u2663C3",card.toString());
+	 }
 	 
+	 @Test 
+	 public void testToStringSpade() throws ExCardNoExists {
+		 Card card = new Card("S3");
+		 assertEquals("\u2660S3",card.toString());
+	 }
+	 @Test 
+	 public void testToStringHeart() throws ExCardNoExists {
+		 Card card = new Card("H3");
+		 assertEquals("\u2665H3",card.toString());
+	 }
+	 @Test 
+	 public void testToStringDiamond() throws ExCardNoExists {
+		 Card card = new Card("D3");
+		 assertEquals("\u2666D3",card.toString());		 
+	 }
 	 @Test
 	 public void testGetInputString1() throws ExCardNoExists {
 		 Card card = new Card("JB");

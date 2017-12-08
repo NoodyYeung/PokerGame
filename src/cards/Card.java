@@ -68,7 +68,9 @@ public class Card implements Comparable<Card> {
      */
     @Override
     public String toString(){
-        if(this.type == null ) return this.suit.toString();
+        if(this.type == null ) {
+        	return this.suit.toString();
+        }
         // UTF8 suit types
         //Window -> Preferences -> Workspace -> text file encoding -> Other -> UTF-8
         String symbol = "";
