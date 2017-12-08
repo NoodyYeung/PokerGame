@@ -10,21 +10,16 @@ public class DDZ extends Rules{
 	private static final String Set = null; // what is this doing here?
 
 	/**
-	 *
-	 * @param cards
-	 * @param lastHand
+	 * validates hand of cards and returns their pattern
+	 * @param List<Card> cards
+	 * @param Cards lastHand
 	 * @return The played card pattern if the plays is valid. If cards is not belongs any pattern , return null
 	 */
 	public Pattern validateDDZ(List<Card> cards, Cards lastHand) {
 		//		System.out.printf("[Debug] : cards.toString() %s \n" ,cards.toString() );
 		Pattern thisPattern;
 		thisPattern = identifyPattern(cards);
-		if(thisPattern != null) {
-			//			System.out.println("[Debug] thisPattern:" + thisPattern.getClass().getName());
-		}else{
-			//			System.out.println("[Debug] thisPattern: null");
-
-		}
+		
 		if(thisPattern!=null) { // TODO 1 : validate for isNull == true
 			if(lastHand!= null) { // TODO 2 : validate for lastHand isNull == true
 				List<Card> lastHandCard = lastHand.getCards();
@@ -93,6 +88,8 @@ public class DDZ extends Rules{
 					if(isRocket(cards)) { // TODO 5b : condition coverage
 						pattern = new Procket();
 						return pattern;
+					} else {
+						return null;
 					}
 				}else
 				{
@@ -173,7 +170,13 @@ public class DDZ extends Rules{
 						Collections.sort(listOfValues);
 						pattern = new PmultiBomb(listOfValues);
 						return pattern;
+					} else {
+						return null;
 					}
+				}
+				
+				else {
+					return null;
 				}
 			}
 		}
@@ -182,8 +185,8 @@ public class DDZ extends Rules{
 
 	public boolean isRocket(List<Card> cards) {
 		return cards.size() == 2 && (
-				(cards.get(0).getValue()==53 && cards.get(1).getValue()==54) || // TODO 5a : decision coverage
-				(cards.get(1).getValue()==53 && cards.get(0).getValue()==54));
+				(cards.get(0).getFaceValue()==53 && cards.get(1).getFaceValue()==54) || // TODO 5a : decision coverage
+				(cards.get(1).getFaceValue()==53 && cards.get(0).getFaceValue()==54));
 	}
 
 	public boolean isBomb(List<Card> cards) {

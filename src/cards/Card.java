@@ -138,6 +138,7 @@ public class Card implements Comparable<Card> {
     }
     
     /**
+     * gets the suit-dependent value for the card 
      * @return int value
      */
     public int getValue() 
@@ -155,7 +156,6 @@ public class Card implements Comparable<Card> {
         }
             
     }
-
 
     @Override
     public int compareTo(Card o) {

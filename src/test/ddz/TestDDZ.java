@@ -399,6 +399,23 @@ public class TestDDZ {
 		int testResult=ddz.isMultipleBomb(cards);
 		assertEquals(-1,testResult);
 	}
+	
+	@Test
+	public void identifyPatternIsNotMultipleBomb()  throws ExCardNoExists{
+		List<Card> cards=new ArrayList<>();
+		cards.add(new Card("C4"));
+		cards.add(new Card("D4"));
+		cards.add(new Card("S4"));
+		cards.add(new Card("H4"));
+		cards.add(new Card("C5"));
+		cards.add(new Card("D5"));
+		cards.add(new Card("S5"));
+		cards.add(new Card("H7"));
+		DDZ ddz=new DDZ();
+		Pattern testResult=ddz.identifyPattern(cards);
+		assertNull(testResult);
+	}
+	
 	@Test
 	public void isMultipleBomb3(){
 		HashMap<Integer,Integer> cards=new HashMap<>();
@@ -622,6 +639,25 @@ public class TestDDZ {
 		DDZ ddz=new DDZ();
 		Pattern testResult=ddz.identifyPattern(cards);
 		assertEquals(null,testResult);
+	}
+	@Test
+	public void identifyPattern16() throws ExCardNoExists{
+		List<Card> cards=new ArrayList<>();
+		cards.add(new Card("C3"));
+		cards.add(new Card("D4"));
+		cards.add(new Card("C5"));
+		cards.add(new Card("C6"));
+		cards.add(new Card("C8"));
+		DDZ ddz=new DDZ();
+		Pattern testResult=ddz.identifyPattern(cards);
+		ArrayList<Integer> listOfStraight=new ArrayList<>();
+		listOfStraight.add(new Integer(1));
+		listOfStraight.add(new Integer(2));
+		listOfStraight.add(new Integer(3));
+		listOfStraight.add(new Integer(4));
+		listOfStraight.add(new Integer(5));
+		Pattern result=new Pstraight(listOfStraight);
+		assertNull(testResult);
 	}
 	@Test
 	public void validateDDZ1() throws ExCardNoExists{
@@ -887,4 +923,15 @@ public class TestDDZ {
 		Pattern result=new Pbomb(1);
 		assertEquals(result,testResult);		
 	}
+	
+	@Test
+	public void allDifferentLessThan5NotRocketCheckIsNull() throws ExCardNoExists {
+		List<Card> cards = new ArrayList<>();
+		cards.add(new Card("C3"));
+		cards.add(new Card("D2"));
+		Cards lastHand = null;
+		DDZ ddz = new DDZ();
+		assertNull(ddz.validateDDZ(cards, lastHand));
+	}
+	
 }
