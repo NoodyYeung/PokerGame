@@ -66,7 +66,7 @@ public class DDZ extends Rules{
 		if(cards == null)
 			return null;
 		for(Card aCard: cards) {
-			int cardValue = aCard.getNumber();
+			int cardValue = aCard.getValue();
 			if(cardsMap.get(cardValue) != null) {
 				cardsMap.put(cardValue,cardsMap.get(cardValue)+1);
 			}
@@ -100,7 +100,7 @@ public class DDZ extends Rules{
 				else {
 					ArrayList<Integer> sortedCards = new ArrayList<>();
 					for(int i=0;i<cards.size();i++) {
-						sortedCards.add(cards.get(i).getNumber());
+						sortedCards.add(cards.get(i).getValue());
 					}
 					Collections.sort(sortedCards);
 //					System.out.println("[DEBUG] : " + sortedCards.toString());
@@ -296,7 +296,7 @@ public class DDZ extends Rules{
 		boolean result = true;
 		for(int i=0;i<length-1;i++) {
 //			System.out.printf("[Debug] : %d %d \n", cards.get(i).getNumber(), cards.get(i+ 1).getNumber());
-			if(cards.get(i).getNumber()==cards.get(i+ 1).getNumber()) {
+			if(cards.get(i).getValue()==cards.get(i+ 1).getValue()) {
 				continue;
 			}
 			else {
