@@ -94,8 +94,10 @@ public class Card implements Comparable<Card> {
     }
 
     public String getInputString(){
-        if(this.type == null ) return this.suit.toString();
-        return this.suit + this.type;
+        if(this.type == null ) {
+        	return this.suit.toString();
+        }
+        return (this.suit + this.type);
     }
 
 
@@ -129,7 +131,8 @@ public class Card implements Comparable<Card> {
     /**
      * @return int value
      */
-    public int getValue() {
+    public int getValue() 
+    {
         return this.value;
     }
 

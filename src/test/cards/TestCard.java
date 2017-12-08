@@ -5,6 +5,8 @@ import cards.ExCardNoExists;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class TestCard {
@@ -53,7 +55,7 @@ public class TestCard {
 			 Card card = new Card("A3");
 			 fail("No exception for non-existent suit");
 		 } catch(ExCardNoExists e) {
-			 assertEquals("Card does not exist. Suit \"A\" does not exist in the card", e.getMessage());
+			 assertEquals("Card does not exist. Suit \"A\" does not exist in card", e.getMessage());
 		 }   
 	 }
 
@@ -63,10 +65,29 @@ public class TestCard {
 			 Card card = new Card("C1");
 			 fail("No exception for non-existent type");
 		 } catch(ExCardNoExists e) {
-			 assertEquals("Card does not exist. Type \"1\" does not exist in the card", e.getMessage());
+			 assertEquals("Card does not exist. Type \"1\" does not exist in card", e.getMessage());
 		 } 
 	 }
-
+	 
+	 @Test
+	 public void testEquals1() throws ExCardNoExists {
+		 Card card = new Card("C10");
+		 Card another = new Card("C10");
+		 assertTrue(card.equals(another));
+	 }
+	 
+	 @Test
+	 public void testEquals2() throws ExCardNoExists {
+		 Card card = new Card("C10");
+		 Card another = new Card("C3");
+		 assertFalse(card.equals(another));
+	 }
+	 @Test
+	 public void testEquals3() throws ExCardNoExists {
+		 Card card = new Card("C10");
+		 String another = "C3";
+		 assertFalse(card.equals(another));
+	 }
 	 @Test
 	 public void testToString2() throws ExCardNoExists  {
 		 Card card = new Card("JB");
