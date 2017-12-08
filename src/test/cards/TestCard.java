@@ -51,9 +51,9 @@ public class TestCard {
 	 public void test6()  {
 		 try{
 			 Card card = new Card("A3");
-			 fail("No exception for non-existed suit");
+			 fail("No exception for non-existent suit");
 		 } catch(ExCardNoExists e) {
-			 assertEquals("Card does not exist. Suit \"A\" not exists in card", e.getMessage());
+			 assertEquals("Card does not exist. Suit \"A\" does not exist in the card", e.getMessage());
 		 }   
 	 }
 
@@ -61,9 +61,9 @@ public class TestCard {
 	 public void test7()  {
 		 try{
 			 Card card = new Card("C1");
-			 fail("No exception for non-existed type");
+			 fail("No exception for non-existent type");
 		 } catch(ExCardNoExists e) {
-			 assertEquals("Card  do not exists. Type \"1\" not exists in card", e.getMessage());
+			 assertEquals("Card does not exist. Type \"1\" does not exist in the card", e.getMessage());
 		 } 
 	 }
 
