@@ -73,6 +73,11 @@ public class Card implements Comparable<Card> {
 		return symbol + this.suit +  this.type;
 		//return this.suit + this.type;
 	}
+
+	public String getInputString(){
+		if(this.type == null ) return this.suit.toString();
+		return this.suit + this.type;
+	}
 /*
 	public void setValue(int value) {
 		this.value = value;

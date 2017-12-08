@@ -35,12 +35,12 @@ public class LocalPlayer extends Player {
 	@Override
 	public List<Card> yourTurnToPlayCard(Cards lastTurnCards, List<Card> tablePlayerCards) {
 		if(lastTurnCards != null)
-			System.out.println("Last player cards : " + Cards.toString(lastTurnCards.getCards()) );
+			System.out.println("Last player cards : " + Cards.toStringWithSymbol(lastTurnCards.getCards()) );
 		else
 			System.out.println("No last player cards. You are free to put cards on the table");
 
 		tablePlayerCards.sort(cardCpm);
-		System.out.println("Card in your hand : " + Cards.toString(tablePlayerCards));
+		System.out.println("Card in your hand : " + Cards.toStringWithSymbol(tablePlayerCards));
 		while(true) {
 			System.out.println("Please put the cards: (Example: \"D1 S1\")");
 			String cardStr = Main.systemIn.nextLine();
@@ -109,11 +109,11 @@ public class LocalPlayer extends Player {
 	@Override
 	public List<Card> yourTurnToPlayCardOrSkipCard(List<Card> cardsThatThePlayerHave,  Cards lastTurnCards) {
 		if(lastTurnCards != null)
-			System.out.println("Last player cards : " + Cards.toString(lastTurnCards.getCards()) );
+			System.out.println("Last player cards : " + Cards.toStringWithSymbol(lastTurnCards.getCards()) );
 		else
 			System.out.println("No last player cards. You are free to put cards on the table");
 		cardsThatThePlayerHave.sort(cardCpm);
-		System.out.println("Card in your hand : " + Cards.toString(cardsThatThePlayerHave) );
+		System.out.println("Card in your hand : " + Cards.toStringWithSymbol(cardsThatThePlayerHave) );
 		while(true) {
 			System.out.println("Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:");
 			String cardStr = Main.systemIn.nextLine();

@@ -12,8 +12,8 @@ public class CmdConnect extends Command {
 
     @Override
     public void execute() {
-//        String host = "127.0.0.1";
-        String host = "ec2-34-214-202-228.us-west-2.compute.amazonaws.com";
+        String host = "127.0.0.1";
+//        String host = "ec2-34-214-202-228.us-west-2.compute.amazonaws.com";
 
         int port = 5999;
 

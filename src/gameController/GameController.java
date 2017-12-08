@@ -150,6 +150,13 @@ public class GameController<T extends Player> {
 			while(true) {
 				try {
 					List<Card> hands = tableController.getCardsByPlayer(currentPlayCardPlayer);
+					List<String> cardCountInfo = new ArrayList<>();
+					for( Player p : playersInThisGame){
+						PlayerAndCards tc = tableController.getPlayerAndCardsObjByPlayer(p);
+						cardCountInfo.add(String.format("[%s] %s: %d card left", tc.isLandLord() ? "Landlord" : "Farmer",
+								p.getName(), tc.getCards().size()));
+					}
+					currentPlayCardPlayer.playerCardCountInfo(cardCountInfo);
 					playedCard = currentPlayCardPlayer.yourTurnToPlayCardOrSkipCard(hands, tableController.getLastHandCard());
 					if(playedCard!=null && !checkPlayedCardInsideHands(playedCard, hands)){
 						throw new ExPlayedCardNotInYourHands();
