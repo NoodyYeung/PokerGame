@@ -7,8 +7,6 @@ import pattern.*;
 import java.util.*;
 public class DDZ extends Rules{
 
-	private static final String Set = null; // what is this doing here?
-
 	/**
 	 * validates hand of cards and returns their pattern
 	 * @param List<Card> cards
@@ -18,8 +16,11 @@ public class DDZ extends Rules{
 	public Pattern validateDDZ(List<Card> cards, Cards lastHand) {
 		//		System.out.printf("[Debug] : cards.toString() %s \n" ,cards.toString() );
 		Pattern thisPattern;
+		
+		// Pattern by length and type
 		thisPattern = identifyPattern(cards);
 		
+		// Pattern by value big/small
 		if(thisPattern!=null) { // TODO 1 : validate for isNull == true
 			if(lastHand!= null) { // TODO 2 : validate for lastHand isNull == true
 				List<Card> lastHandCard = lastHand.getCards();
@@ -72,7 +73,6 @@ public class DDZ extends Rules{
 	}
 
 	public Pattern identifyPattern(List<Card> cards) {
-
 		Pattern pattern=null;
 		HashMap<Integer, Integer> cardsMap = hashAllCards(cards); 
 		if(cards == null) {
@@ -112,7 +112,7 @@ public class DDZ extends Rules{
 				}
 			}
 		}
-		else if(allSame(cards,cards.size())) {
+		else if(allSame(cards, cards.size())) {
 			if(isBomb(cards)) { // TODO : condition 4a (line 72 + 73)
 				pattern = new Pbomb(cards.get(0).getValue());
 				return pattern;
@@ -151,7 +151,7 @@ public class DDZ extends Rules{
 					pattern = new PfullHouse(listOfThree,numOfFullHouse);
 					return pattern;
 				}
-
+				// 6 cards: double..triple..bomb..
 				else if(cards.size()>=6) { // TODO 6c
 					if(isDoubleStraight(cardsMap)>2) { // TODO 6c(i)
 						ArrayList<Integer> listOfValues = numOfN(cardsMap,2);

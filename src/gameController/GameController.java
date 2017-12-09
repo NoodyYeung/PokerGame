@@ -64,19 +64,6 @@ public class GameController<T extends Player> {
 	}
 
 	/**
-	 * Noody: This is not my code.
-	 * The main main different i thought is that
-	 *
-	 public void startGame(){
-	 List<Card>[] decks = deck.distribute();
-	 for(int i = 0; i < playersInThisGame.size(); i ++) {
-	 Player player = playersInThisGame.get(i);
-	 player.setHand(decks[i]);
-	 TableController.createTableForGame(players);
-	 }
-	 **/
-
-	/**
 	 * TODO 1.Prompt player got cards
 	 * TODO 2.ASk Player to call for land lord
 	 */
@@ -163,15 +150,18 @@ public class GameController<T extends Player> {
 					}
 					if (playedCard == null) { // the user choose to skip
 						break;
+						// List<Card> lastHands = tableController.getLastHandCard() != null ? tableController.getLastHandCard().getCards() : null;
+						// System.out.println("[DEBUG]: GOT Pattern FAIL " + Cards.toString(lastHands));
 					}
 					Pattern pattern = ddz.validateDDZ(playedCard, tableController.getLastHandCard());
+					
+					if(pattern == null) {
+						info("Incorrect pattern! Please play a valid hand of cards.");
+						break;
+					}
 					if (pattern != null) {
 						System.out.println("[DEBUG] : GOT Pattern " + pattern.getClass().getName());
-					} else {
-						List<Card> lastHands = tableController.getLastHandCard() != null ? tableController.getLastHandCard().getCards() : null;
-						System.out.println("[DEBUG]: GOT Pattern FAIL " + Cards.toString(lastHands));
-					}
-					if (pattern != null) { // exit when user input valid pattern
+						// exit when user input valid pattern
 						break;
 					}
 				}catch (ExPlayedCardNotInYourHands e){
@@ -335,5 +325,10 @@ public class GameController<T extends Player> {
 
 	public boolean getIsEnd() {
 		return isEnd;
+	}
+	
+	private void info(String message) {
+		// give info to user
+		System.out.println(message);
 	}
 }
