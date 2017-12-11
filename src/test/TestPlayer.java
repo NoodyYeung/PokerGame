@@ -91,10 +91,10 @@ public class TestPlayer {
         player.yourTurnToPlayCard(cards, c);
 
         Assert.assertEquals(
-                "No last player cards. You are free to put cards on the table\n" +
-                "Card in your hand : ♦DA \n" +
-                "Please put the cards: (Example: \"D1 S1\")\n" +
-                "Please put the cards: (Example: \"D1 S1\")\n", getOutput());
+                "No last player cards. You are free to put cards on the table" + System.lineSeparator() +
+                        "Card in your hand : ♦DA " + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\")" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\")" + System.lineSeparator(), getOutput());
 
         System.setIn(System.in);
 
@@ -120,12 +120,12 @@ public class TestPlayer {
         player.yourTurnToPlayCard(cards, c);
 
         Assert.assertEquals(
-                "No last player cards. You are free to put cards on the table\n" +
-                        "Card in your hand : ♦DA \n" +
-                        "Please put the cards: (Example: \"D1 S1\")\n" +
-                        "Please put the cards: (Example: \"D1 S1\")\n" +
-                "Invalid Cards Combination\n"+
-                        "Please put the cards: (Example: \"D1 S1\")\n" , getOutput());
+                "No last player cards. You are free to put cards on the table" + System.lineSeparator() +
+                        "Card in your hand : ♦DA " + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\")" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\")" + System.lineSeparator() +
+                        "Invalid Cards Combination" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\")" + System.lineSeparator(), getOutput());
 
         System.setIn(System.in);
     }
@@ -152,12 +152,12 @@ public class TestPlayer {
         player.yourTurnToPlayCard(cards, c);
 
         Assert.assertEquals(
-                "Last player cards : ♠SJ \n" +
-                        "Card in your hand : ♦DA \n" +
-                        "Please put the cards: (Example: \"D1 S1\")\n" +
-                        "Please put the cards: (Example: \"D1 S1\")\n" +
-                        "Invalid Cards Combination\n"+
-                        "Please put the cards: (Example: \"D1 S1\")\n" , getOutput());
+                "Last player cards : ♠SJ " + System.lineSeparator() +
+                        "Card in your hand : ♦DA " + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\")" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\")" + System.lineSeparator() +
+                        "Invalid Cards Combination" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\")" + System.lineSeparator(), getOutput());
 
         System.setIn(System.in);
     }
@@ -182,15 +182,15 @@ public class TestPlayer {
 
         ArrayList<Card> c = new ArrayList<>();
         c.add(new Card("DA"));
-        player.yourTurnToPlayCardOrSkipCard( c, cards);
+        player.yourTurnToPlayCardOrSkipCard(c, cards);
 
         Assert.assertEquals(
-                "Last player cards : ♠SJ \n" +
-                        "Card in your hand : ♦DA \n" +
-                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:\n" +
-                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:\n" +
-                        "Invalid Cards Combination\n"+
-                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:\n" , getOutput());
+                "Last player cards : ♠SJ " + System.lineSeparator() +
+                        "Card in your hand : ♦DA " + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:" + System.lineSeparator() +
+                        "Invalid Cards Combination" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:" + System.lineSeparator(), getOutput());
 
         System.setIn(System.in);
     }
@@ -214,15 +214,15 @@ public class TestPlayer {
 
         ArrayList<Card> c = new ArrayList<>();
         c.add(new Card("DA"));
-        player.yourTurnToPlayCardOrSkipCard( c, cards);
+        player.yourTurnToPlayCardOrSkipCard(c, cards);
 
         Assert.assertEquals(
-                "No last player cards. You are free to put cards on the table\n" +
-                        "Card in your hand : ♦DA \n" +
-                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:\n" +
-                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:\n" +
-                        "Invalid Cards Combination\n"+
-                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:\n" , getOutput());
+                "No last player cards. You are free to put cards on the table" + System.lineSeparator() +
+                        "Card in your hand : ♦DA " + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:" + System.lineSeparator() +
+                        "Invalid Cards Combination" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:" + System.lineSeparator(), getOutput());
 
         System.setIn(System.in);
     }
@@ -245,14 +245,14 @@ public class TestPlayer {
 
         ArrayList<Card> c = new ArrayList<>();
         c.add(new Card("DA"));
-        player.yourTurnToPlayCardOrSkipCard( c, cards);
+        player.yourTurnToPlayCardOrSkipCard(c, cards);
 
         Assert.assertEquals(
-                "No last player cards. You are free to put cards on the table\n" +
-                        "Card in your hand : ♦DA \n" +
-                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:\n" +
-                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:\n"
-                         , getOutput());
+                "No last player cards. You are free to put cards on the table" + System.lineSeparator() +
+                        "Card in your hand : ♦DA " + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:" + System.lineSeparator() +
+                        "Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:" + System.lineSeparator()
+                , getOutput());
 
         System.setIn(System.in);
     }
@@ -267,7 +267,6 @@ public class TestPlayer {
         player.waitPlayerToPlayerCard(player2, false);
         Assert.assertEquals(String.format("Player %d -- Name %s is choosing cards to play !!\n", player2.getId(), "player2"), getOutput());
     }
-
 
 
     PrintStream oldPrintStream;
