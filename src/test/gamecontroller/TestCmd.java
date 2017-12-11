@@ -1,4 +1,4 @@
-package test;
+package test.gamecontroller;
 
 import command.*;
 import org.junit.After;
@@ -31,7 +31,7 @@ public class TestCmd {
     public void testCmdHelp() {
         CmdHelp cmdHelp = new CmdHelp();
         cmdHelp.execute();
-        Assert.assertEquals("Please read README.txt\r\n", outContent.toString());
+        Assert.assertEquals("Please read README.txt" + System.lineSeparator(), outContent.toString());
     }
 
 
@@ -54,7 +54,7 @@ public class TestCmd {
     public void testCmdBack() {
         CmdBack cmdBack = new CmdBack();
         cmdBack.execute();
-        Assert.assertEquals("Exit\r\n", outContent.toString());
+        Assert.assertEquals("Exit" + System.lineSeparator(), outContent.toString());
     }
 
 
@@ -86,7 +86,7 @@ public class TestCmd {
     public void testCmd2PlayDesc() {
         Cmd2Play cmd2Play = new Cmd2Play();
         String desc = cmd2Play.description();
-        Assert.assertEquals("Play some card", desc);
+        Assert.assertEquals("Play some cards", desc);
     }
 
 
@@ -94,8 +94,8 @@ public class TestCmd {
     public void testCmdConnect() {
         CmdConnect cmdConnect = new CmdConnect();
         cmdConnect.execute();
-        Assert.assertEquals("Exit\r\n" +
-                "Testing : connecting\r\n", outContent.toString());
+        Assert.assertEquals("Exit" + System.lineSeparator() +
+                "Testing : connecting" + System.lineSeparator(), outContent.toString());
     }
 
 

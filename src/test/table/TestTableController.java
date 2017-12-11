@@ -1,4 +1,4 @@
-package test;
+package test.table;
 
 import cards.Card;
 import cards.Cards;
