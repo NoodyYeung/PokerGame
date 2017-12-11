@@ -1,4 +1,4 @@
-package test;
+package test.gamecontroller;
 
 import command.Menu;
 import command.MenuGame;
