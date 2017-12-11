@@ -55,22 +55,5 @@ public class TestPthree {
 		assertEquals(true, highPthree.isLarger(thisPbomb));
 	}
 	
-	@Test
-	public void testEquals1() {
-		boolean result = highPthree.equals(new Pthree(11));
-		assertEquals(true, result);
-	}
-	
-	@Test
-	public void testEquals2() {
-		boolean result = highPthree.equals(new Pthree(4));
-		assertEquals(false, result);
-	}
-	
-	@Test 
-	public void testEquals3() {
-		boolean result = highPthree.equals(new Pbomb(3));
-		assertEquals(false, result);
-	}
 }
 

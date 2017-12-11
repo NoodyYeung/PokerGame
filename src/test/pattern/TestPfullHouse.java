@@ -62,22 +62,4 @@ public class TestPfullHouse {
 		assertEquals(false, house2.isLarger(new Pone(2)));
 	}
 	
-	@Test
-	public void testEquals1() {
-		assertEquals(true, house1.equals(house1));
-	}
-	
-	@Test
-	public void testEquals2() {
-		assertEquals(false, house1.equals(new PfullHouse(house1list, 2)));
-	}
-	
-	@Test 
-	public void test934() {
-		assertEquals(false, house1.equals(house2));
-	}
-	@Test 
-	public void testEquals3() {
-		assertEquals(false, house1.equals(new Pone(1)));
-	}
 }
