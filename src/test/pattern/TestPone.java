@@ -54,21 +54,4 @@ public class TestPone {
 		assertEquals(false, thisPone.isLarger(thisPtwo));
 	}
 	
-	@Test
-	public void testEquals1() {
-		boolean result = thisPone.equals(new Pone(4));
-		assertEquals(true, result);
-	}
-	
-	@Test
-	public void testEquals2() {
-		boolean result = thisPone.equals(new Pone(5));
-		assertEquals(false, result);
-	}
-	
-	@Test 
-	public void testEquals3() {
-		boolean result = thisPone.equals(new Pbomb(3));
-		assertEquals(false, result);
-	}
 }

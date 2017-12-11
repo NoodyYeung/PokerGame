@@ -38,7 +38,7 @@ public class Ptwo extends Pattern {
 	        return false;
 	    }
 	    Ptwo other = (Ptwo)o;
-	    return getValue()==other.getValue()&&getNum()==other.getNum();
+	    return getValue()==other.getValue() && getNum()==other.getNum();
 	}
 
 }
