@@ -1,6 +1,7 @@
 package test;
 
 import command.Menu;
+import command.MenuGame;
 import command.MenuMain;
 import org.junit.After;
 import org.junit.Assert;
@@ -39,4 +40,11 @@ public class TestMenu {
     }
 
 
+    @Test
+    public void testMenuGame() {
+        Menu menuGame = new MenuGame();
+        menuGame.displayCommandList();
+        Assert.assertEquals("p: Play some cards\r\n" +
+                "q: Back\r\n", outContent.toString());
+    }
 }
