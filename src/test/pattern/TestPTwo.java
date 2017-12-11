@@ -56,4 +56,22 @@ public class TestPTwo {
 		Ptwo thisPtwo = new Ptwo(2);
 		assertEquals(false, thisPtwo.isLarger(thisPtwo));
 	}
+	
+	@Test
+	public void testEquals1() {
+		boolean result = thisPtwo.equals(new Ptwo(4));
+		assertEquals(true, result);
+	}
+	
+	@Test
+	public void testEquals2() {
+		boolean result = thisPtwo.equals(new Pthree(5));
+		assertEquals(false, result);
+	}
+	
+	@Test 
+	public void testEquals3() {
+		boolean result = thisPtwo.equals(new Pbomb(11));
+		assertEquals(false, result);
+	}
 }

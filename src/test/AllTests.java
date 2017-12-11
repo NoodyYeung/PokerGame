@@ -4,10 +4,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import test.command.*;
-import test.ddz.*;
-import test.pattern.*;
-import test.cards.*;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
