@@ -76,4 +76,21 @@ public class TestPbomb {
 		assertEquals(false, result);
 	}	
 	
+	@Test
+	public void testEquals1() {
+		boolean result = thisBomb.equals(new Pbomb(4));
+		assertEquals(true, result);
+	}
+	
+	@Test
+	public void testEquals2() {
+		boolean result = thisBomb.equals(new Pbomb(3));
+		assertEquals(false, result);
+	}
+	
+	@Test 
+	public void testEquals3() {
+		boolean result = thisBomb.equals(new Pone(1));
+		assertEquals(false, result);
+	}
 }
