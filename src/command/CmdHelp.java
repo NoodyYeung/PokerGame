@@ -27,13 +27,12 @@ public class CmdHelp extends Command {
 
 	@Override
 	public String key() {
-		// TODO Auto-generated method stub
 		return key != null ? key : "h";
 	}
 
 	@Override
 	public void execute() {
-		System.out.println(detailsMessage != null ? detailsMessage : "[CmdHelp execute()] Need help? ");
+		System.out.println(detailsMessage != null ? detailsMessage : "Please read README.txt");
 	}
 
 }
