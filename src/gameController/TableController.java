@@ -8,13 +8,14 @@ import table.PlayerAndCards;
 import table.Table;
 
 import java.util.List;
+import java.util.Random;
 
 public class TableController {
 
 	Table table;
 	public  <T extends Player> String createTableForGame(List<T> players) throws ExCardNoExists, ExNotEnoughPlayers{
 		table=new Table(players);
-		return table.distributeCards();
+		return table.distributeCards(new Random());
 	}
 
 	public boolean checkGameEnd(){
