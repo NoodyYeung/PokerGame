@@ -229,6 +229,7 @@ public class TestTable {
         List<Player> players = new ArrayList<>();
         players.add(new LocalPlayer());
         players.add(new AIPlayer());
+        players.add(new AIPlayer());
         ArrayList<Card> cards= new ArrayList<>();
         try {
 
@@ -250,7 +251,221 @@ public class TestTable {
 
     @Test
     public void testEmptyLastHand(){
+        List<Player> players = new ArrayList<>();
+        players.add(new LocalPlayer());
+        players.add(new AIPlayer());
+        players.add(new AIPlayer());
+        Table table = new Table(players);
+        table.emptyLastHand();
+        assertEquals(null, table.getLastHandCard());
+    }
 
+
+    @Test
+    public void testGetGameWinner(){
+        List<Player> players = new ArrayList<>();
+        Player p1 = new LocalPlayer();
+        Player p2 = new AIPlayer();
+        Player p3 = new AIPlayer();
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+
+        Table table = new Table(players);
+        List<PlayerAndCards> entities = table.getPlayerCardsEntities();
+
+        ArrayList<Card> a1 = new ArrayList<>();
+        ArrayList<Card> a2 = new ArrayList<>();
+        ArrayList<Card> a3 = new ArrayList<>();
+
+        try {
+            a1.add(new Card("D3"));
+            a1.add(new Card("D4"));
+            a1.add(new Card("D5"));
+            a2.add(new Card("D6"));
+        } catch (ExCardNoExists exCardNoExists) {
+            fail("No exception should be throw");
+            exCardNoExists.printStackTrace();
+        }
+
+        entities.add(new PlayerAndCards(players.get(0),  a1));
+        entities.add(new PlayerAndCards(players.get(1),  a2));
+        entities.add(new PlayerAndCards(players.get(2),  a3));
+
+        assertEquals(p3, table.getGameWinner());
+
+    }
+
+    @Test
+    public void testGetGameWinner2(){
+        List<Player> players = new ArrayList<>();
+        Player p1 = new LocalPlayer();
+        Player p2 = new AIPlayer();
+        Player p3 = new AIPlayer();
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+
+        Table table = new Table(players);
+        List<PlayerAndCards> entities = table.getPlayerCardsEntities();
+
+        ArrayList<Card> a1 = new ArrayList<>();
+        ArrayList<Card> a2 = new ArrayList<>();
+        ArrayList<Card> a3 = new ArrayList<>();
+
+        try {
+            a1.add(new Card("D3"));
+            a1.add(new Card("D4"));
+            a1.add(new Card("D5"));
+            a2.add(new Card("D6"));
+            a3.add(new Card("D7"));
+        } catch (ExCardNoExists exCardNoExists) {
+            fail("No exception should be throw");
+            exCardNoExists.printStackTrace();
+        }
+
+        entities.add(new PlayerAndCards(players.get(0),  a1));
+        entities.add(new PlayerAndCards(players.get(1),  a2));
+        entities.add(new PlayerAndCards(players.get(2),  a3));
+
+        assertEquals(null, table.getGameWinner());
+
+    }
+
+    @Test
+    public void testGetGameWinner3(){
+        List<Player> players = new ArrayList<>();
+        Player p1 = new LocalPlayer();
+        Player p2 = new AIPlayer();
+        Player p3 = new AIPlayer();
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+
+        Table table = new Table(players);
+        List<PlayerAndCards> entities = table.getPlayerCardsEntities();
+
+        ArrayList<Card> a1 = new ArrayList<>();
+        ArrayList<Card> a2 = new ArrayList<>();
+        ArrayList<Card> a3 = new ArrayList<>();
+
+        try {
+            a2.add(new Card("D6"));
+            a3.add(new Card("D7"));
+        } catch (ExCardNoExists exCardNoExists) {
+            fail("No exception should be throw");
+            exCardNoExists.printStackTrace();
+        }
+
+        entities.add(new PlayerAndCards(players.get(0),  a1));
+        entities.add(new PlayerAndCards(players.get(1),  a2));
+        entities.add(new PlayerAndCards(players.get(2),  a3));
+
+        assertEquals(p1, table.getGameWinner());
+    }
+
+    @Test
+    public void testReduceTheCardFromPlayer(){
+        List<Player> players = new ArrayList<>();
+        Player p1 = new LocalPlayer();
+        Player p2 = new AIPlayer();
+        Player p3 = new AIPlayer();
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+
+        Table table = new Table(players);
+        List<PlayerAndCards> entities = table.getPlayerCardsEntities();
+
+        ArrayList<Card> a1 = new ArrayList<>();
+        ArrayList<Card> a2 = new ArrayList<>();
+        ArrayList<Card> a3 = new ArrayList<>();
+
+        try {
+            a1.add(new Card("D3"));
+            a1.add(new Card("D4"));
+            a1.add(new Card("D5"));
+            a2.add(new Card("D6"));
+            a3.add(new Card("D7"));
+        } catch (ExCardNoExists exCardNoExists) {
+            fail("No exception should be throw");
+            exCardNoExists.printStackTrace();
+        }
+
+        entities.add(new PlayerAndCards(players.get(0),  a1));
+        entities.add(new PlayerAndCards(players.get(1),  a2));
+        entities.add(new PlayerAndCards(players.get(2),  a3));
+
+
+        List<Card> reCards = new ArrayList<>();
+        ArrayList<Card> arrayListAfterReduce = new ArrayList<>();
+
+        try {
+            reCards.add(new Card("D3"));
+            arrayListAfterReduce.add(new Card("D4"));
+            arrayListAfterReduce.add(new Card("D5"));
+        } catch (ExCardNoExists exCardNoExists) {
+            fail("No exception should be throw");
+            exCardNoExists.printStackTrace();
+        }
+
+        boolean result = table.reduceTheCardFromPlayer(p1, reCards);
+
+
+        assertEquals(true , result);
+        assertEquals(arrayListAfterReduce.toString(), a1.toString());
+    }
+
+    @Test
+    public void testReduceTheCardFromPlayer2(){
+        List<Player> players = new ArrayList<>();
+        Player p1 = new LocalPlayer();
+        Player p2 = new AIPlayer();
+        Player p3 = new AIPlayer();
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+
+        Table table = new Table(players);
+        List<PlayerAndCards> entities = table.getPlayerCardsEntities();
+
+        ArrayList<Card> a1 = new ArrayList<>();
+        ArrayList<Card> a2 = new ArrayList<>();
+        ArrayList<Card> a3 = new ArrayList<>();
+
+        try {
+            a1.add(new Card("D3"));
+            a1.add(new Card("D4"));
+            a1.add(new Card("D5"));
+            a2.add(new Card("D6"));
+            a3.add(new Card("D7"));
+        } catch (ExCardNoExists exCardNoExists) {
+            fail("No exception should be throw");
+            exCardNoExists.printStackTrace();
+        }
+
+        entities.add(new PlayerAndCards(players.get(0),  a1));
+        entities.add(new PlayerAndCards(players.get(1),  a2));
+        entities.add(new PlayerAndCards(players.get(2),  a3));
+
+
+        List<Card> reCards = new ArrayList<>();
+        ArrayList<Card> arrayListAfterReduce = new ArrayList<>();
+
+        try {
+            reCards.add(new Card("D3"));
+            arrayListAfterReduce.add(new Card("D4"));
+            arrayListAfterReduce.add(new Card("D5"));
+        } catch (ExCardNoExists exCardNoExists) {
+            fail("No exception should be throw");
+            exCardNoExists.printStackTrace();
+        }
+
+        boolean result = table.reduceTheCardFromPlayer(p1, reCards);
+
+
+        assertEquals(true , result);
+        assertEquals(arrayListAfterReduce.toString(), a1.toString());
     }
 
 }
