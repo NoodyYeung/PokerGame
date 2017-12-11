@@ -2,6 +2,7 @@ package test;
 
 import cards.Card;
 import cards.Cards;
+import client.AIPlayer;
 import client.LocalPlayer;
 import client.Main;
 import gameController.Player;
@@ -12,6 +13,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TestPlayer {
@@ -268,6 +270,98 @@ public class TestPlayer {
         player.waitPlayerToPlayerCard(player2, false);
         Assert.assertEquals(String.format("Player %d -- Name %s is choosing cards to play !!\n", player2.getId(), "player2"), getOutput());
     }
+
+    @Test
+    public void testAiPlayerWaitPlayerCard(){
+        Player player = new AIPlayer();
+        player.waitPlayerToPlayerCard(null, false);
+    }
+
+    @Test
+    public void testAiPlayerYouAreFarmer(){
+        Player player = new AIPlayer();
+        player.youAreFarmer(null);
+    }
+
+    @Test
+    public void testAiPlayerYouAreLandLord(){
+        Player player = new AIPlayer();
+        player.youAreLandLord();
+    }
+
+    @Test
+    public void testAiPlayerYouWin(){
+        Player player = new AIPlayer();
+        player.youWin();
+    }
+
+    @Test
+    public void testAiPlayerYouLose(){
+        Player player = new AIPlayer();
+        player.youLose();
+    }
+
+    @Test
+    public void testAiPlayerYouMakeAValidPlay(){
+        Player player = new AIPlayer();
+        player.pleaseMakeAValidPlay();
+    }
+
+    @Test
+    public void testAIPLAYERplayerCardCountInfo(){
+        Player player = new AIPlayer();
+        player.playerCardCountInfo(null);
+    }
+
+    @Test
+    public void testAIPLAYERYourTurnPlayCard() throws Exception {
+
+        Player player = new AIPlayer();
+
+
+        setOutput();
+        ArrayList<Card> c1 = new ArrayList<>();
+        c1.add(new Card("DA"));
+        Cards cards = new Cards(c1);
+        ArrayList<Card> c = new ArrayList<>();
+        c.add(new Card("D2"));
+        List<Card> cardsss = player.yourTurnToPlayCard(cards, c);
+
+        Assert.assertEquals("AI is selecting card ..." + System.lineSeparator(), getOutput());
+        Assert.assertEquals("[♦D2]",cardsss.toString());
+        System.setIn(System.in);
+    }
+
+    @Test
+    public void testAIAutoPlaysCard() throws Exception{
+        AIPlayer player = new AIPlayer();
+
+        ArrayList<Card> c1 = new ArrayList<>();
+        c1.add(new Card("DA"));
+        Cards cards = new Cards(c1);
+        ArrayList<Card> c = new ArrayList<>();
+        c.add(new Card("D2"));
+        List<Card> cardsss = player.autoPlaysCard(c, cards);
+        Assert.assertEquals("[♦D2]",cardsss.toString());
+
+    }
+
+    @Test
+    public void testAIAutoPlaysCard2() throws Exception{
+        AIPlayer player = new AIPlayer();
+
+        ArrayList<Card> c1 = new ArrayList<>();
+        c1.add(new Card("D2"));
+        Cards cards = new Cards(c1);
+        ArrayList<Card> c = new ArrayList<>();
+        c.add(new Card("DA"));
+        List<Card> cardsss = player.autoPlaysCard(c, cards);
+        Assert.assertEquals(null,cardsss);
+
+    }
+
+
+
 
 
 

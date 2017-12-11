@@ -79,7 +79,6 @@ public class TestTable {
             exCardNoExists.printStackTrace();
         } catch (ExNotEnoughPlayers exNotEnoughPlayers) {
             assertEquals("Not enough players at this table! There are only "+2+" players here.", exNotEnoughPlayers.getMessage());
-            exNotEnoughPlayers.printStackTrace();
         }
 
     }
@@ -97,7 +96,6 @@ public class TestTable {
             exCardNoExists.printStackTrace();
         } catch (ExNotEnoughPlayers exNotEnoughPlayers) {
             assertEquals("Players object is null", exNotEnoughPlayers.getMessage());
-            exNotEnoughPlayers.printStackTrace();
         }
     }
 
