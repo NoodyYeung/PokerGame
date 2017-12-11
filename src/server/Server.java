@@ -83,12 +83,12 @@ public class Server {
                     if(input.available() <= 0)
                         continue;
                     while(player.isGameStarted()){
-                        System.out.println("[DEBUG] Reset");
+//                        System.out.println("[DEBUG] Reset");
                         Thread.sleep(1000);
                     }
                     String s = input.readUTF();
-                    System.out.println("[Debug] getMessage 2: " + s);
-                    System.out.println("[Debug] getMessage : " + s);
+//                    System.out.println("[Debug] getMessage 2: " + s);
+//                    System.out.println("[Debug] getMessage : " + s);
                     try {
                         handler.handleMessage(new Message(s));
                     } catch (ExInsuffientData exInsuffientData) {

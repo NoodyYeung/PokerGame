@@ -69,7 +69,7 @@ public class TableController {
 	public void  reduceUserPlayedCard(Player player, List<Card> playedCard){
 		PlayerAndCards playerAndCards =  getPlayerAndCardsObjByPlayer(player);
 		table.reduceTheCardFromPlayer( player, playedCard);
-		System.out.println("[DEBUG] : Card after delete : " + Cards.toString(		getCardsByPlayer(player)));
+//		System.out.println("[DEBUG] : Card after delete : " + Cards.toString(		getCardsByPlayer(player)));
 
 	}
 
