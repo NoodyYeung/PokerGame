@@ -19,9 +19,8 @@ public class TestPlayer {
     @Test
     public void testLocalPlayerId() {
         Player player = new LocalPlayer();
-        player.setId(1);
         int id = player.getId();
-        Assert.assertEquals(1, id);
+        Assert.assertEquals(Player.playerIdForLocalAndAI - 1, id);
     }
 
     @Test
@@ -37,7 +36,7 @@ public class TestPlayer {
         Player player = new LocalPlayer();
         player.setName("player1");
         String toString = player.toString();
-        Assert.assertEquals("player1: Gotta catch them all! ", toString);
+        Assert.assertEquals("player1", toString);
     }
 
     @Test
