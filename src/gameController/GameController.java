@@ -80,7 +80,7 @@ public class GameController<T extends Player> {
 			List<Card> playedCard = null;
 			do {
 				try {
-					System.out.println("[DEBUG] tried loop here 1:");
+//					System.out.println("[DEBUG] tried loop here 1:");
 					List<Card> hands = tableController.getCardsByPlayer(landLord);
 					playedCard = landLord.yourTurnToPlayCard(null, hands);
 					if(playedCard!= null && !checkPlayedCardInsideHands(playedCard, hands)){
@@ -111,7 +111,7 @@ public class GameController<T extends Player> {
 	 */
 	public void nextTurn(){
 		try{
-			System.out.println("[Debug] : next turn : " + (turn + 1) );
+//			System.out.println("[Debug] : next turn : " + (turn + 1) );
 			if(tableController.checkGameEnd()){
 				gameEnd();
 				return;
@@ -152,7 +152,7 @@ public class GameController<T extends Player> {
 						break;
 					}
 					if (pattern != null) {
-						System.out.println("[DEBUG] : GOT Pattern " + pattern.getClass().getName());
+//						System.out.println("[DEBUG] : GOT Pattern " + pattern.getClass().getName());
 						// exit when user input valid pattern
 						break;
 					}
@@ -249,7 +249,7 @@ public class GameController<T extends Player> {
 	 * Only trigger on the numberOfskip == 2
 	 */
 	public void newRound(){
-		System.out.println("[Debug] : new round");
+//		System.out.println("[Debug] : new round");
 		numberOfSkip = 0;
 		tableController.emptyLastHand();
 	}
@@ -285,7 +285,7 @@ public class GameController<T extends Player> {
 
 	public Player getLandLord(){
 		List<PlayerAndCards> cardsList = tableController.getTablePlayerCards();
-		System.out.println("[Debug] : " + cardsList.size());
+//		System.out.println("[Debug] : " + cardsList.size());
 		for(int i =0; i < cardsList.size(); i ++){
 			PlayerAndCards playerAndCards = cardsList.get(i);
 			if(playerAndCards.isLandLord())

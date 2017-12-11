@@ -168,7 +168,7 @@ public class Table<T extends Player> {
 		List<Card> cardNeededToBeRemoved = new ArrayList();
 		for(PlayerAndCards pc : entities){
 			if(pc.equalsPlayer(player)){
-				System.out.println("[DEBUG] reduceTheCardFromPlayer : FOUND equals player !");
+//				System.out.println("[DEBUG] reduceTheCardFromPlayer : FOUND equals player !");
 				List<Card > cards = pc.getCards();
 
 
@@ -188,20 +188,20 @@ public class Table<T extends Player> {
 						cardNeededToBeRemoved.add(matchedCard);
 					}
 				}
-				System.out.println("[DEBUG] cardNeededToBeRemoved: "+Cards.toString(cardNeededToBeRemoved));
-				System.out.println("[DEBUG] playedCard: "+Cards.toString(playedCard));
+//				System.out.println("[DEBUG] cardNeededToBeRemoved: "+Cards.toString(cardNeededToBeRemoved));
+//				System.out.println("[DEBUG] playedCard: "+Cards.toString(playedCard));
 				if(removedCard != playedCard.size()) {
-					System.out.println("[Debug] fail to reduce the card");
+//					System.out.println("[Debug] fail to reduce the card");
 					return false;
 				}else {
-					System.out.println("[DEBUG] : Card before delete : " + Cards.toString(cards));
+//					System.out.println("[DEBUG] : Card before delete : " + Cards.toString(cards));
 					List<Card> userHandCards = pc.getCards();
 					List<Card> userUsedCards = pc.getUsedCards();
 					for(Card rc: cardNeededToBeRemoved){
 						userHandCards.remove(rc);
 						userUsedCards.add(rc);
 					}
-					System.out.println("[DEBUG] : Card after delete : " + Cards.toString(userHandCards));
+//					System.out.println("[DEBUG] : Card after delete : " + Cards.toString(userHandCards));
 					return true;
 				}
 			}
