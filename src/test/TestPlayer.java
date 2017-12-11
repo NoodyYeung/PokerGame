@@ -1,13 +1,14 @@
 package test;
 
+import cards.Card;
 import cards.Cards;
 import client.LocalPlayer;
 import client.Main;
 import gameController.Player;
 import org.junit.Assert;
 import org.junit.Test;
-import pattern.Pone;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -74,15 +75,32 @@ public class TestPlayer {
         Assert.assertEquals(String.format("You are farmer. Your teammate is Player %d -- Name %s \n", 9, "teammate"), getOutput());
     }
 
-//    @Test
-//    public void testLocalPlayerYouTurn() throws Exception {
-//        Player player = new LocalPlayer();
-//        Main.systemIn = new Scanner(System.in);
-//        setOutput();
-//        Cards cards = new Cards(new ArrayList<>(), null);
-//        player.yourTurnToPlayCard(cards, new ArrayList<>());
-//        Assert.assertEquals("No last player cards. You are free to put cards on the table\n" + "Card in your hand : \n", getOutput());
-//    }
+    @Test
+    public void testLocalPlayerYouTurnToPlayCard() throws Exception {
+
+
+        Player player = new LocalPlayer();
+        String input = "" + System.lineSeparator()
+                + "DA" + System.lineSeparator();
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+//        System.setIn(in);
+        Main.systemIn = new Scanner(in);
+
+        setOutput();
+        Cards cards = null;
+        ArrayList<Card> c = new ArrayList<>();
+        c.add(new Card("DA"));
+        player.yourTurnToPlayCard(cards, c);
+
+        Assert.assertEquals(
+                "No last player cards. You are free to put cards on the table\n" +
+                "Card in your hand : ♦DA \n" +
+                "Please put the cards: (Example: \"D1 S1\")\n" +
+                "Please put the cards: (Example: \"D1 S1\")\n", getOutput());
+
+        System.setIn(System.in);
+
+    }
 
     PrintStream oldPrintStream;
     ByteArrayOutputStream bos;

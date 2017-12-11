@@ -5,6 +5,7 @@ import cards.Cards;
 import cards.ExCardNoExists;
 import gameController.Player;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class LocalPlayer extends Player {
 	 */
 	@Override
 	public List<Card> yourTurnToPlayCard(Cards lastTurnCards, List<Card> tablePlayerCards) {
+		if(tablePlayerCards == null){
+			return new ArrayList<>();
+		}
 		if(lastTurnCards != null)
 			System.out.println("Last player cards : " + Cards.toStringWithSymbol(lastTurnCards.getCards()) );
 		else
