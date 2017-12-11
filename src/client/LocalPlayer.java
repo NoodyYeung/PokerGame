@@ -126,6 +126,10 @@ public class LocalPlayer extends Player {
 		while(true) {
 			System.out.println("Please put the cards: (Example: \"D1 S1\") OR input SKIP to skip:");
 			String cardStr = Main.systemIn.nextLine();
+			if(cardStr.equals("")){
+				continue;
+			}
+
 			if(cardStr.equals("SKIP"))
 				break;
 			try {

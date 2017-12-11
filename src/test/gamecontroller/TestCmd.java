@@ -86,7 +86,7 @@ public class TestCmd {
     public void testCmd2PlayDesc() {
         Cmd2Play cmd2Play = new Cmd2Play();
         String desc = cmd2Play.description();
-        Assert.assertEquals("Play some card", desc);
+        Assert.assertEquals("Play some cards", desc);
     }
 
 
