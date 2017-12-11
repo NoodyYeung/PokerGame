@@ -1,4 +1,4 @@
-package test;
+package test.gamecontroller;
 
 import command.*;
 import org.junit.After;

@@ -1,4 +1,4 @@
-package test;
+package test.gamecontroller;
 
 import cards.Card;
 import cards.ExCardNoExists;
