@@ -2,7 +2,6 @@ package gameController;
 
 import DDZ.DDZ;
 import cards.Card;
-import cards.Cards;
 import cards.ExCardNoExists;
 import pattern.Pattern;
 import table.ExNotEnoughPlayers;
@@ -10,6 +9,7 @@ import table.PlayerAndCards;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -23,12 +23,7 @@ public class GameController<T extends Player> {
 	 * turn is always increasing
 	 */
 	private int turn = 0;
-	/** A new round is started when a user if free to play card (no last hand).
-	 * 	And two case will generate this situation:
-	 * 	1. The first turn
-	 * 	2. Two user skip the turn
-	 * **/
-	private int round=0;
+
 	/**
 	 * Count the number of skip. If the nubmer of skip == 2, it reset to 0 and a new round is started
 	 */
@@ -37,8 +32,6 @@ public class GameController<T extends Player> {
 	private ArrayList<T> playersInThisGame;
 	private TableController tableController;
 	private DDZ ddz;
-	private boolean isGameInit = false;
-	ArrayList<Integer> playerSequence=new ArrayList<>();
 	/** used to identify which user to play. playersInThisGame[initTurn + turn % 3] = the player play card in this turn **/
 	private int initTurn = 0;
 
@@ -49,7 +42,6 @@ public class GameController<T extends Player> {
 		if (players.size() != 3) {
 			throw new InsufficientPlayerException("Insufficient players. At least three player is needed");
 		}
-		round = 0;
 		turn = 0;
 		this.playersInThisGame = players;
 		this.tableController = new TableController();
@@ -64,25 +56,12 @@ public class GameController<T extends Player> {
 	}
 
 	/**
-	 * Noody: This is not my code.
-	 * The main main different i thought is that
-	 *
-	 public void startGame(){
-	 List<Card>[] decks = deck.distribute();
-	 for(int i = 0; i < playersInThisGame.size(); i ++) {
-	 Player player = playersInThisGame.get(i);
-	 player.setHand(decks[i]);
-	 TableController.createTableForGame(players);
-	 }
-	 **/
-
-	/**
 	 * TODO 1.Prompt player got cards
 	 * TODO 2.ASk Player to call for land lord
 	 */
 	public void startGame(){
 		try {
-			tableController.createTableForGame(playersInThisGame);
+			tableController.createTableForGame(playersInThisGame, new Random());
 			newRound();
 			Player landLord = getLandLord();
 			List<Player> farmers = getFarmer();
@@ -101,7 +80,7 @@ public class GameController<T extends Player> {
 			List<Card> playedCard = null;
 			do {
 				try {
-					System.out.println("[DEBUG] tried loop here 1:");
+//					System.out.println("[DEBUG] tried loop here 1:");
 					List<Card> hands = tableController.getCardsByPlayer(landLord);
 					playedCard = landLord.yourTurnToPlayCard(null, hands);
 					if(playedCard!= null && !checkPlayedCardInsideHands(playedCard, hands)){
@@ -132,7 +111,7 @@ public class GameController<T extends Player> {
 	 */
 	public void nextTurn(){
 		try{
-			System.out.println("[Debug] : next turn : " + (turn + 1) );
+//			System.out.println("[Debug] : next turn : " + (turn + 1) );
 			if(tableController.checkGameEnd()){
 				gameEnd();
 				return;
@@ -163,15 +142,18 @@ public class GameController<T extends Player> {
 					}
 					if (playedCard == null) { // the user choose to skip
 						break;
+						// List<Card> lastHands = tableController.getLastHandCard() != null ? tableController.getLastHandCard().getCards() : null;
+						// System.out.println("[DEBUG]: GOT Pattern FAIL " + Cards.toString(lastHands));
 					}
 					Pattern pattern = ddz.validateDDZ(playedCard, tableController.getLastHandCard());
-					if (pattern != null) {
-						System.out.println("[DEBUG] : GOT Pattern " + pattern.getClass().getName());
-					} else {
-						List<Card> lastHands = tableController.getLastHandCard() != null ? tableController.getLastHandCard().getCards() : null;
-						System.out.println("[DEBUG]: GOT Pattern FAIL " + Cards.toString(lastHands));
+					
+					if(pattern == null) {
+						info("Incorrect pattern! Please play a valid hand of cards.");
+						break;
 					}
-					if (pattern != null) { // exit when user input valid pattern
+					if (pattern != null) {
+//						System.out.println("[DEBUG] : GOT Pattern " + pattern.getClass().getName());
+						// exit when user input valid pattern
 						break;
 					}
 				}catch (ExPlayedCardNotInYourHands e){
@@ -267,7 +249,7 @@ public class GameController<T extends Player> {
 	 * Only trigger on the numberOfskip == 2
 	 */
 	public void newRound(){
-		System.out.println("[Debug] : new round");
+//		System.out.println("[Debug] : new round");
 		numberOfSkip = 0;
 		tableController.emptyLastHand();
 	}
@@ -303,7 +285,7 @@ public class GameController<T extends Player> {
 
 	public Player getLandLord(){
 		List<PlayerAndCards> cardsList = tableController.getTablePlayerCards();
-		System.out.println("[Debug] : " + cardsList.size());
+//		System.out.println("[Debug] : " + cardsList.size());
 		for(int i =0; i < cardsList.size(); i ++){
 			PlayerAndCards playerAndCards = cardsList.get(i);
 			if(playerAndCards.isLandLord())
@@ -328,12 +310,14 @@ public class GameController<T extends Player> {
 
 
 
-	public boolean checkGameEnd(){
-		return tableController.checkGameEnd();
-	}
 
 
 	public boolean getIsEnd() {
 		return isEnd;
+	}
+	
+	private void info(String message) {
+		// give info to user
+		System.out.println(message);
 	}
 }

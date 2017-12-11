@@ -73,13 +73,13 @@ public class AIPlayer extends Player {
         Pattern p = ddz.validateDDZ(canPlayedList, lastTurnCard);
         if(p != null){
             if(lastTurnCard != null){
-                System.out.println("[Debug] : lastTurnCard "+ Cards.toStringWithSymbol(lastTurnCard.getCards()));
-                System.out.println("[Debug] : lastTurnCard pattern "+ lastTurnCard.getPattern());
+//                System.out.println("[Debug] : lastTurnCard "+ Cards.toStringWithSymbol(lastTurnCard.getCards()));
+//                System.out.println("[Debug] : lastTurnCard pattern "+ lastTurnCard.getPattern());
             }
-            System.out.println("[Debug] : found play " + p.getClass().getName() );
+//            System.out.println("[Debug] : found play " + p.getClass().getName() );
         }
         if(canPlayedList.size() > 0 && ddz.validateDDZ(canPlayedList, lastTurnCard) != null){
-            System.out.println("[DEbug] : autoPlaysCardR return TRUE");
+//            System.out.println("[DEbug] : autoPlaysCardR return TRUE");
             return true;
         }
         for(int i = 0; i < cardInHand.size(); i ++){
@@ -87,7 +87,7 @@ public class AIPlayer extends Player {
             if(canPlayedList.indexOf(tempCard)== -1){
                 canPlayedList.add(tempCard);
                 if(autoPlaysCardR(cardInHand, lastTurnCard, depth+ 1, canPlayedList, ddz)){
-                    System.out.println("[DEbug] : autoPlaysCardR return TRUE");
+//                    System.out.println("[DEbug] : autoPlaysCardR return TRUE");
                     return true;
                 };
                 canPlayedList.remove(tempCard);
@@ -109,8 +109,8 @@ public class AIPlayer extends Player {
         List<Card> combination = new ArrayList<>();
         autoPlaysCardR(cardsInHand, lastTureCards, 0, combination, ddz);
 
-        System.out.println("[Debug] AI Auto play size :" + combination.size());
-        System.out.println("[Debug] AI Auto play :" + Cards.toStringWithSymbol(combination));
+//        System.out.println("[Debug] AI Auto play size :" + combination.size());
+//        System.out.println("[Debug] AI Auto play :" + Cards.toStringWithSymbol(combination));
 
         return combination.size() == 0 ? null : combination;
     }

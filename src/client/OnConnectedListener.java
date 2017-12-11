@@ -74,7 +74,7 @@ public class OnConnectedListener{
                 case Message.SERVER_YOUR_TURN_TO_PLAY:
                     String lastHandStr = msg.getJSONObject().getString("lastTurn");
                     String handString = msg.getJSONObject().getString("yourCard");
-                    System.out.printf("[DEBUG] : %s\n", handString);
+//                    System.out.printf("[DEBUG] : %s\n", handString);
                     List<Card> cards;
                     if(lastHandStr.equals("-1")) {
                         cards = tempPlayer.yourTurnToPlayCardOrSkipCard(
@@ -86,7 +86,7 @@ public class OnConnectedListener{
                                 new Cards(Cards.createCardsListFromString(lastHandStr)));
                     }
                     builder.prepareRawTextMessage(Cards.toString(cards)).sendMessageToServer(ClientConnection.getInstance());
-                    System.out.println("[DEBUG] Message sent to server (your turn to play )");
+//                    System.out.println("[DEBUG] Message sent to server (your turn to play )");
                     break;
 
                 case Message.SERVER_WAIT_PLAYER_TO_PLAY_CARD:
@@ -154,7 +154,7 @@ public class OnConnectedListener{
                     break;
 
                 default:
-                    System.out.println("[Debug] ReceivedMessage : " + msg);
+//                    System.out.println("[Debug] ReceivedMessage : " + msg);
                     break;
             }
         } catch (JSONException e) {

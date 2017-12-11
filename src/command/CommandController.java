@@ -34,7 +34,7 @@ public class CommandController {
 	private CommandController() {
 		menuHistory.add(MenuMain.getInstance());
 		
-		List<Command> cmds = Arrays.asList(new CmdHelp(), new CmdBack());
+		List<Command> cmds = Arrays.asList(new CmdHelp("The instruction manual is available in the game folder. More information is in readme.txt. Begin the game to start!"), new CmdBack());
 	}
 
 

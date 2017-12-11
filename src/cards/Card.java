@@ -146,6 +146,7 @@ public class Card implements Comparable<Card> {
         return this.value;
     }
 
+
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Card) {

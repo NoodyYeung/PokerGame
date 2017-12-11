@@ -7,11 +7,13 @@ import cards.ExCardNoExists;
 import gameController.Player;
 import pattern.Pattern;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 
 public class Table<T extends Player> {
-	List <CardOfEachTurn> historyCard;
-	List <CardOfEachRound> roundCard;
 	List <T> players;
 	List <PlayerAndCards> entities;
 	Cards lastHandCard;
@@ -19,9 +21,7 @@ public class Table<T extends Player> {
 
 	public Table(List<T> players){
 		this.players=players;
-		historyCard= new ArrayList<CardOfEachTurn>();
-		roundCard=new ArrayList<CardOfEachRound>();
-		entities=new ArrayList<PlayerAndCards>();
+		entities=new ArrayList<>();
 
 	}
 
@@ -30,32 +30,7 @@ public class Table<T extends Player> {
 		return entities;
 	}
 
-	public boolean addCardToTable(int playerID, Cards cards){
 
-		
-		return addCardToTurn(playerID, cards)&& addCardToRound(playerID, cards)&&updateEntityStatus(playerID, cards);
-	}
-	
-
-	private boolean updateEntityStatus(int playerID, Cards cards) {
-		for(PlayerAndCards e:entities){
-			if(e.getPlayer().getId()==playerID) {
-				e.updateCards(cards);
-			}
-		}
-		return false;
-	}
-
-	private boolean addCardToRound(int playerID, Cards cards) {
-		CardOfEachRound temp=new CardOfEachRound(playerID,cards);
-		roundCard.add(temp);
-		return true;
-	}
-	private boolean addCardToTurn(int playerID, Cards cards) {
-		CardOfEachTurn temp=new CardOfEachTurn(playerID,cards);
-		historyCard.add(temp);
-		return true;		
-	}
 	
 	// add player????
 	/**The function call from TableController createTable **/
@@ -63,15 +38,18 @@ public class Table<T extends Player> {
 	//each entity saves the player info and his related cards
 	//the entity is saved in the entities list
 	//return the distributed cards in string format and the delimiter is " "
-	public String distributeCards() throws ExCardNoExists, ExNotEnoughPlayers {
-		ArrayList<Card> cards=randomGenerateCards();
-		ArrayList<Card> cardsOnBottom = new ArrayList<Card>();
+	public String distributeCards(Random rand) throws ExCardNoExists, ExNotEnoughPlayers {
+		ArrayList<Card> cards=randomGenerateCards(rand);
+		ArrayList<Card> cardsOnBottom = new ArrayList<>();
 
-		if(players == null || players.size()<3)
+		if(players == null){
+			throw new ExNotEnoughPlayers("Players object is null");
+		}
+
+		if(players.size()<3)
 			throw new ExNotEnoughPlayers("Not enough players at this table! There are only "+players.size()+" players here.");
 		
 //		if(hasDiZhu()){
-		Random rand=new Random();
 		for(int i=0; i<3; i++){
 			Card c = cards.get(rand.nextInt(cards.size()) + 0);
 			cardsOnBottom.add(c);
@@ -100,12 +78,10 @@ public class Table<T extends Player> {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		System.out.println(cards);
-		Random random = new Random();
-		int randomLandLord = random.nextInt(3);
-		System.out.println("[Debug] randomLandLord :" + randomLandLord);
-		System.out.println("[Debug] randomLandLord cardSize :" + cards.size());
-		System.out.println("[Debug] randomLandLord cardsOnBottomSize :" + cardsOnBottom.size());
+		int randomLandLord = rand.nextInt(3);
+//		System.out.println("[Debug] randomLandLord :" + randomLandLord);
+//		System.out.println("[Debug] randomLandLord cardSize :" + cards.size());
+//		System.out.println("[Debug] randomLandLord cardsOnBottomSize :" + cardsOnBottom.size());
 
 		while(cardsOnBottom.size() > 0) {
 			playerAndCards.get(randomLandLord).add(cardsOnBottom.get(cardsOnBottom.size() - 1));
@@ -115,14 +91,15 @@ public class Table<T extends Player> {
 		int i=0;
 		PlayerAndCards entity;
 		for (Player p:players){
-			entity=new PlayerAndCards(p,playerAndCards.get(i++));
+			ArrayList<Card> tempCards = playerAndCards.get(i++);
+			entity=new PlayerAndCards(p,tempCards);
 			entities.add(entity);
-			result=result+cards.toString()+" ";
+			result=result+tempCards.toString()+" ";
 		}
 		return result;
 	}
 
-	private ArrayList<Card> randomGenerateCards() throws ExCardNoExists {
+	private ArrayList<Card> randomGenerateCards(Random rand) throws ExCardNoExists {
 		// TODO Auto-generated method stub
 		ArrayList<Card> wholeDeck=new ArrayList<>();
 		for (int i=0;i<13;i++){
@@ -137,7 +114,7 @@ public class Table<T extends Player> {
 		}
 		wholeDeck.add(new Card("JR"));
 		wholeDeck.add(new Card("JB"));
-		Collections.shuffle(wholeDeck);
+		Collections.shuffle(wholeDeck, rand);
 
 		return wholeDeck;
 	}
@@ -168,14 +145,7 @@ public class Table<T extends Player> {
 		}
 		return null;
 	}
-	
-	public boolean hasDiZhu() {
-		if(players==null) return false;
-		for(Player p: players){
-			if(p.isDiZhu()) return true;
-		}
-		return false;
-	}
+
 
 	public void setLastHand(List<Card> lastHand) {
 		DDZ ddz = new DDZ();
@@ -195,7 +165,7 @@ public class Table<T extends Player> {
 		List<Card> cardNeededToBeRemoved = new ArrayList();
 		for(PlayerAndCards pc : entities){
 			if(pc.equalsPlayer(player)){
-				System.out.println("[DEBUG] reduceTheCardFromPlayer : FOUND equals player !");
+//				System.out.println("[DEBUG] reduceTheCardFromPlayer : FOUND equals player !");
 				List<Card > cards = pc.getCards();
 
 
@@ -215,20 +185,20 @@ public class Table<T extends Player> {
 						cardNeededToBeRemoved.add(matchedCard);
 					}
 				}
-				System.out.println("[DEBUG] cardNeededToBeRemoved: "+Cards.toString(cardNeededToBeRemoved));
-				System.out.println("[DEBUG] playedCard: "+Cards.toString(playedCard));
+//				System.out.println("[DEBUG] cardNeededToBeRemoved: "+Cards.toString(cardNeededToBeRemoved));
+//				System.out.println("[DEBUG] playedCard: "+Cards.toString(playedCard));
 				if(removedCard != playedCard.size()) {
-					System.out.println("[Debug] fail to reduce the card");
+//					System.out.println("[Debug] fail to reduce the card");
 					return false;
 				}else {
-					System.out.println("[DEBUG] : Card before delete : " + Cards.toString(cards));
+//					System.out.println("[DEBUG] : Card before delete : " + Cards.toString(cards));
 					List<Card> userHandCards = pc.getCards();
 					List<Card> userUsedCards = pc.getUsedCards();
 					for(Card rc: cardNeededToBeRemoved){
 						userHandCards.remove(rc);
 						userUsedCards.add(rc);
 					}
-					System.out.println("[DEBUG] : Card after delete : " + Cards.toString(userHandCards));
+//					System.out.println("[DEBUG] : Card after delete : " + Cards.toString(userHandCards));
 					return true;
 				}
 			}

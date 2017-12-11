@@ -8,13 +8,14 @@ import table.PlayerAndCards;
 import table.Table;
 
 import java.util.List;
+import java.util.Random;
 
 public class TableController {
 
 	Table table;
-	public  <T extends Player> String createTableForGame(List<T> players) throws ExCardNoExists, ExNotEnoughPlayers{
+	public  <T extends Player> String createTableForGame(List<T> players, Random random) throws ExCardNoExists, ExNotEnoughPlayers{
 		table=new Table(players);
-		return table.distributeCards();
+		return table.distributeCards(random);
 	}
 
 	public boolean checkGameEnd(){
@@ -65,10 +66,14 @@ public class TableController {
 		}
 		return  null;
 	}
-	public void  reduceUserPlayedCard(Player player, List<Card> playedCard){
+
+	public boolean  reduceUserPlayedCard(Player player, List<Card> playedCard){
 		PlayerAndCards playerAndCards =  getPlayerAndCardsObjByPlayer(player);
-		table.reduceTheCardFromPlayer( player, playedCard);
-		System.out.println("[DEBUG] : Card after delete : " + Cards.toString(		getCardsByPlayer(player)));
+		boolean result = table.reduceTheCardFromPlayer( player, playedCard);
+
+		return result;
+
+//		System.out.println("[DEBUG] : Card after delete : " + Cards.toString(		getCardsByPlayer(player)));
 
 	}
 

@@ -23,7 +23,7 @@ public class LocalPlayer extends Player {
 
 
 	public String toString(){
-		return name + ": Gotta catch them all! ";
+		return name;
 	}
 
 
@@ -44,6 +44,11 @@ public class LocalPlayer extends Player {
 		while(true) {
 			System.out.println("Please put the cards: (Example: \"D1 S1\")");
 			String cardStr = Main.systemIn.nextLine();
+
+			if(cardStr.equals("")){
+				continue;
+			}
+
 			try {
 				List<Card> card = Cards.createCardsListFromString(cardStr);
 				/** TO-DO :: playCard() here */

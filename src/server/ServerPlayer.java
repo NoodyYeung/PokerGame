@@ -67,15 +67,15 @@ public class ServerPlayer  extends Player{
                 if(inputStream.available() <= 0)
                     continue;
                 responseText = inputStream.readUTF();
-                System.out.println("[DEBUG] yourTurnToPlayCard getMessage : " + responseText);
+//                System.out.println("[DEBUG] yourTurnToPlayCard getMessage : " + responseText);
                 if(responseText.equals("") || responseText.equals("\n")) {
-                    System.out.println("[DEBUG]  empty row received : " );
+//                    System.out.println("[DEBUG]  empty row received : " );
                     continue;
                 }
                 responseText = new Message(responseText).getJSONObject().getString("raw");
-                System.out.println("[DEBUG]  rawmessage : " + responseText );
+//                System.out.println("[DEBUG]  rawmessage : " + responseText );
                 cards = Cards.createCardsListFromString(responseText);
-                System.out.println("[DEBUG]  Break : " + responseText );
+//                System.out.println("[DEBUG]  Break : " + responseText );
                 break;
             } catch(EOFException e) {
                 e.printStackTrace();
@@ -153,13 +153,13 @@ public class ServerPlayer  extends Player{
                 responseText = inputStream.readUTF();
                 responseText = new Message(responseText).getJSONObject().getString("raw");
                 if(responseText.equals("SKIP")){
-                    System.out.println("[DEBUG]  Break1 : " + responseText );
+//                    System.out.println("[DEBUG]  Break1 : " + responseText );
 
                     break;
                 }
-                System.out.println("[DEBUG]  rawmessage : " + responseText );
+//                System.out.println("[DEBUG]  rawmessage : " + responseText );
                 cards = Cards.createCardsListFromString(responseText);
-                System.out.println("[DEBUG]  Break2 : " + responseText );
+//                System.out.println("[DEBUG]  Break2 : " + responseText );
 
                 break;
             }  catch (IOException e) {
