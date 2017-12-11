@@ -23,12 +23,7 @@ public class GameController<T extends Player> {
 	 * turn is always increasing
 	 */
 	private int turn = 0;
-	/** A new round is started when a user if free to play card (no last hand).
-	 * 	And two case will generate this situation:
-	 * 	1. The first turn
-	 * 	2. Two user skip the turn
-	 * **/
-	private int round=0;
+
 	/**
 	 * Count the number of skip. If the nubmer of skip == 2, it reset to 0 and a new round is started
 	 */
@@ -37,8 +32,6 @@ public class GameController<T extends Player> {
 	private ArrayList<T> playersInThisGame;
 	private TableController tableController;
 	private DDZ ddz;
-	private boolean isGameInit = false;
-	ArrayList<Integer> playerSequence=new ArrayList<>();
 	/** used to identify which user to play. playersInThisGame[initTurn + turn % 3] = the player play card in this turn **/
 	private int initTurn = 0;
 
@@ -49,7 +42,6 @@ public class GameController<T extends Player> {
 		if (players.size() != 3) {
 			throw new InsufficientPlayerException("Insufficient players. At least three player is needed");
 		}
-		round = 0;
 		turn = 0;
 		this.playersInThisGame = players;
 		this.tableController = new TableController();
@@ -328,9 +320,6 @@ public class GameController<T extends Player> {
 
 
 
-	public boolean checkGameEnd(){
-		return tableController.checkGameEnd();
-	}
 
 
 	public boolean getIsEnd() {
