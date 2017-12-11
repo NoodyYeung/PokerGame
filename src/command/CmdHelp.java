@@ -9,7 +9,11 @@ public class CmdHelp extends Command {
 	public CmdHelp(){
 
 	}
-
+	
+	public CmdHelp(String detailsMessage) {
+		this.detailsMessage = detailsMessage;
+	}
+	
 	public CmdHelp(String detailsMessage, String key, String description) {
 		this.detailsMessage = detailsMessage;
 		this.key = key;

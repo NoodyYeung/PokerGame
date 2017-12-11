@@ -10,6 +10,7 @@ import pattern.Pbomb;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 public class TestCards {
@@ -31,10 +32,10 @@ public class TestCards {
          
         assertEquals(true,result);
     }
-
+ 
 	
     @Test
-    public void test2() throws ExCardNoExists {
+    public void testtoStringWithSymbolNotNull() throws ExCardNoExists {
         Card card1 = new Card("C3");
         Card card2 = new Card("H3");
         Card card3 = new Card("D4");
@@ -45,10 +46,36 @@ public class TestCards {
         expectCards.add(card3);
         expectCards.add(card4);
         String expect ="\u2663C3 \u2665H3 \u2666D4 \u2660S5 ";
+        assertEquals(expect,Cards.toStringWithSymbol(expectCards));
+ 
+    }
+    
+    @Test
+    public void testtoStringWithSymbolNullCards() throws ExCardNoExists {
+    	ArrayList<Card> expectCards = null;
+    	assertNull(Cards.toStringWithSymbol(expectCards));
+    }
+ 
+    @Test
+    public void testtoStringCards() throws ExCardNoExists {
+    	ArrayList<Card> expectCards = null;
+    	assertNull(Cards.toString(expectCards));
+    }
+    @Test
+    public void testtoStringNotNull() throws ExCardNoExists {
+        Card card1 = new Card("C3");
+        Card card2 = new Card("H3");
+        Card card3 = new Card("D4");
+        Card card4 = new Card("S5");
+        ArrayList<Card> expectCards =new ArrayList<Card>();
+        expectCards.add(card1);
+        expectCards.add(card2);
+        expectCards.add(card3);
+        expectCards.add(card4);
+        String expect ="C3 H3 D4 S5 ";
         assertEquals(expect,Cards.toString(expectCards));
  
     }
- 
 
     @Test
     public void test3() throws ExCardNoExists {

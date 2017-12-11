@@ -30,7 +30,7 @@ public class Cards {
 	    DDZ ddz = new DDZ();
 	    this.pattern = ddz.identifyPattern(cards);
     }
-
+ 
 
     public static ArrayList<Card> createCardsListFromString(String rawString) throws ExCardNoExists {
         ArrayList<Card> cards = new ArrayList<Card>();
@@ -60,7 +60,7 @@ public class Cards {
     }
 
     public static String toStringWithSymbol(List<Card> cards){
-        if(cards== null){
+        if(cards == null){
             return null;
         }
         String s = "";
@@ -70,16 +70,12 @@ public class Cards {
         return s;
 
     }
-
-
-
-    
+   
     public List<Card> getCards(){
     	return cards;
     }
     
     public Pattern getPattern() {
-        // TODO Auto-generated method stub
         return pattern;
     }
 }
