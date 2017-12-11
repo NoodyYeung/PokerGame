@@ -2,7 +2,6 @@ package gameController;
 
 import DDZ.DDZ;
 import cards.Card;
-import cards.Cards;
 import cards.ExCardNoExists;
 import pattern.Pattern;
 import table.ExNotEnoughPlayers;
@@ -10,6 +9,7 @@ import table.PlayerAndCards;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -61,7 +61,7 @@ public class GameController<T extends Player> {
 	 */
 	public void startGame(){
 		try {
-			tableController.createTableForGame(playersInThisGame);
+			tableController.createTableForGame(playersInThisGame, new Random());
 			newRound();
 			Player landLord = getLandLord();
 			List<Player> farmers = getFarmer();

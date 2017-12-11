@@ -12,9 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+
 public class Table<T extends Player> {
-	List <CardOfEachTurn> historyCard;
-	List <CardOfEachRound> roundCard;
 	List <T> players;
 	List <PlayerAndCards> entities;
 	Cards lastHandCard;
@@ -22,8 +21,6 @@ public class Table<T extends Player> {
 
 	public Table(List<T> players){
 		this.players=players;
-		historyCard= new ArrayList<>();
-		roundCard=new ArrayList<>();
 		entities=new ArrayList<>();
 
 	}

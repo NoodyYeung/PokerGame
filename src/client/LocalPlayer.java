@@ -23,7 +23,7 @@ public class LocalPlayer extends Player {
 
 
 	public String toString(){
-		return name + ": Gotta catch them all! ";
+		return name;
 	}
 
 

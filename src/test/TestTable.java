@@ -416,6 +416,7 @@ public class TestTable {
         assertEquals(arrayListAfterReduce.toString(), a1.toString());
     }
 
+
     @Test
     public void testReduceTheCardFromPlayer2(){
         List<Player> players = new ArrayList<>();
@@ -453,7 +454,7 @@ public class TestTable {
         ArrayList<Card> arrayListAfterReduce = new ArrayList<>();
 
         try {
-            reCards.add(new Card("D3"));
+            reCards.add(new Card("D6"));
             arrayListAfterReduce.add(new Card("D4"));
             arrayListAfterReduce.add(new Card("D5"));
         } catch (ExCardNoExists exCardNoExists) {
@@ -462,10 +463,6 @@ public class TestTable {
         }
 
         boolean result = table.reduceTheCardFromPlayer(p1, reCards);
-
-
-        assertEquals(true , result);
-        assertEquals(arrayListAfterReduce.toString(), a1.toString());
+        assertEquals(false , result);
     }
-
 }
