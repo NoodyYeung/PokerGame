@@ -68,11 +68,10 @@ public class TestPlayer {
     public void testLocalPlayerFarmer() throws Exception {
         Player player = new LocalPlayer();
         Player teammates = new LocalPlayer();
-        teammates.setId(9);
         teammates.setName("teammate");
         setOutput();
         player.youAreFarmer(teammates);
-        Assert.assertEquals(String.format("You are farmer. Your teammate is Player %d -- Name %s \n", 9, "teammate"), getOutput());
+        Assert.assertEquals(String.format("You are farmer. Your teammate is Player %d -- Name %s \n", teammates.getId(), "teammate"), getOutput());
     }
 
     @Test
@@ -101,6 +100,18 @@ public class TestPlayer {
         System.setIn(System.in);
 
     }
+    
+    @Test
+    public void testLocalPlayerWaitPlayerToPlayerCard() throws Exception {
+        Player player = new LocalPlayer();
+        Player player2 = new LocalPlayer();
+        player2.setName("player2");
+        setOutput();
+        player.waitPlayerToPlayerCard(player2, false);
+        Assert.assertEquals(String.format("Player %d -- Name %s is choosing cards to play !!\n", player2.getId(), "player2"), getOutput());
+    }
+
+
 
     PrintStream oldPrintStream;
     ByteArrayOutputStream bos;
